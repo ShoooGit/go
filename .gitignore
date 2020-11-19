@@ -8,3 +8,4 @@ src/golang.org/x/crypto/
 src/golang.org/x/net/
 src/golang.org/x/sys/
 src/golang.org/x/text/
+src/github.com/atotto/go-tour-jp/
