@@ -1,0 +1,10 @@
+
+src/github.com/labstack/echo/
+src/github.com/labstack/gommon/
+src/github.com/mattn/go-colorable/
+src/github.com/mattn/go-isatty/
+src/github.com/valyala/fasttemplate/
+src/golang.org/x/crypto/
+src/golang.org/x/net/
+src/golang.org/x/sys/
+src/golang.org/x/text/
