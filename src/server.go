@@ -3,6 +3,7 @@ package main
 import (
     "net/http"
     "github.com/labstack/echo"
+    "strconv"
 )
 
 type User struct {
@@ -22,8 +23,28 @@ func main() {
 
 func initRouting(e *echo.Echo) {
 	e.GET("/", hello)
+	e.GET("/api/v1/groups/:group_id/users", getUsers)
 }
 
 func hello(c echo.Context) error {
 	return c.JSON(http.StatusOK, map[string]string{"hello": "world"})
+}
+
+func getUsers(c echo.Context) error {
+	groupIDStr := c.Param("group_id")
+	groupID, err := strconv.Atoi(groupIDStr)
+	if err != nil {
+		return err
+	}
+	gender := c.QueryParam("gender")
+	users := []*User{}
+	if gender == "" || gender == "man" {
+		users = append(users, &User{ID: 1, GroupID: groupID, Name: "Taro", Gender: "man"})
+		users = append(users, &User{ID: 2, GroupID: groupID, Name: "Jiro", Gender: "man"})
+	}
+	if gender == "" || gender == "woman" {
+		users = append(users, &User{ID: 3, GroupID: groupID, Name: "Hanako", Gender: "woman"})
+		users = append(users, &User{ID: 4, GroupID: groupID, Name: "Yoshiko", Gender: "woman"})
+	}
+	return c.JSON(http.StatusOK, users)
 }
