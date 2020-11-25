@@ -2,26 +2,28 @@ package main
 
 import (
     "net/http"
-
     "github.com/labstack/echo"
 )
 
 type User struct {
-    Name  string `json:"name"`
-    Email string `json:"email"`
+	ID      int    `json:"id"`
+	GroupID int    `json:"group_id"`
+	Name    string `json:"name"`
+	Gender  string `json:"gender"`
 }
 
 func main() {
-    e := echo.New()
-    e.GET("/user", show)
+	e := echo.New()
 
-    e.Logger.Fatal(e.Start(":1323"))
+	initRouting(e)
+
+	e.Logger.Fatal(e.Start(":1313"))
 }
 
-func show(c echo.Context) error {
-    u := new(User)
-    if err := c.Bind(u); err != nil {
-        return err
-    }
-    return c.JSON(http.StatusOK, u)
+func initRouting(e *echo.Echo) {
+	e.GET("/", hello)
+}
+
+func hello(c echo.Context) error {
+	return c.JSON(http.StatusOK, map[string]string{"hello": "world"})
 }
