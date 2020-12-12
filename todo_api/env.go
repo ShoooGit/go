@@ -14,7 +14,7 @@ type Env struct {
 
 func CreateEnv() (*Env, error) {
 
-	env := ENV{}
+	env := Env{}
 
 	bind := os.Getenv("TODO_BIND") // APIをListenするポート設定
 	if bind == "" {
