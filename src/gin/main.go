@@ -4,6 +4,7 @@ import (
 	"gin/article"
 	"gin/handler"
 	dblib "gin/lib"
+	"gin/todo"
 	"strconv"
 
 	"github.com/gin-gonic/gin"
@@ -22,15 +23,18 @@ func main() {
 	// json
 	router.GET("/article", handler.ArticlesGet(article))
 	router.POST("/article", handler.ArticlesGet(article))
+
+	todo := todo.New()
+	router.GET("/", handler.TodosGet(todo))
 	///////////////////////////////////////////////////
 
-	//Index
-	router.GET("/", func(ctx *gin.Context) {
-		todos := dblib.GetAll()
-		ctx.HTML(200, "index.html", gin.H{
-			"todos": todos,
-		})
-	})
+	// //Index
+	// router.GET("/", func(ctx *gin.Context) {
+	// 	todos := dblib.GetAll()
+	// 	ctx.HTML(200, "index.html", gin.H{
+	// 		"todos": todos,
+	// 	})
+	// })
 
 	//Create
 	router.POST("/new", func(ctx *gin.Context) {
