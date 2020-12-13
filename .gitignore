@@ -11,3 +11,13 @@ src/golang.org/x/text/
 src/github.com/atotto/go-tour-jp/
 bin/*
 pkg/*
+src/github.com/gin-contrib/sse/
+src/github.com/gin-gonic/gin/
+src/github.com/go-playground/locales/
+src/github.com/go-playground/universal-translator/
+src/github.com/go-playground/validator/
+src/github.com/golang/protobuf/
+src/github.com/leodido/go-urn/
+src/github.com/ugorji/go/
+src/google.golang.org/protobuf/
+src/gopkg.in/yaml.v2/
