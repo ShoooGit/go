@@ -9,11 +9,6 @@ type Todo struct {
 	Status string
 }
 
-type Item struct {
-	Text   string `json:"text"`
-	Status string `json:"status"`
-}
-
 // DBマイグレート
 func Init() {
 	db, err := gorm.Open("sqlite3", "test.sqlite3")
@@ -73,16 +68,13 @@ func GetAll() []Todo {
 }
 
 // DB単独取得
-func GetOne(id int) Item {
+func GetOne(id int) Todo {
 	db, err := gorm.Open("sqlite3", "test.sqlite3")
 	if err != nil {
 		panic("データベースを開けません(dbGetOne)")
 	}
 	var todo Todo
-	var item Item
 	db.First(&todo, id)
 	db.Close()
-	item.Text = todo.Text
-	item.Status = todo.Status
-	return item
+	return todo
 }
