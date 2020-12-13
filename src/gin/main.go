@@ -9,10 +9,10 @@ import (
 )
 
 func main() {
+	dblib.Init()
+
 	router := gin.Default()
 	router.LoadHTMLGlob("templates/*.html")
-
-	dblib.Init()
 
 	//Index
 	router.GET("/", func(ctx *gin.Context) {
