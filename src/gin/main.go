@@ -2,8 +2,8 @@ package main
 
 import (
 	"gin/article"
+	"gin/dblib"
 	"gin/handler"
-	dblib "gin/lib"
 	"gin/todo"
 	"strconv"
 
