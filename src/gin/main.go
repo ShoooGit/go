@@ -9,10 +9,18 @@ import (
 )
 
 func main() {
+
 	dblib.Init()
 
 	router := gin.Default()
 	router.LoadHTMLGlob("templates/*.html")
+
+	// json
+	router.GET("/ping", func(ctx *gin.Context) {
+		ctx.JSON(200, gin.H{
+			"message": "pong",
+		})
+	})
 
 	//Index
 	router.GET("/", func(ctx *gin.Context) {
