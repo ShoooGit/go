@@ -35,8 +35,8 @@ func Detail() gin.HandlerFunc {
 			panic(err)
 		}
 		todo := dblib.GetOne(id)
-		// ctx.HTML(200, "detail.html", gin.H{"todo": todo})
-		ctx.JSON(http.StatusOK, todo)
+		ctx.HTML(200, "detail.html", gin.H{"todo": todo})
+		// ctx.JSON(http.StatusOK, todo)
 	}
 }
 

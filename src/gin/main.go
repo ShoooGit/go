@@ -23,7 +23,7 @@ func main() {
 	router.POST("/new", handler.Create())
 
 	//Detail
-	router.POST("/detail/:id", handler.Detail())
+	router.GET("/detail/:id", handler.Detail())
 
 	//Update
 	router.POST("/update/:id", handler.Update())
@@ -35,8 +35,8 @@ func main() {
 	router.POST("/delete/:id", handler.Delete())
 
 	///////////////////////////////////////////////////
-	article := article.New()
 	// json
+	article := article.New()
 	router.GET("/article", handler.ArticlesGet(article))
 	router.POST("/article", handler.ArticlesGet(article))
 	///////////////////////////////////////////////////
