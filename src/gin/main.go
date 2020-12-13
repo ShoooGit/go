@@ -1,6 +1,8 @@
 package main
 
 import (
+	"gin/article"
+	"gin/handler"
 	dblib "gin/lib"
 	"strconv"
 
@@ -15,12 +17,12 @@ func main() {
 	router := gin.Default()
 	router.LoadHTMLGlob("templates/*.html")
 
+	///////////////////////////////////////////////////
+	article := article.New()
 	// json
-	router.GET("/ping", func(ctx *gin.Context) {
-		ctx.JSON(200, gin.H{
-			"message": "pong",
-		})
-	})
+	router.GET("/article", handler.ArticlesGet(article))
+	router.POST("/article", handler.ArticlesGet(article))
+	///////////////////////////////////////////////////
 
 	//Index
 	router.GET("/", func(ctx *gin.Context) {
