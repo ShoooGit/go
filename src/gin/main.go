@@ -58,7 +58,7 @@ func dbUpdate(id int, text string, status string) {
 	todo.Text = text
 	todo.Status = status
 	db.Save(&todo)
-	db.close()
+	db.Close()
 }
 
 // DB削除
