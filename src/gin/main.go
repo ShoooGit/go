@@ -11,36 +11,27 @@ import (
 
 func main() {
 
+	// DBの初期化
 	dblib.Init()
 
 	router := gin.Default()
 	router.LoadHTMLGlob("templates/*.html")
 
-	//Index
+	// ルーティング
 	router.GET("/", handler.Index())
-
-	//Create
 	router.POST("/new", handler.Create())
-
-	//Detail
 	router.GET("/detail/:id", handler.Detail())
-
-	//Update
 	router.POST("/update/:id", handler.Update())
-
-	//削除確認
 	router.GET("/delete_check/:id", handler.CheckDelete())
-
-	//Delete
 	router.POST("/delete/:id", handler.Delete())
 
 	///////////////////////////////////////////////////
-	// json
+	// jsonテスト
 	article := article.New()
 	router.GET("/article", handler.ArticlesGet(article))
 	router.POST("/article", handler.ArticlesGet(article))
 	///////////////////////////////////////////////////
 
-	router.Run()
+	router.Run(":3000")
 
 }
