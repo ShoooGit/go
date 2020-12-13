@@ -2,7 +2,6 @@ package handler
 
 import (
 	"gin/article"
-	"gin/todo"
 	"net/http"
 
 	"github.com/gin-gonic/gin"
@@ -32,12 +31,5 @@ func ArticlePost(post *article.Articles) gin.HandlerFunc {
 		post.Add(item)
 
 		ctx.Status(http.StatusNoContent)
-	}
-}
-
-func TodosGet(todos *todo.Todos) gin.HandlerFunc {
-	return func(ctx *gin.Context) {
-		result := todos.GetAll()
-		ctx.JSON(http.StatusOK, result)
 	}
 }

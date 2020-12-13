@@ -4,7 +4,7 @@ import (
 	"gin/article"
 	"gin/dblib"
 	"gin/handler"
-	"gin/todo"
+	"net/http"
 	"strconv"
 
 	"github.com/gin-gonic/gin"
@@ -23,18 +23,15 @@ func main() {
 	// json
 	router.GET("/article", handler.ArticlesGet(article))
 	router.POST("/article", handler.ArticlesGet(article))
-
-	todo := todo.New()
-	router.GET("/", handler.TodosGet(todo))
 	///////////////////////////////////////////////////
 
-	// //Index
-	// router.GET("/", func(ctx *gin.Context) {
-	// 	todos := dblib.GetAll()
-	// 	ctx.HTML(200, "index.html", gin.H{
-	// 		"todos": todos,
-	// 	})
-	// })
+	//Index
+	router.GET("/", func(ctx *gin.Context) {
+		todos := dblib.GetAll()
+		ctx.HTML(200, "index.html", gin.H{
+			"todos": todos,
+		})
+	})
 
 	//Create
 	router.POST("/new", func(ctx *gin.Context) {
@@ -52,7 +49,8 @@ func main() {
 			panic(err)
 		}
 		todo := dblib.GetOne(id)
-		ctx.HTML(200, "detail.html", gin.H{"todo": todo})
+		// ctx.HTML(200, "detail.html", gin.H{"todo": todo})
+		ctx.JSON(http.StatusOK, todo)
 	})
 
 	//Update
