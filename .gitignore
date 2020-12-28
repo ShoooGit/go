@@ -40,3 +40,5 @@ src/golang.org/x/tools/
 src/golang.org/x/xerrors/
 src/google.golang.org/genproto/
 src/google.golang.org/grpc/
+src/calc/calc
+src/calc/calc-cli
