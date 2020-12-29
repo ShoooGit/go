@@ -19,6 +19,5 @@ func NewCalc2(logger *log.Logger) calc2.Service {
 
 // Minus implements minus.
 func (s *calc2srvc) Minus(ctx context.Context, p *calc2.MinusPayload) (res int, err error) {
-	s.logger.Print("calc2.minus")
-	return
+	return p.A - p.B, nil
 }
