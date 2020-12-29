@@ -34,20 +34,20 @@ func BuildAddPayload(calcAddMessage string) (*calc.AddPayload, error) {
 	return v, nil
 }
 
-// BuildMinusPayload builds the payload for the calc minus endpoint from CLI
+// BuildDividePayload builds the payload for the calc divide endpoint from CLI
 // flags.
-func BuildMinusPayload(calcMinusMessage string) (*calc.MinusPayload, error) {
+func BuildDividePayload(calcDivideMessage string) (*calc.DividePayload, error) {
 	var err error
-	var message calcpb.MinusRequest
+	var message calcpb.DivideRequest
 	{
-		if calcMinusMessage != "" {
-			err = json.Unmarshal([]byte(calcMinusMessage), &message)
+		if calcDivideMessage != "" {
+			err = json.Unmarshal([]byte(calcDivideMessage), &message)
 			if err != nil {
 				return nil, fmt.Errorf("invalid JSON for message, \nerror: %s, \nexample of valid JSON:\n%s", err, "'{\n      \"a\": 686605435966370186,\n      \"b\": 8228676432890045784\n   }'")
 			}
 		}
 	}
-	v := &calc.MinusPayload{
+	v := &calc.DividePayload{
 		A: int(message.A),
 		B: int(message.B),
 	}

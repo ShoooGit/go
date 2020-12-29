@@ -15,8 +15,8 @@ option go_package = "calcpb";
 service Calc {
 	// Add implements add.
 	rpc Add (AddRequest) returns (AddResponse);
-	// Minus implements minus.
-	rpc Minus (MinusRequest) returns (MinusResponse);
+	// Divide implements divide.
+	rpc Divide (DivideRequest) returns (DivideResponse);
 }
 
 message AddRequest {
@@ -30,13 +30,13 @@ message AddResponse {
 	sint32 field = 1;
 }
 
-message MinusRequest {
+message DivideRequest {
 	// Left operand
 	sint32 a = 1;
 	// Right operand
 	sint32 b = 2;
 }
 
-message MinusResponse {
+message DivideResponse {
 	sint32 field = 1;
 }

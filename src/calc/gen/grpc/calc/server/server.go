@@ -14,12 +14,13 @@ import (
 
 	goagrpc "goa.design/goa/v3/grpc"
 	goa "goa.design/goa/v3/pkg"
+	"google.golang.org/grpc/codes"
 )
 
 // Server implements the calcpb.CalcServer interface.
 type Server struct {
-	AddH   goagrpc.UnaryHandler
-	MinusH goagrpc.UnaryHandler
+	AddH    goagrpc.UnaryHandler
+	DivideH goagrpc.UnaryHandler
 }
 
 // ErrorNamer is an interface implemented by generated error structs that
@@ -31,8 +32,8 @@ type ErrorNamer interface {
 // New instantiates the server struct with the calc service endpoints.
 func New(e *calc.Endpoints, uh goagrpc.UnaryHandler) *Server {
 	return &Server{
-		AddH:   NewAddHandler(e.Add, uh),
-		MinusH: NewMinusHandler(e.Minus, uh),
+		AddH:    NewAddHandler(e.Add, uh),
+		DivideH: NewDivideHandler(e.Divide, uh),
 	}
 }
 
@@ -56,22 +57,28 @@ func (s *Server) Add(ctx context.Context, message *calcpb.AddRequest) (*calcpb.A
 	return resp.(*calcpb.AddResponse), nil
 }
 
-// NewMinusHandler creates a gRPC handler which serves the "calc" service
-// "minus" endpoint.
-func NewMinusHandler(endpoint goa.Endpoint, h goagrpc.UnaryHandler) goagrpc.UnaryHandler {
+// NewDivideHandler creates a gRPC handler which serves the "calc" service
+// "divide" endpoint.
+func NewDivideHandler(endpoint goa.Endpoint, h goagrpc.UnaryHandler) goagrpc.UnaryHandler {
 	if h == nil {
-		h = goagrpc.NewUnaryHandler(endpoint, DecodeMinusRequest, EncodeMinusResponse)
+		h = goagrpc.NewUnaryHandler(endpoint, DecodeDivideRequest, EncodeDivideResponse)
 	}
 	return h
 }
 
-// Minus implements the "Minus" method in calcpb.CalcServer interface.
-func (s *Server) Minus(ctx context.Context, message *calcpb.MinusRequest) (*calcpb.MinusResponse, error) {
-	ctx = context.WithValue(ctx, goa.MethodKey, "minus")
+// Divide implements the "Divide" method in calcpb.CalcServer interface.
+func (s *Server) Divide(ctx context.Context, message *calcpb.DivideRequest) (*calcpb.DivideResponse, error) {
+	ctx = context.WithValue(ctx, goa.MethodKey, "divide")
 	ctx = context.WithValue(ctx, goa.ServiceKey, "calc")
-	resp, err := s.MinusH.Handle(ctx, message)
+	resp, err := s.DivideH.Handle(ctx, message)
 	if err != nil {
+		if en, ok := err.(ErrorNamer); ok {
+			switch en.ErrorName() {
+			case "DivByZero":
+				return nil, goagrpc.NewStatusError(codes.InvalidArgument, err, goagrpc.NewErrorResponse(err))
+			}
+		}
 		return nil, goagrpc.EncodeError(err)
 	}
-	return resp.(*calcpb.MinusResponse), nil
+	return resp.(*calcpb.DivideResponse), nil
 }

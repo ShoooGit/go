@@ -64,9 +64,9 @@ func DecodeAddRequest(mux goahttp.Muxer, decoder func(*http.Request) goahttp.Dec
 	}
 }
 
-// EncodeMinusResponse returns an encoder for responses returned by the calc
-// minus endpoint.
-func EncodeMinusResponse(encoder func(context.Context, http.ResponseWriter) goahttp.Encoder) func(context.Context, http.ResponseWriter, interface{}) error {
+// EncodeDivideResponse returns an encoder for responses returned by the calc
+// divide endpoint.
+func EncodeDivideResponse(encoder func(context.Context, http.ResponseWriter) goahttp.Encoder) func(context.Context, http.ResponseWriter, interface{}) error {
 	return func(ctx context.Context, w http.ResponseWriter, v interface{}) error {
 		res := v.(int)
 		enc := encoder(ctx, w)
@@ -76,9 +76,9 @@ func EncodeMinusResponse(encoder func(context.Context, http.ResponseWriter) goah
 	}
 }
 
-// DecodeMinusRequest returns a decoder for requests sent to the calc minus
+// DecodeDivideRequest returns a decoder for requests sent to the calc divide
 // endpoint.
-func DecodeMinusRequest(mux goahttp.Muxer, decoder func(*http.Request) goahttp.Decoder) func(*http.Request) (interface{}, error) {
+func DecodeDivideRequest(mux goahttp.Muxer, decoder func(*http.Request) goahttp.Decoder) func(*http.Request) (interface{}, error) {
 	return func(r *http.Request) (interface{}, error) {
 		var (
 			a   int
@@ -106,8 +106,36 @@ func DecodeMinusRequest(mux goahttp.Muxer, decoder func(*http.Request) goahttp.D
 		if err != nil {
 			return nil, err
 		}
-		payload := NewMinusPayload(a, b)
+		payload := NewDividePayload(a, b)
 
 		return payload, nil
+	}
+}
+
+// EncodeDivideError returns an encoder for errors returned by the divide calc
+// endpoint.
+func EncodeDivideError(encoder func(context.Context, http.ResponseWriter) goahttp.Encoder, formatter func(err error) goahttp.Statuser) func(context.Context, http.ResponseWriter, error) error {
+	encodeError := goahttp.ErrorEncoder(encoder, formatter)
+	return func(ctx context.Context, w http.ResponseWriter, v error) error {
+		en, ok := v.(ErrorNamer)
+		if !ok {
+			return encodeError(ctx, w, v)
+		}
+		switch en.ErrorName() {
+		case "DivByZero":
+			res := v.(*goa.ServiceError)
+			enc := encoder(ctx, w)
+			var body interface{}
+			if formatter != nil {
+				body = formatter(res)
+			} else {
+				body = NewDivideDivByZeroResponseBody(res)
+			}
+			w.Header().Set("goa-error", "DivByZero")
+			w.WriteHeader(http.StatusBadRequest)
+			return enc.Encode(body)
+		default:
+			return encodeError(ctx, w, v)
+		}
 	}
 }

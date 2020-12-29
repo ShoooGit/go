@@ -80,25 +80,25 @@ func DecodeAddResponse(decoder func(*http.Response) goahttp.Decoder, restoreBody
 	}
 }
 
-// BuildMinusRequest instantiates a HTTP request object with method and path
-// set to call the "calc" service "minus" endpoint
-func (c *Client) BuildMinusRequest(ctx context.Context, v interface{}) (*http.Request, error) {
+// BuildDivideRequest instantiates a HTTP request object with method and path
+// set to call the "calc" service "divide" endpoint
+func (c *Client) BuildDivideRequest(ctx context.Context, v interface{}) (*http.Request, error) {
 	var (
 		a int
 		b int
 	)
 	{
-		p, ok := v.(*calc.MinusPayload)
+		p, ok := v.(*calc.DividePayload)
 		if !ok {
-			return nil, goahttp.ErrInvalidType("calc", "minus", "*calc.MinusPayload", v)
+			return nil, goahttp.ErrInvalidType("calc", "divide", "*calc.DividePayload", v)
 		}
 		a = p.A
 		b = p.B
 	}
-	u := &url.URL{Scheme: c.scheme, Host: c.host, Path: MinusCalcPath(a, b)}
+	u := &url.URL{Scheme: c.scheme, Host: c.host, Path: DivideCalcPath(a, b)}
 	req, err := http.NewRequest("GET", u.String(), nil)
 	if err != nil {
-		return nil, goahttp.ErrInvalidURL("calc", "minus", u.String(), err)
+		return nil, goahttp.ErrInvalidURL("calc", "divide", u.String(), err)
 	}
 	if ctx != nil {
 		req = req.WithContext(ctx)
@@ -107,10 +107,13 @@ func (c *Client) BuildMinusRequest(ctx context.Context, v interface{}) (*http.Re
 	return req, nil
 }
 
-// DecodeMinusResponse returns a decoder for responses returned by the calc
-// minus endpoint. restoreBody controls whether the response body should be
+// DecodeDivideResponse returns a decoder for responses returned by the calc
+// divide endpoint. restoreBody controls whether the response body should be
 // restored after having been read.
-func DecodeMinusResponse(decoder func(*http.Response) goahttp.Decoder, restoreBody bool) func(*http.Response) (interface{}, error) {
+// DecodeDivideResponse may return the following errors:
+//	- "DivByZero" (type *goa.ServiceError): http.StatusBadRequest
+//	- error: internal error
+func DecodeDivideResponse(decoder func(*http.Response) goahttp.Decoder, restoreBody bool) func(*http.Response) (interface{}, error) {
 	return func(resp *http.Response) (interface{}, error) {
 		if restoreBody {
 			b, err := ioutil.ReadAll(resp.Body)
@@ -132,12 +135,26 @@ func DecodeMinusResponse(decoder func(*http.Response) goahttp.Decoder, restoreBo
 			)
 			err = decoder(resp).Decode(&body)
 			if err != nil {
-				return nil, goahttp.ErrDecodingError("calc", "minus", err)
+				return nil, goahttp.ErrDecodingError("calc", "divide", err)
 			}
 			return body, nil
+		case http.StatusBadRequest:
+			var (
+				body DivideDivByZeroResponseBody
+				err  error
+			)
+			err = decoder(resp).Decode(&body)
+			if err != nil {
+				return nil, goahttp.ErrDecodingError("calc", "divide", err)
+			}
+			err = ValidateDivideDivByZeroResponseBody(&body)
+			if err != nil {
+				return nil, goahttp.ErrValidationError("calc", "divide", err)
+			}
+			return nil, NewDivideDivByZero(&body)
 		default:
 			body, _ := ioutil.ReadAll(resp.Body)
-			return nil, goahttp.ErrInvalidResponse("calc", "minus", resp.StatusCode, string(body))
+			return nil, goahttp.ErrInvalidResponse("calc", "divide", resp.StatusCode, string(body))
 		}
 	}
 }

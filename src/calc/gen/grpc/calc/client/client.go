@@ -12,6 +12,7 @@ import (
 	"context"
 
 	goagrpc "goa.design/goa/v3/grpc"
+	goapb "goa.design/goa/v3/grpc/pb"
 	goa "goa.design/goa/v3/pkg"
 	"google.golang.org/grpc"
 )
@@ -45,16 +46,22 @@ func (c *Client) Add() goa.Endpoint {
 	}
 }
 
-// Minus calls the "Minus" function in calcpb.CalcClient interface.
-func (c *Client) Minus() goa.Endpoint {
+// Divide calls the "Divide" function in calcpb.CalcClient interface.
+func (c *Client) Divide() goa.Endpoint {
 	return func(ctx context.Context, v interface{}) (interface{}, error) {
 		inv := goagrpc.NewInvoker(
-			BuildMinusFunc(c.grpccli, c.opts...),
-			EncodeMinusRequest,
-			DecodeMinusResponse)
+			BuildDivideFunc(c.grpccli, c.opts...),
+			EncodeDivideRequest,
+			DecodeDivideResponse)
 		res, err := inv.Invoke(ctx, v)
 		if err != nil {
-			return nil, goa.Fault(err.Error())
+			resp := goagrpc.DecodeError(err)
+			switch message := resp.(type) {
+			case *goapb.ErrorResponse:
+				return nil, goagrpc.NewServiceError(message)
+			default:
+				return nil, goa.Fault(err.Error())
+			}
 		}
 		return res, nil
 	}

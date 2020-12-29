@@ -22,7 +22,7 @@ import (
 //    command (subcommand1|subcommand2|...)
 //
 func UsageCommands() string {
-	return `calc (add|minus)
+	return `calc (add|divide)
 `
 }
 
@@ -44,12 +44,12 @@ func ParseEndpoint(cc *grpc.ClientConn, opts ...grpc.CallOption) (goa.Endpoint, 
 		calcAddFlags       = flag.NewFlagSet("add", flag.ExitOnError)
 		calcAddMessageFlag = calcAddFlags.String("message", "", "")
 
-		calcMinusFlags       = flag.NewFlagSet("minus", flag.ExitOnError)
-		calcMinusMessageFlag = calcMinusFlags.String("message", "", "")
+		calcDivideFlags       = flag.NewFlagSet("divide", flag.ExitOnError)
+		calcDivideMessageFlag = calcDivideFlags.String("message", "", "")
 	)
 	calcFlags.Usage = calcUsage
 	calcAddFlags.Usage = calcAddUsage
-	calcMinusFlags.Usage = calcMinusUsage
+	calcDivideFlags.Usage = calcDivideUsage
 
 	if err := flag.CommandLine.Parse(os.Args[1:]); err != nil {
 		return nil, nil, err
@@ -88,8 +88,8 @@ func ParseEndpoint(cc *grpc.ClientConn, opts ...grpc.CallOption) (goa.Endpoint, 
 			case "add":
 				epf = calcAddFlags
 
-			case "minus":
-				epf = calcMinusFlags
+			case "divide":
+				epf = calcDivideFlags
 
 			}
 
@@ -119,9 +119,9 @@ func ParseEndpoint(cc *grpc.ClientConn, opts ...grpc.CallOption) (goa.Endpoint, 
 			case "add":
 				endpoint = c.Add()
 				data, err = calcc.BuildAddPayload(*calcAddMessageFlag)
-			case "minus":
-				endpoint = c.Minus()
-				data, err = calcc.BuildMinusPayload(*calcMinusMessageFlag)
+			case "divide":
+				endpoint = c.Divide()
+				data, err = calcc.BuildDividePayload(*calcDivideMessageFlag)
 			}
 		}
 	}
@@ -140,7 +140,7 @@ Usage:
 
 COMMAND:
     add: Add implements add.
-    minus: Minus implements minus.
+    divide: Divide implements divide.
 
 Additional help:
     %s calc COMMAND --help
@@ -160,14 +160,14 @@ Example:
 `, os.Args[0])
 }
 
-func calcMinusUsage() {
-	fmt.Fprintf(os.Stderr, `%s [flags] calc minus -message JSON
+func calcDivideUsage() {
+	fmt.Fprintf(os.Stderr, `%s [flags] calc divide -message JSON
 
-Minus implements minus.
+Divide implements divide.
     -message JSON: 
 
 Example:
-    `+os.Args[0]+` calc minus --message '{
+    `+os.Args[0]+` calc divide --message '{
       "a": 686605435966370186,
       "b": 8228676432890045784
    }'

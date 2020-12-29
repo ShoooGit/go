@@ -9,14 +9,16 @@ package calc
 
 import (
 	"context"
+
+	goa "goa.design/goa/v3/pkg"
 )
 
 // The calc service performs operations on numbers.
 type Service interface {
 	// Add implements add.
 	Add(context.Context, *AddPayload) (res int, err error)
-	// Minus implements minus.
-	Minus(context.Context, *MinusPayload) (res int, err error)
+	// Divide implements divide.
+	Divide(context.Context, *DividePayload) (res int, err error)
 }
 
 // ServiceName is the name of the service as defined in the design. This is the
@@ -27,7 +29,7 @@ const ServiceName = "calc"
 // MethodNames lists the service method names as defined in the design. These
 // are the same values that are set in the endpoint request contexts under the
 // MethodKey key.
-var MethodNames = [2]string{"add", "minus"}
+var MethodNames = [2]string{"add", "divide"}
 
 // AddPayload is the payload type of the calc service add method.
 type AddPayload struct {
@@ -37,10 +39,19 @@ type AddPayload struct {
 	B int
 }
 
-// MinusPayload is the payload type of the calc service minus method.
-type MinusPayload struct {
+// DividePayload is the payload type of the calc service divide method.
+type DividePayload struct {
 	// Left operand
 	A int
 	// Right operand
 	B int
+}
+
+// MakeDivByZero builds a goa.ServiceError from an error.
+func MakeDivByZero(err error) *goa.ServiceError {
+	return &goa.ServiceError{
+		Name:    "DivByZero",
+		ID:      goa.NewErrorID(),
+		Message: err.Error(),
+	}
 }

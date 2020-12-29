@@ -4,7 +4,13 @@ info:
   description: Service for adding numbes, a Goa teaser
   version: "1.0"
 servers:
-- url: http://localhost:8000
+- url: http://localhost:8000/calc
+  description: calc hosts the Calculator Service.
+- url: https://v1.goa.design/calc
+  description: calc hosts the Calculator Service.
+  variables:
+    version:
+      default: v1
 paths:
   /add/{a}/{b}:
     get:
@@ -20,9 +26,9 @@ paths:
         schema:
           type: integer
           description: Left operand
-          example: 1228682945796019344
+          example: 1089204046671954241
           format: int64
-        example: 4886963557863946648
+        example: 3833729960400405184
       - name: b
         in: path
         description: Right operand
@@ -30,9 +36,9 @@ paths:
         schema:
           type: integer
           description: Right operand
-          example: 6642806206162570878
+          example: 7617773024289378824
           format: int64
-        example: 8723986392256123438
+        example: 8614350958614154271
       responses:
         "200":
           description: OK response.
@@ -40,15 +46,15 @@ paths:
             application/json:
               schema:
                 type: integer
-                example: 7309877832173772408
+                example: 9092197569596372935
                 format: int64
-              example: 9092197569596372935
-  /minus/{a}/{b}:
+              example: 4285228716133201605
+  /divide/{a}/{b}:
     get:
       tags:
       - calc
-      summary: minus calc
-      operationId: calc#minus
+      summary: divide calc
+      operationId: calc#divide
       parameters:
       - name: a
         in: path
@@ -57,9 +63,9 @@ paths:
         schema:
           type: integer
           description: Left operand
-          example: 2937026320033011362
+          example: 1232634558296710584
           format: int64
-        example: 207017106558923967
+        example: 2965960569464252933
       - name: b
         in: path
         description: Right operand
@@ -67,9 +73,9 @@ paths:
         schema:
           type: integer
           description: Right operand
-          example: 6001261670528037577
+          example: 6525775414444532386
           format: int64
-        example: 5850431520333673251
+        example: 5635247262153220700
       responses:
         "200":
           description: OK response.
@@ -77,7 +83,58 @@ paths:
             application/json:
               schema:
                 type: integer
-                example: 3237209857320107068
+                example: 2937026320033011362
                 format: int64
-              example: 1089204046671954241
-components: {}
+              example: 6595082841550375708
+        "400":
+          description: Bad Request response.
+          content:
+            application/vnd.goa.error:
+              schema:
+                $ref: '#/components/schemas/Error'
+              example:
+                id: 3F1FKVRR
+                message: Value of ID must be an integer
+                name: bad_request
+components:
+  schemas:
+    Error:
+      type: object
+      properties:
+        fault:
+          type: boolean
+          description: Is the error a server-side fault?
+          example: false
+        id:
+          type: string
+          description: ID is a unique identifier for this particular occurrence of
+            the problem.
+          example: 123abc
+        message:
+          type: string
+          description: Message is a human-readable explanation specific to this occurrence
+            of the problem.
+          example: parameter 'p' must be an integer
+        name:
+          type: string
+          description: Name is the name of this class of errors.
+          example: bad_request
+        temporary:
+          type: boolean
+          description: Is the error temporary?
+          example: false
+        timeout:
+          type: boolean
+          description: Is the error a timeout?
+          example: false
+      example:
+        id: 3F1FKVRR
+        message: Value of ID must be an integer
+        name: bad_request
+      required:
+      - name
+      - id
+      - message
+      - temporary
+      - timeout
+      - fault

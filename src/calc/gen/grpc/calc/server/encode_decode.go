@@ -44,31 +44,32 @@ func DecodeAddRequest(ctx context.Context, v interface{}, md metadata.MD) (inter
 	return payload, nil
 }
 
-// EncodeMinusResponse encodes responses from the "calc" service "minus"
+// EncodeDivideResponse encodes responses from the "calc" service "divide"
 // endpoint.
-func EncodeMinusResponse(ctx context.Context, v interface{}, hdr, trlr *metadata.MD) (interface{}, error) {
+func EncodeDivideResponse(ctx context.Context, v interface{}, hdr, trlr *metadata.MD) (interface{}, error) {
 	result, ok := v.(int)
 	if !ok {
-		return nil, goagrpc.ErrInvalidType("calc", "minus", "int", v)
+		return nil, goagrpc.ErrInvalidType("calc", "divide", "int", v)
 	}
-	resp := NewMinusResponse(result)
+	resp := NewDivideResponse(result)
 	return resp, nil
 }
 
-// DecodeMinusRequest decodes requests sent to "calc" service "minus" endpoint.
-func DecodeMinusRequest(ctx context.Context, v interface{}, md metadata.MD) (interface{}, error) {
+// DecodeDivideRequest decodes requests sent to "calc" service "divide"
+// endpoint.
+func DecodeDivideRequest(ctx context.Context, v interface{}, md metadata.MD) (interface{}, error) {
 	var (
-		message *calcpb.MinusRequest
+		message *calcpb.DivideRequest
 		ok      bool
 	)
 	{
-		if message, ok = v.(*calcpb.MinusRequest); !ok {
-			return nil, goagrpc.ErrInvalidType("calc", "minus", "*calcpb.MinusRequest", v)
+		if message, ok = v.(*calcpb.DivideRequest); !ok {
+			return nil, goagrpc.ErrInvalidType("calc", "divide", "*calcpb.DivideRequest", v)
 		}
 	}
-	var payload *calc.MinusPayload
+	var payload *calc.DividePayload
 	{
-		payload = NewMinusPayload(message)
+		payload = NewDividePayload(message)
 	}
 	return payload, nil
 }

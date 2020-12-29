@@ -22,7 +22,7 @@ func (s *calcsrvc) Add(ctx context.Context, p *calc.AddPayload) (res int, err er
 	return p.A + p.B, nil
 }
 
-// Add implements add.
-func (s *calcsrvc) Minus(ctx context.Context, p *calc.MinusPayload) (res int, err error) {
-	return p.A - p.B, nil
+// Divide implements divide.
+func (s *calcsrvc) Divide(ctx context.Context, p *calc.DividePayload) (res int, err error) {
+	return p.A / p.B, nil
 }

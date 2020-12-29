@@ -29,19 +29,19 @@ func NewAddResult(message *calcpb.AddResponse) int {
 	return result
 }
 
-// NewMinusRequest builds the gRPC request type from the payload of the "minus"
-// endpoint of the "calc" service.
-func NewMinusRequest(payload *calc.MinusPayload) *calcpb.MinusRequest {
-	message := &calcpb.MinusRequest{
+// NewDivideRequest builds the gRPC request type from the payload of the
+// "divide" endpoint of the "calc" service.
+func NewDivideRequest(payload *calc.DividePayload) *calcpb.DivideRequest {
+	message := &calcpb.DivideRequest{
 		A: int32(payload.A),
 		B: int32(payload.B),
 	}
 	return message
 }
 
-// NewMinusResult builds the result type of the "minus" endpoint of the "calc"
-// service from the gRPC response type.
-func NewMinusResult(message *calcpb.MinusResponse) int {
+// NewDivideResult builds the result type of the "divide" endpoint of the
+// "calc" service from the gRPC response type.
+func NewDivideResult(message *calcpb.DivideResponse) int {
 	result := int(message.Field)
 	return result
 }

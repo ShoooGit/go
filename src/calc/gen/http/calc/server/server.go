@@ -20,7 +20,7 @@ import (
 type Server struct {
 	Mounts []*MountPoint
 	Add    http.Handler
-	Minus  http.Handler
+	Divide http.Handler
 }
 
 // ErrorNamer is an interface implemented by generated error structs that
@@ -57,10 +57,10 @@ func New(
 	return &Server{
 		Mounts: []*MountPoint{
 			{"Add", "GET", "/add/{a}/{b}"},
-			{"Minus", "GET", "/minus/{a}/{b}"},
+			{"Divide", "GET", "/divide/{a}/{b}"},
 		},
-		Add:   NewAddHandler(e.Add, mux, decoder, encoder, errhandler, formatter),
-		Minus: NewMinusHandler(e.Minus, mux, decoder, encoder, errhandler, formatter),
+		Add:    NewAddHandler(e.Add, mux, decoder, encoder, errhandler, formatter),
+		Divide: NewDivideHandler(e.Divide, mux, decoder, encoder, errhandler, formatter),
 	}
 }
 
@@ -70,13 +70,13 @@ func (s *Server) Service() string { return "calc" }
 // Use wraps the server handlers with the given middleware.
 func (s *Server) Use(m func(http.Handler) http.Handler) {
 	s.Add = m(s.Add)
-	s.Minus = m(s.Minus)
+	s.Divide = m(s.Divide)
 }
 
 // Mount configures the mux to serve the calc endpoints.
 func Mount(mux goahttp.Muxer, h *Server) {
 	MountAddHandler(mux, h.Add)
-	MountMinusHandler(mux, h.Minus)
+	MountDivideHandler(mux, h.Divide)
 }
 
 // MountAddHandler configures the mux to serve the "calc" service "add"
@@ -130,21 +130,21 @@ func NewAddHandler(
 	})
 }
 
-// MountMinusHandler configures the mux to serve the "calc" service "minus"
+// MountDivideHandler configures the mux to serve the "calc" service "divide"
 // endpoint.
-func MountMinusHandler(mux goahttp.Muxer, h http.Handler) {
+func MountDivideHandler(mux goahttp.Muxer, h http.Handler) {
 	f, ok := h.(http.HandlerFunc)
 	if !ok {
 		f = func(w http.ResponseWriter, r *http.Request) {
 			h.ServeHTTP(w, r)
 		}
 	}
-	mux.Handle("GET", "/minus/{a}/{b}", f)
+	mux.Handle("GET", "/divide/{a}/{b}", f)
 }
 
-// NewMinusHandler creates a HTTP handler which loads the HTTP request and
-// calls the "calc" service "minus" endpoint.
-func NewMinusHandler(
+// NewDivideHandler creates a HTTP handler which loads the HTTP request and
+// calls the "calc" service "divide" endpoint.
+func NewDivideHandler(
 	endpoint goa.Endpoint,
 	mux goahttp.Muxer,
 	decoder func(*http.Request) goahttp.Decoder,
@@ -153,13 +153,13 @@ func NewMinusHandler(
 	formatter func(err error) goahttp.Statuser,
 ) http.Handler {
 	var (
-		decodeRequest  = DecodeMinusRequest(mux, decoder)
-		encodeResponse = EncodeMinusResponse(encoder)
-		encodeError    = goahttp.ErrorEncoder(encoder, formatter)
+		decodeRequest  = DecodeDivideRequest(mux, decoder)
+		encodeResponse = EncodeDivideResponse(encoder)
+		encodeError    = EncodeDivideError(encoder, formatter)
 	)
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		ctx := context.WithValue(r.Context(), goahttp.AcceptTypeKey, r.Header.Get("Accept"))
-		ctx = context.WithValue(ctx, goa.MethodKey, "minus")
+		ctx = context.WithValue(ctx, goa.MethodKey, "divide")
 		ctx = context.WithValue(ctx, goa.ServiceKey, "calc")
 		payload, err := decodeRequest(r)
 		if err != nil {
