@@ -9,6 +9,7 @@ package cli
 
 import (
 	calcc "calc/gen/grpc/calc/client"
+	calc2c "calc/gen/grpc/calc2/client"
 	"flag"
 	"fmt"
 	"os"
@@ -23,14 +24,19 @@ import (
 //
 func UsageCommands() string {
 	return `calc add
+calc2 minus
 `
 }
 
 // UsageExamples produces an example of a valid invocation of the CLI tool.
 func UsageExamples() string {
 	return os.Args[0] + ` calc add --message '{
-      "a": 8399553735696626949,
-      "b": 360622074634248926
+      "a": 1698882017578366363,
+      "b": 6747375795581831989
+   }'` + "\n" +
+		os.Args[0] + ` calc2 minus --message '{
+      "a": 686605435966370186,
+      "b": 8228676432890045784
    }'` + "\n" +
 		""
 }
@@ -43,9 +49,17 @@ func ParseEndpoint(cc *grpc.ClientConn, opts ...grpc.CallOption) (goa.Endpoint, 
 
 		calcAddFlags       = flag.NewFlagSet("add", flag.ExitOnError)
 		calcAddMessageFlag = calcAddFlags.String("message", "", "")
+
+		calc2Flags = flag.NewFlagSet("calc2", flag.ContinueOnError)
+
+		calc2MinusFlags       = flag.NewFlagSet("minus", flag.ExitOnError)
+		calc2MinusMessageFlag = calc2MinusFlags.String("message", "", "")
 	)
 	calcFlags.Usage = calcUsage
 	calcAddFlags.Usage = calcAddUsage
+
+	calc2Flags.Usage = calc2Usage
+	calc2MinusFlags.Usage = calc2MinusUsage
 
 	if err := flag.CommandLine.Parse(os.Args[1:]); err != nil {
 		return nil, nil, err
@@ -64,6 +78,8 @@ func ParseEndpoint(cc *grpc.ClientConn, opts ...grpc.CallOption) (goa.Endpoint, 
 		switch svcn {
 		case "calc":
 			svcf = calcFlags
+		case "calc2":
+			svcf = calc2Flags
 		default:
 			return nil, nil, fmt.Errorf("unknown service %q", svcn)
 		}
@@ -83,6 +99,13 @@ func ParseEndpoint(cc *grpc.ClientConn, opts ...grpc.CallOption) (goa.Endpoint, 
 			switch epn {
 			case "add":
 				epf = calcAddFlags
+
+			}
+
+		case "calc2":
+			switch epn {
+			case "minus":
+				epf = calc2MinusFlags
 
 			}
 
@@ -112,6 +135,13 @@ func ParseEndpoint(cc *grpc.ClientConn, opts ...grpc.CallOption) (goa.Endpoint, 
 			case "add":
 				endpoint = c.Add()
 				data, err = calcc.BuildAddPayload(*calcAddMessageFlag)
+			}
+		case "calc2":
+			c := calc2c.NewClient(cc, opts...)
+			switch epn {
+			case "minus":
+				endpoint = c.Minus()
+				data, err = calc2c.BuildMinusPayload(*calc2MinusMessageFlag)
 			}
 		}
 	}
@@ -143,8 +173,35 @@ Add implements add.
 
 Example:
     `+os.Args[0]+` calc add --message '{
-      "a": 8399553735696626949,
-      "b": 360622074634248926
+      "a": 1698882017578366363,
+      "b": 6747375795581831989
+   }'
+`, os.Args[0])
+}
+
+// calc2Usage displays the usage of the calc2 command and its subcommands.
+func calc2Usage() {
+	fmt.Fprintf(os.Stderr, `The calc2 service performs operations on numbers.
+Usage:
+    %s [globalflags] calc2 COMMAND [flags]
+
+COMMAND:
+    minus: Minus implements minus.
+
+Additional help:
+    %s calc2 COMMAND --help
+`, os.Args[0], os.Args[0])
+}
+func calc2MinusUsage() {
+	fmt.Fprintf(os.Stderr, `%s [flags] calc2 minus -message JSON
+
+Minus implements minus.
+    -message JSON: 
+
+Example:
+    `+os.Args[0]+` calc2 minus --message '{
+      "a": 686605435966370186,
+      "b": 8228676432890045784
    }'
 `, os.Args[0])
 }
