@@ -19,3 +19,12 @@ func NewAddPayload(a int, b int) *calc.AddPayload {
 
 	return v
 }
+
+// NewMinusPayload builds a calc service minus endpoint payload.
+func NewMinusPayload(a int, b int) *calc.MinusPayload {
+	v := &calc.MinusPayload{}
+	v.A = a
+	v.B = b
+
+	return v
+}

@@ -28,3 +28,20 @@ func NewAddResult(message *calcpb.AddResponse) int {
 	result := int(message.Field)
 	return result
 }
+
+// NewMinusRequest builds the gRPC request type from the payload of the "minus"
+// endpoint of the "calc" service.
+func NewMinusRequest(payload *calc.MinusPayload) *calcpb.MinusRequest {
+	message := &calcpb.MinusRequest{
+		A: int32(payload.A),
+		B: int32(payload.B),
+	}
+	return message
+}
+
+// NewMinusResult builds the result type of the "minus" endpoint of the "calc"
+// service from the gRPC response type.
+func NewMinusResult(message *calcpb.MinusResponse) int {
+	result := int(message.Field)
+	return result
+}

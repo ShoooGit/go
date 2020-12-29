@@ -79,3 +79,65 @@ func DecodeAddResponse(decoder func(*http.Response) goahttp.Decoder, restoreBody
 		}
 	}
 }
+
+// BuildMinusRequest instantiates a HTTP request object with method and path
+// set to call the "calc" service "minus" endpoint
+func (c *Client) BuildMinusRequest(ctx context.Context, v interface{}) (*http.Request, error) {
+	var (
+		a int
+		b int
+	)
+	{
+		p, ok := v.(*calc.MinusPayload)
+		if !ok {
+			return nil, goahttp.ErrInvalidType("calc", "minus", "*calc.MinusPayload", v)
+		}
+		a = p.A
+		b = p.B
+	}
+	u := &url.URL{Scheme: c.scheme, Host: c.host, Path: MinusCalcPath(a, b)}
+	req, err := http.NewRequest("GET", u.String(), nil)
+	if err != nil {
+		return nil, goahttp.ErrInvalidURL("calc", "minus", u.String(), err)
+	}
+	if ctx != nil {
+		req = req.WithContext(ctx)
+	}
+
+	return req, nil
+}
+
+// DecodeMinusResponse returns a decoder for responses returned by the calc
+// minus endpoint. restoreBody controls whether the response body should be
+// restored after having been read.
+func DecodeMinusResponse(decoder func(*http.Response) goahttp.Decoder, restoreBody bool) func(*http.Response) (interface{}, error) {
+	return func(resp *http.Response) (interface{}, error) {
+		if restoreBody {
+			b, err := ioutil.ReadAll(resp.Body)
+			if err != nil {
+				return nil, err
+			}
+			resp.Body = ioutil.NopCloser(bytes.NewBuffer(b))
+			defer func() {
+				resp.Body = ioutil.NopCloser(bytes.NewBuffer(b))
+			}()
+		} else {
+			defer resp.Body.Close()
+		}
+		switch resp.StatusCode {
+		case http.StatusOK:
+			var (
+				body int
+				err  error
+			)
+			err = decoder(resp).Decode(&body)
+			if err != nil {
+				return nil, goahttp.ErrDecodingError("calc", "minus", err)
+			}
+			return body, nil
+		default:
+			body, _ := ioutil.ReadAll(resp.Body)
+			return nil, goahttp.ErrInvalidResponse("calc", "minus", resp.StatusCode, string(body))
+		}
+	}
+}

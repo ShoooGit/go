@@ -49,3 +49,36 @@ func DecodeAddResponse(ctx context.Context, v interface{}, hdr, trlr metadata.MD
 	res := NewAddResult(message)
 	return res, nil
 }
+
+// BuildMinusFunc builds the remote method to invoke for "calc" service "minus"
+// endpoint.
+func BuildMinusFunc(grpccli calcpb.CalcClient, cliopts ...grpc.CallOption) goagrpc.RemoteFunc {
+	return func(ctx context.Context, reqpb interface{}, opts ...grpc.CallOption) (interface{}, error) {
+		for _, opt := range cliopts {
+			opts = append(opts, opt)
+		}
+		if reqpb != nil {
+			return grpccli.Minus(ctx, reqpb.(*calcpb.MinusRequest), opts...)
+		}
+		return grpccli.Minus(ctx, &calcpb.MinusRequest{}, opts...)
+	}
+}
+
+// EncodeMinusRequest encodes requests sent to calc minus endpoint.
+func EncodeMinusRequest(ctx context.Context, v interface{}, md *metadata.MD) (interface{}, error) {
+	payload, ok := v.(*calc.MinusPayload)
+	if !ok {
+		return nil, goagrpc.ErrInvalidType("calc", "minus", "*calc.MinusPayload", v)
+	}
+	return NewMinusRequest(payload), nil
+}
+
+// DecodeMinusResponse decodes responses from the calc minus endpoint.
+func DecodeMinusResponse(ctx context.Context, v interface{}, hdr, trlr metadata.MD) (interface{}, error) {
+	message, ok := v.(*calcpb.MinusResponse)
+	if !ok {
+		return nil, goagrpc.ErrInvalidType("calc", "minus", "*calcpb.MinusResponse", v)
+	}
+	res := NewMinusResult(message)
+	return res, nil
+}

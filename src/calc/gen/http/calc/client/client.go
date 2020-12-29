@@ -20,6 +20,9 @@ type Client struct {
 	// Add Doer is the HTTP client used to make requests to the add endpoint.
 	AddDoer goahttp.Doer
 
+	// Minus Doer is the HTTP client used to make requests to the minus endpoint.
+	MinusDoer goahttp.Doer
+
 	// RestoreResponseBody controls whether the response bodies are reset after
 	// decoding so they can be read again.
 	RestoreResponseBody bool
@@ -41,6 +44,7 @@ func NewClient(
 ) *Client {
 	return &Client{
 		AddDoer:             doer,
+		MinusDoer:           doer,
 		RestoreResponseBody: restoreBody,
 		scheme:              scheme,
 		host:                host,
@@ -63,6 +67,25 @@ func (c *Client) Add() goa.Endpoint {
 		resp, err := c.AddDoer.Do(req)
 		if err != nil {
 			return nil, goahttp.ErrRequestError("calc", "add", err)
+		}
+		return decodeResponse(resp)
+	}
+}
+
+// Minus returns an endpoint that makes HTTP requests to the calc service minus
+// server.
+func (c *Client) Minus() goa.Endpoint {
+	var (
+		decodeResponse = DecodeMinusResponse(c.decoder, c.RestoreResponseBody)
+	)
+	return func(ctx context.Context, v interface{}) (interface{}, error) {
+		req, err := c.BuildMinusRequest(ctx, v)
+		if err != nil {
+			return nil, err
+		}
+		resp, err := c.MinusDoer.Do(req)
+		if err != nil {
+			return nil, goahttp.ErrRequestError("calc", "minus", err)
 		}
 		return decodeResponse(resp)
 	}

@@ -140,6 +140,110 @@ func (x *AddResponse) GetField() int32 {
 	return 0
 }
 
+type MinusRequest struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	// Left operand
+	A int32 `protobuf:"zigzag32,1,opt,name=a,proto3" json:"a,omitempty"`
+	// Right operand
+	B int32 `protobuf:"zigzag32,2,opt,name=b,proto3" json:"b,omitempty"`
+}
+
+func (x *MinusRequest) Reset() {
+	*x = MinusRequest{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_calc_proto_msgTypes[2]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *MinusRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*MinusRequest) ProtoMessage() {}
+
+func (x *MinusRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_calc_proto_msgTypes[2]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use MinusRequest.ProtoReflect.Descriptor instead.
+func (*MinusRequest) Descriptor() ([]byte, []int) {
+	return file_calc_proto_rawDescGZIP(), []int{2}
+}
+
+func (x *MinusRequest) GetA() int32 {
+	if x != nil {
+		return x.A
+	}
+	return 0
+}
+
+func (x *MinusRequest) GetB() int32 {
+	if x != nil {
+		return x.B
+	}
+	return 0
+}
+
+type MinusResponse struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	Field int32 `protobuf:"zigzag32,1,opt,name=field,proto3" json:"field,omitempty"`
+}
+
+func (x *MinusResponse) Reset() {
+	*x = MinusResponse{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_calc_proto_msgTypes[3]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *MinusResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*MinusResponse) ProtoMessage() {}
+
+func (x *MinusResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_calc_proto_msgTypes[3]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use MinusResponse.ProtoReflect.Descriptor instead.
+func (*MinusResponse) Descriptor() ([]byte, []int) {
+	return file_calc_proto_rawDescGZIP(), []int{3}
+}
+
+func (x *MinusResponse) GetField() int32 {
+	if x != nil {
+		return x.Field
+	}
+	return 0
+}
+
 var File_calc_proto protoreflect.FileDescriptor
 
 var file_calc_proto_rawDesc = []byte{
@@ -149,11 +253,19 @@ var file_calc_proto_rawDesc = []byte{
 	0x0a, 0x01, 0x62, 0x18, 0x02, 0x20, 0x01, 0x28, 0x11, 0x52, 0x01, 0x62, 0x22, 0x23, 0x0a, 0x0b,
 	0x41, 0x64, 0x64, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x14, 0x0a, 0x05, 0x66,
 	0x69, 0x65, 0x6c, 0x64, 0x18, 0x01, 0x20, 0x01, 0x28, 0x11, 0x52, 0x05, 0x66, 0x69, 0x65, 0x6c,
-	0x64, 0x32, 0x32, 0x0a, 0x04, 0x43, 0x61, 0x6c, 0x63, 0x12, 0x2a, 0x0a, 0x03, 0x41, 0x64, 0x64,
-	0x12, 0x10, 0x2e, 0x63, 0x61, 0x6c, 0x63, 0x2e, 0x41, 0x64, 0x64, 0x52, 0x65, 0x71, 0x75, 0x65,
-	0x73, 0x74, 0x1a, 0x11, 0x2e, 0x63, 0x61, 0x6c, 0x63, 0x2e, 0x41, 0x64, 0x64, 0x52, 0x65, 0x73,
-	0x70, 0x6f, 0x6e, 0x73, 0x65, 0x42, 0x08, 0x5a, 0x06, 0x63, 0x61, 0x6c, 0x63, 0x70, 0x62, 0x62,
-	0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
+	0x64, 0x22, 0x2a, 0x0a, 0x0c, 0x4d, 0x69, 0x6e, 0x75, 0x73, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73,
+	0x74, 0x12, 0x0c, 0x0a, 0x01, 0x61, 0x18, 0x01, 0x20, 0x01, 0x28, 0x11, 0x52, 0x01, 0x61, 0x12,
+	0x0c, 0x0a, 0x01, 0x62, 0x18, 0x02, 0x20, 0x01, 0x28, 0x11, 0x52, 0x01, 0x62, 0x22, 0x25, 0x0a,
+	0x0d, 0x4d, 0x69, 0x6e, 0x75, 0x73, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x14,
+	0x0a, 0x05, 0x66, 0x69, 0x65, 0x6c, 0x64, 0x18, 0x01, 0x20, 0x01, 0x28, 0x11, 0x52, 0x05, 0x66,
+	0x69, 0x65, 0x6c, 0x64, 0x32, 0x64, 0x0a, 0x04, 0x43, 0x61, 0x6c, 0x63, 0x12, 0x2a, 0x0a, 0x03,
+	0x41, 0x64, 0x64, 0x12, 0x10, 0x2e, 0x63, 0x61, 0x6c, 0x63, 0x2e, 0x41, 0x64, 0x64, 0x52, 0x65,
+	0x71, 0x75, 0x65, 0x73, 0x74, 0x1a, 0x11, 0x2e, 0x63, 0x61, 0x6c, 0x63, 0x2e, 0x41, 0x64, 0x64,
+	0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x30, 0x0a, 0x05, 0x4d, 0x69, 0x6e, 0x75,
+	0x73, 0x12, 0x12, 0x2e, 0x63, 0x61, 0x6c, 0x63, 0x2e, 0x4d, 0x69, 0x6e, 0x75, 0x73, 0x52, 0x65,
+	0x71, 0x75, 0x65, 0x73, 0x74, 0x1a, 0x13, 0x2e, 0x63, 0x61, 0x6c, 0x63, 0x2e, 0x4d, 0x69, 0x6e,
+	0x75, 0x73, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x42, 0x08, 0x5a, 0x06, 0x63, 0x61,
+	0x6c, 0x63, 0x70, 0x62, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
 }
 
 var (
@@ -168,16 +280,20 @@ func file_calc_proto_rawDescGZIP() []byte {
 	return file_calc_proto_rawDescData
 }
 
-var file_calc_proto_msgTypes = make([]protoimpl.MessageInfo, 2)
+var file_calc_proto_msgTypes = make([]protoimpl.MessageInfo, 4)
 var file_calc_proto_goTypes = []interface{}{
-	(*AddRequest)(nil),  // 0: calc.AddRequest
-	(*AddResponse)(nil), // 1: calc.AddResponse
+	(*AddRequest)(nil),    // 0: calc.AddRequest
+	(*AddResponse)(nil),   // 1: calc.AddResponse
+	(*MinusRequest)(nil),  // 2: calc.MinusRequest
+	(*MinusResponse)(nil), // 3: calc.MinusResponse
 }
 var file_calc_proto_depIdxs = []int32{
 	0, // 0: calc.Calc.Add:input_type -> calc.AddRequest
-	1, // 1: calc.Calc.Add:output_type -> calc.AddResponse
-	1, // [1:2] is the sub-list for method output_type
-	0, // [0:1] is the sub-list for method input_type
+	2, // 1: calc.Calc.Minus:input_type -> calc.MinusRequest
+	1, // 2: calc.Calc.Add:output_type -> calc.AddResponse
+	3, // 3: calc.Calc.Minus:output_type -> calc.MinusResponse
+	2, // [2:4] is the sub-list for method output_type
+	0, // [0:2] is the sub-list for method input_type
 	0, // [0:0] is the sub-list for extension type_name
 	0, // [0:0] is the sub-list for extension extendee
 	0, // [0:0] is the sub-list for field type_name
@@ -213,6 +329,30 @@ func file_calc_proto_init() {
 				return nil
 			}
 		}
+		file_calc_proto_msgTypes[2].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*MinusRequest); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_calc_proto_msgTypes[3].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*MinusResponse); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
 	}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
@@ -220,7 +360,7 @@ func file_calc_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: file_calc_proto_rawDesc,
 			NumEnums:      0,
-			NumMessages:   2,
+			NumMessages:   4,
 			NumExtensions: 0,
 			NumServices:   1,
 		},
@@ -248,6 +388,8 @@ const _ = grpc.SupportPackageIsVersion6
 type CalcClient interface {
 	// Add implements add.
 	Add(ctx context.Context, in *AddRequest, opts ...grpc.CallOption) (*AddResponse, error)
+	// Minus implements minus.
+	Minus(ctx context.Context, in *MinusRequest, opts ...grpc.CallOption) (*MinusResponse, error)
 }
 
 type calcClient struct {
@@ -267,10 +409,21 @@ func (c *calcClient) Add(ctx context.Context, in *AddRequest, opts ...grpc.CallO
 	return out, nil
 }
 
+func (c *calcClient) Minus(ctx context.Context, in *MinusRequest, opts ...grpc.CallOption) (*MinusResponse, error) {
+	out := new(MinusResponse)
+	err := c.cc.Invoke(ctx, "/calc.Calc/Minus", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // CalcServer is the server API for Calc service.
 type CalcServer interface {
 	// Add implements add.
 	Add(context.Context, *AddRequest) (*AddResponse, error)
+	// Minus implements minus.
+	Minus(context.Context, *MinusRequest) (*MinusResponse, error)
 }
 
 // UnimplementedCalcServer can be embedded to have forward compatible implementations.
@@ -279,6 +432,9 @@ type UnimplementedCalcServer struct {
 
 func (*UnimplementedCalcServer) Add(context.Context, *AddRequest) (*AddResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Add not implemented")
+}
+func (*UnimplementedCalcServer) Minus(context.Context, *MinusRequest) (*MinusResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method Minus not implemented")
 }
 
 func RegisterCalcServer(s *grpc.Server, srv CalcServer) {
@@ -303,6 +459,24 @@ func _Calc_Add_Handler(srv interface{}, ctx context.Context, dec func(interface{
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Calc_Minus_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(MinusRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(CalcServer).Minus(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/calc.Calc/Minus",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(CalcServer).Minus(ctx, req.(*MinusRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 var _Calc_serviceDesc = grpc.ServiceDesc{
 	ServiceName: "calc.Calc",
 	HandlerType: (*CalcServer)(nil),
@@ -310,6 +484,10 @@ var _Calc_serviceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "Add",
 			Handler:    _Calc_Add_Handler,
+		},
+		{
+			MethodName: "Minus",
+			Handler:    _Calc_Minus_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

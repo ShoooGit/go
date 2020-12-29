@@ -43,3 +43,32 @@ func DecodeAddRequest(ctx context.Context, v interface{}, md metadata.MD) (inter
 	}
 	return payload, nil
 }
+
+// EncodeMinusResponse encodes responses from the "calc" service "minus"
+// endpoint.
+func EncodeMinusResponse(ctx context.Context, v interface{}, hdr, trlr *metadata.MD) (interface{}, error) {
+	result, ok := v.(int)
+	if !ok {
+		return nil, goagrpc.ErrInvalidType("calc", "minus", "int", v)
+	}
+	resp := NewMinusResponse(result)
+	return resp, nil
+}
+
+// DecodeMinusRequest decodes requests sent to "calc" service "minus" endpoint.
+func DecodeMinusRequest(ctx context.Context, v interface{}, md metadata.MD) (interface{}, error) {
+	var (
+		message *calcpb.MinusRequest
+		ok      bool
+	)
+	{
+		if message, ok = v.(*calcpb.MinusRequest); !ok {
+			return nil, goagrpc.ErrInvalidType("calc", "minus", "*calcpb.MinusRequest", v)
+		}
+	}
+	var payload *calc.MinusPayload
+	{
+		payload = NewMinusPayload(message)
+	}
+	return payload, nil
+}

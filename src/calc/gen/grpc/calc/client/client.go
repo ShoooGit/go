@@ -44,3 +44,18 @@ func (c *Client) Add() goa.Endpoint {
 		return res, nil
 	}
 }
+
+// Minus calls the "Minus" function in calcpb.CalcClient interface.
+func (c *Client) Minus() goa.Endpoint {
+	return func(ctx context.Context, v interface{}) (interface{}, error) {
+		inv := goagrpc.NewInvoker(
+			BuildMinusFunc(c.grpccli, c.opts...),
+			EncodeMinusRequest,
+			DecodeMinusResponse)
+		res, err := inv.Invoke(ctx, v)
+		if err != nil {
+			return nil, goa.Fault(err.Error())
+		}
+		return res, nil
+	}
+}

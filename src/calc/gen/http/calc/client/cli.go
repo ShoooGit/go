@@ -40,3 +40,32 @@ func BuildAddPayload(calcAddA string, calcAddB string) (*calc.AddPayload, error)
 
 	return v, nil
 }
+
+// BuildMinusPayload builds the payload for the calc minus endpoint from CLI
+// flags.
+func BuildMinusPayload(calcMinusA string, calcMinusB string) (*calc.MinusPayload, error) {
+	var err error
+	var a int
+	{
+		var v int64
+		v, err = strconv.ParseInt(calcMinusA, 10, 64)
+		a = int(v)
+		if err != nil {
+			return nil, fmt.Errorf("invalid value for a, must be INT")
+		}
+	}
+	var b int
+	{
+		var v int64
+		v, err = strconv.ParseInt(calcMinusB, 10, 64)
+		b = int(v)
+		if err != nil {
+			return nil, fmt.Errorf("invalid value for b, must be INT")
+		}
+	}
+	v := &calc.MinusPayload{}
+	v.A = a
+	v.B = b
+
+	return v, nil
+}

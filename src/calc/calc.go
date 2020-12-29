@@ -21,3 +21,8 @@ func NewCalc(logger *log.Logger) calc.Service {
 func (s *calcsrvc) Add(ctx context.Context, p *calc.AddPayload) (res int, err error) {
 	return p.A + p.B, nil
 }
+
+// Add implements add.
+func (s *calcsrvc) Minus(ctx context.Context, p *calc.MinusPayload) (res int, err error) {
+	return p.A - p.B, nil
+}

@@ -41,9 +41,9 @@ paths:
   /minus/{a}/{b}:
     get:
       tags:
-      - calc2
-      summary: minus calc2
-      operationId: calc2#minus
+      - calc
+      summary: minus calc
+      operationId: calc#minus
       parameters:
       - name: a
         in: path

@@ -18,7 +18,8 @@ import (
 
 // Server implements the calcpb.CalcServer interface.
 type Server struct {
-	AddH goagrpc.UnaryHandler
+	AddH   goagrpc.UnaryHandler
+	MinusH goagrpc.UnaryHandler
 }
 
 // ErrorNamer is an interface implemented by generated error structs that
@@ -30,7 +31,8 @@ type ErrorNamer interface {
 // New instantiates the server struct with the calc service endpoints.
 func New(e *calc.Endpoints, uh goagrpc.UnaryHandler) *Server {
 	return &Server{
-		AddH: NewAddHandler(e.Add, uh),
+		AddH:   NewAddHandler(e.Add, uh),
+		MinusH: NewMinusHandler(e.Minus, uh),
 	}
 }
 
@@ -52,4 +54,24 @@ func (s *Server) Add(ctx context.Context, message *calcpb.AddRequest) (*calcpb.A
 		return nil, goagrpc.EncodeError(err)
 	}
 	return resp.(*calcpb.AddResponse), nil
+}
+
+// NewMinusHandler creates a gRPC handler which serves the "calc" service
+// "minus" endpoint.
+func NewMinusHandler(endpoint goa.Endpoint, h goagrpc.UnaryHandler) goagrpc.UnaryHandler {
+	if h == nil {
+		h = goagrpc.NewUnaryHandler(endpoint, DecodeMinusRequest, EncodeMinusResponse)
+	}
+	return h
+}
+
+// Minus implements the "Minus" method in calcpb.CalcServer interface.
+func (s *Server) Minus(ctx context.Context, message *calcpb.MinusRequest) (*calcpb.MinusResponse, error) {
+	ctx = context.WithValue(ctx, goa.MethodKey, "minus")
+	ctx = context.WithValue(ctx, goa.ServiceKey, "calc")
+	resp, err := s.MinusH.Handle(ctx, message)
+	if err != nil {
+		return nil, goagrpc.EncodeError(err)
+	}
+	return resp.(*calcpb.MinusResponse), nil
 }

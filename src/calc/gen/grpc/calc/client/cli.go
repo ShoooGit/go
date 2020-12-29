@@ -33,3 +33,24 @@ func BuildAddPayload(calcAddMessage string) (*calc.AddPayload, error) {
 
 	return v, nil
 }
+
+// BuildMinusPayload builds the payload for the calc minus endpoint from CLI
+// flags.
+func BuildMinusPayload(calcMinusMessage string) (*calc.MinusPayload, error) {
+	var err error
+	var message calcpb.MinusRequest
+	{
+		if calcMinusMessage != "" {
+			err = json.Unmarshal([]byte(calcMinusMessage), &message)
+			if err != nil {
+				return nil, fmt.Errorf("invalid JSON for message, \nerror: %s, \nexample of valid JSON:\n%s", err, "'{\n      \"a\": 686605435966370186,\n      \"b\": 8228676432890045784\n   }'")
+			}
+		}
+	}
+	v := &calc.MinusPayload{
+		A: int(message.A),
+		B: int(message.B),
+	}
+
+	return v, nil
+}
