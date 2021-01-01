@@ -69,6 +69,7 @@ var _ = Service("calc", func() {
 			// })
 			// -------------------------------------------
 			// Required は必須となるフィールドの名前を列挙
+			// RequiredAttributeを使用すると、Reguiredを使用しなくていい
 			Required("a", "b")
 		})
 
