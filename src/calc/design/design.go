@@ -117,12 +117,15 @@ var _ = Service("calc", func() {
 		Result(Int)
 
 		// エラー
-		Error("DivByZero")
+		Error("DivByZero", func() {
+			Description("ゼロ除算エラー")
+		})
 
 		// HTTP トランスポートへの割り当て
 		HTTP(func() {
-			GET("/divide/{a}/{b}")                  // --> 入力
-			Response(StatusOK)                      // --> 正常系
+			GET("/divide/{a}/{b}") // --> 入力
+			Response(StatusOK)     // --> 正常系
+			// "DivByZero" エラーに HTTP ステータスコード 400 Bad Request を使う。
 			Response("DivByZero", StatusBadRequest) // --> エラー
 		})
 		// GRPC トランスポートへの割当
