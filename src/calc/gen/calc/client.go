@@ -39,7 +39,7 @@ func (c *Client) Add(ctx context.Context, p *AddPayload) (res int, err error) {
 
 // Divide calls the "divide" endpoint of the "calc" service.
 // Divide may return the following errors:
-//	- "DivByZero" (type *goa.ServiceError)
+//	- "DivByZero" (type *goa.ServiceError): ゼロ除算エラー
 //	- error: internal error
 func (c *Client) Divide(ctx context.Context, p *DividePayload) (res int, err error) {
 	var ires interface{}
