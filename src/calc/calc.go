@@ -3,6 +3,7 @@ package calcapi
 import (
 	calc "calc/gen/calc"
 	"context"
+	"fmt"
 	"log"
 )
 
@@ -24,5 +25,9 @@ func (s *calcsrvc) Add(ctx context.Context, p *calc.AddPayload) (res int, err er
 
 // Divide implements divide.
 func (s *calcsrvc) Divide(ctx context.Context, p *calc.DividePayload) (res int, err error) {
+	if p.B == 0 {
+		// 生成された関数を利用してエラー結果を作成する
+		return 0, calc.MakeDivByZero(fmt.Errorf("right operand cannot be 0"))
+	}
 	return p.A / p.B, nil
 }
