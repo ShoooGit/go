@@ -36,6 +36,9 @@ func DecodeAddRequest(ctx context.Context, v interface{}, md metadata.MD) (inter
 		if message, ok = v.(*calcpb.AddRequest); !ok {
 			return nil, goagrpc.ErrInvalidType("calc", "add", "*calcpb.AddRequest", v)
 		}
+		if err := ValidateAddRequest(message); err != nil {
+			return nil, err
+		}
 	}
 	var payload *calc.AddPayload
 	{

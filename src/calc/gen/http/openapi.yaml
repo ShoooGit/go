@@ -25,6 +25,8 @@ paths:
         description: Left operand
         required: true
         type: integer
+        maximum: 10
+        minimum: 1
       - name: b
         in: path
         description: Right operand

@@ -47,6 +47,12 @@ func DecodeAddRequest(mux goahttp.Muxer, decoder func(*http.Request) goahttp.Dec
 			}
 			a = int(v)
 		}
+		if a < 1 {
+			err = goa.MergeErrors(err, goa.InvalidRangeError("a", a, 1, true))
+		}
+		if a > 10 {
+			err = goa.MergeErrors(err, goa.InvalidRangeError("a", a, 10, false))
+		}
 		{
 			bRaw := params["b"]
 			v, err2 := strconv.ParseInt(bRaw, 10, strconv.IntSize)

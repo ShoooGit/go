@@ -55,12 +55,17 @@ var _ = Service("calc", func() {
 		// ここでは、ペイロードは2つのフィールドからなるオブジェクト
 		Payload(func() {
 			// Field はフィールドインデックス、フィールド名、タイプ、および説明が与えられたオブジェクトを記述
-			Field(1, "a", Int, "Left operand")
+			Attribute("a", Int, "Left operand", func() {
+				Meta("rpc:tag", "1")
+				// バリデーションの実施
+				Minimum(1)
+				Maximum(10)
+			})
 			Field(2, "b", Int, "Right operand")
 			// Field DSL は gRPC のフィールドを記述するためのエイリアスで、下記と同等
 			// -------------------------------------------
-			// Attribute("a", Int, "Left operand", func(){
-			// 	Meta("rpc:tag", "1")
+			// Attribute("b", Int, "Right operand", func(){
+			// 	Meta("rpc:tag", "2")
 			// })
 			// -------------------------------------------
 			// Required は必須となるフィールドの名前を列挙

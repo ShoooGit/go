@@ -10,6 +10,8 @@ package server
 import (
 	calc "calc/gen/calc"
 	calcpb "calc/gen/grpc/calc/pb"
+
+	goa "goa.design/goa/v3/pkg"
 )
 
 // NewAddPayload builds the payload of the "add" endpoint of the "calc" service
@@ -46,4 +48,15 @@ func NewDivideResponse(result int) *calcpb.DivideResponse {
 	message := &calcpb.DivideResponse{}
 	message.Field = int32(result)
 	return message
+}
+
+// ValidateAddRequest runs the validations defined on AddRequest.
+func ValidateAddRequest(message *calcpb.AddRequest) (err error) {
+	if message.A < 1 {
+		err = goa.MergeErrors(err, goa.InvalidRangeError("message.a", message.A, 1, true))
+	}
+	if message.A > 10 {
+		err = goa.MergeErrors(err, goa.InvalidRangeError("message.a", message.A, 10, false))
+	}
+	return
 }

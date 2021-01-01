@@ -11,6 +11,8 @@ import (
 	calc "calc/gen/calc"
 	"fmt"
 	"strconv"
+
+	goa "goa.design/goa/v3/pkg"
 )
 
 // BuildAddPayload builds the payload for the calc add endpoint from CLI flags.
@@ -23,6 +25,15 @@ func BuildAddPayload(calcAddA string, calcAddB string) (*calc.AddPayload, error)
 		a = int(v)
 		if err != nil {
 			return nil, fmt.Errorf("invalid value for a, must be INT")
+		}
+		if a < 1 {
+			err = goa.MergeErrors(err, goa.InvalidRangeError("a", a, 1, true))
+		}
+		if a > 10 {
+			err = goa.MergeErrors(err, goa.InvalidRangeError("a", a, 10, false))
+		}
+		if err != nil {
+			return nil, err
 		}
 	}
 	var b int

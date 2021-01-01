@@ -26,9 +26,10 @@ paths:
         schema:
           type: integer
           description: Left operand
-          example: 1089204046671954241
-          format: int64
-        example: 3833729960400405184
+          example: 2
+          minimum: 1
+          maximum: 10
+        example: 5
       - name: b
         in: path
         description: Right operand
