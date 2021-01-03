@@ -6,7 +6,7 @@ import (
 
 // レスポンスデータの定義
 // MediaType of Users API.
-var UserResponse = ResultType("application/vnd.goa2-sample.user+json", func() {
+var UserResponse = ResultType("application/vnd.goa3-sample.user+json", func() {
 	Description("User Response")
 	ContentType("application/json")
 
@@ -27,7 +27,7 @@ var UserResponse = ResultType("application/vnd.goa2-sample.user+json", func() {
 })
 
 // MediaType of Admin API.
-var AdminUserStatsResponse = ResultType("application/vnd.goa2-sample.admin.user_number+json", func() {
+var AdminUserStatsResponse = ResultType("application/vnd.goa3-sample.admin.user_number+json", func() {
 	Description("statistic of users")
 	ContentType("application/json")
 
@@ -43,7 +43,7 @@ var AdminUserStatsResponse = ResultType("application/vnd.goa2-sample.admin.user_
 	})
 })
 
-var AdminUserResponse = ResultType("application/vnd.goa2-sample.admin.user+json", func() {
+var AdminUserResponse = ResultType("application/vnd.goa3-sample.admin.user+json", func() {
 	Description("User Response")
 	ContentType("application/json")
 

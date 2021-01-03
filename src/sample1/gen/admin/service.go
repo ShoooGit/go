@@ -15,15 +15,15 @@ import (
 // Admin provide functions for the management screen.
 type Service interface {
 	// Number of users
-	UserNumber(context.Context) (res *Goa2SampleAdminUserNumber, err error)
+	UserNumber(context.Context) (res *Goa3SampleAdminUserNumber, err error)
 	// List all stored users
-	AdminListUser(context.Context) (res Goa2SampleAdminUserCollection, err error)
+	AdminListUser(context.Context) (res Goa3SampleAdminUserCollection, err error)
 	// Show user by ID
-	AdminGetUser(context.Context, *GetUserPayload) (res *Goa2SampleAdminUser, err error)
+	AdminGetUser(context.Context, *GetUserPayload) (res *Goa3SampleAdminUser, err error)
 	// Add new user and return its ID.
 	AdminCreateUser(context.Context, *CreateUserPayload) (res string, err error)
 	// Update user item.
-	AdminUpdateUser(context.Context, *UpdateUserPayload) (res *Goa2SampleAdminUser, err error)
+	AdminUpdateUser(context.Context, *UpdateUserPayload) (res *Goa3SampleAdminUser, err error)
 	// Delete user by id.
 	AdminDeleteUser(context.Context, *DeleteUserPayload) (err error)
 }
@@ -38,9 +38,9 @@ const ServiceName = "Admin"
 // MethodKey key.
 var MethodNames = [6]string{"user_number", "admin list user", "admin get user", "admin create user", "admin update user", "admin delete user"}
 
-// Goa2SampleAdminUserNumber is the result type of the Admin service
+// Goa3SampleAdminUserNumber is the result type of the Admin service
 // user_number method.
-type Goa2SampleAdminUserNumber struct {
+type Goa3SampleAdminUserNumber struct {
 	// グラフデータ
 	Data []*Data
 	// X軸に使用するkey
@@ -54,9 +54,9 @@ type Goa2SampleAdminUserNumber struct {
 	Guide *StatsGuideType
 }
 
-// Goa2SampleAdminUserCollection is the result type of the Admin service admin
+// Goa3SampleAdminUserCollection is the result type of the Admin service admin
 // list user method.
-type Goa2SampleAdminUserCollection []*Goa2SampleAdminUser
+type Goa3SampleAdminUserCollection []*Goa3SampleAdminUser
 
 // GetUserPayload is the payload type of the Admin service admin get user
 // method.
@@ -64,9 +64,9 @@ type GetUserPayload struct {
 	ID string
 }
 
-// Goa2SampleAdminUser is the result type of the Admin service admin get user
+// Goa3SampleAdminUser is the result type of the Admin service admin get user
 // method.
-type Goa2SampleAdminUser struct {
+type Goa3SampleAdminUser struct {
 	// User id
 	ID string
 	// Name of user
@@ -120,53 +120,53 @@ type StatsLabelType struct {
 	Label string
 }
 
-// NewGoa2SampleAdminUserNumber initializes result type
-// Goa2SampleAdminUserNumber from viewed result type Goa2SampleAdminUserNumber.
-func NewGoa2SampleAdminUserNumber(vres *adminviews.Goa2SampleAdminUserNumber) *Goa2SampleAdminUserNumber {
-	return newGoa2SampleAdminUserNumber(vres.Projected)
+// NewGoa3SampleAdminUserNumber initializes result type
+// Goa3SampleAdminUserNumber from viewed result type Goa3SampleAdminUserNumber.
+func NewGoa3SampleAdminUserNumber(vres *adminviews.Goa3SampleAdminUserNumber) *Goa3SampleAdminUserNumber {
+	return newGoa3SampleAdminUserNumber(vres.Projected)
 }
 
-// NewViewedGoa2SampleAdminUserNumber initializes viewed result type
-// Goa2SampleAdminUserNumber from result type Goa2SampleAdminUserNumber using
+// NewViewedGoa3SampleAdminUserNumber initializes viewed result type
+// Goa3SampleAdminUserNumber from result type Goa3SampleAdminUserNumber using
 // the given view.
-func NewViewedGoa2SampleAdminUserNumber(res *Goa2SampleAdminUserNumber, view string) *adminviews.Goa2SampleAdminUserNumber {
-	p := newGoa2SampleAdminUserNumberView(res)
-	return &adminviews.Goa2SampleAdminUserNumber{Projected: p, View: "default"}
+func NewViewedGoa3SampleAdminUserNumber(res *Goa3SampleAdminUserNumber, view string) *adminviews.Goa3SampleAdminUserNumber {
+	p := newGoa3SampleAdminUserNumberView(res)
+	return &adminviews.Goa3SampleAdminUserNumber{Projected: p, View: "default"}
 }
 
-// NewGoa2SampleAdminUserCollection initializes result type
-// Goa2SampleAdminUserCollection from viewed result type
-// Goa2SampleAdminUserCollection.
-func NewGoa2SampleAdminUserCollection(vres adminviews.Goa2SampleAdminUserCollection) Goa2SampleAdminUserCollection {
-	return newGoa2SampleAdminUserCollection(vres.Projected)
+// NewGoa3SampleAdminUserCollection initializes result type
+// Goa3SampleAdminUserCollection from viewed result type
+// Goa3SampleAdminUserCollection.
+func NewGoa3SampleAdminUserCollection(vres adminviews.Goa3SampleAdminUserCollection) Goa3SampleAdminUserCollection {
+	return newGoa3SampleAdminUserCollection(vres.Projected)
 }
 
-// NewViewedGoa2SampleAdminUserCollection initializes viewed result type
-// Goa2SampleAdminUserCollection from result type Goa2SampleAdminUserCollection
+// NewViewedGoa3SampleAdminUserCollection initializes viewed result type
+// Goa3SampleAdminUserCollection from result type Goa3SampleAdminUserCollection
 // using the given view.
-func NewViewedGoa2SampleAdminUserCollection(res Goa2SampleAdminUserCollection, view string) adminviews.Goa2SampleAdminUserCollection {
-	p := newGoa2SampleAdminUserCollectionView(res)
-	return adminviews.Goa2SampleAdminUserCollection{Projected: p, View: "default"}
+func NewViewedGoa3SampleAdminUserCollection(res Goa3SampleAdminUserCollection, view string) adminviews.Goa3SampleAdminUserCollection {
+	p := newGoa3SampleAdminUserCollectionView(res)
+	return adminviews.Goa3SampleAdminUserCollection{Projected: p, View: "default"}
 }
 
-// NewGoa2SampleAdminUser initializes result type Goa2SampleAdminUser from
-// viewed result type Goa2SampleAdminUser.
-func NewGoa2SampleAdminUser(vres *adminviews.Goa2SampleAdminUser) *Goa2SampleAdminUser {
-	return newGoa2SampleAdminUser(vres.Projected)
+// NewGoa3SampleAdminUser initializes result type Goa3SampleAdminUser from
+// viewed result type Goa3SampleAdminUser.
+func NewGoa3SampleAdminUser(vres *adminviews.Goa3SampleAdminUser) *Goa3SampleAdminUser {
+	return newGoa3SampleAdminUser(vres.Projected)
 }
 
-// NewViewedGoa2SampleAdminUser initializes viewed result type
-// Goa2SampleAdminUser from result type Goa2SampleAdminUser using the given
+// NewViewedGoa3SampleAdminUser initializes viewed result type
+// Goa3SampleAdminUser from result type Goa3SampleAdminUser using the given
 // view.
-func NewViewedGoa2SampleAdminUser(res *Goa2SampleAdminUser, view string) *adminviews.Goa2SampleAdminUser {
-	p := newGoa2SampleAdminUserView(res)
-	return &adminviews.Goa2SampleAdminUser{Projected: p, View: "default"}
+func NewViewedGoa3SampleAdminUser(res *Goa3SampleAdminUser, view string) *adminviews.Goa3SampleAdminUser {
+	p := newGoa3SampleAdminUserView(res)
+	return &adminviews.Goa3SampleAdminUser{Projected: p, View: "default"}
 }
 
-// newGoa2SampleAdminUserNumber converts projected type
-// Goa2SampleAdminUserNumber to service type Goa2SampleAdminUserNumber.
-func newGoa2SampleAdminUserNumber(vres *adminviews.Goa2SampleAdminUserNumberView) *Goa2SampleAdminUserNumber {
-	res := &Goa2SampleAdminUserNumber{
+// newGoa3SampleAdminUserNumber converts projected type
+// Goa3SampleAdminUserNumber to service type Goa3SampleAdminUserNumber.
+func newGoa3SampleAdminUserNumber(vres *adminviews.Goa3SampleAdminUserNumberView) *Goa3SampleAdminUserNumber {
+	res := &Goa3SampleAdminUserNumber{
 		Size:  vres.Size,
 		Color: vres.Color,
 	}
@@ -188,11 +188,11 @@ func newGoa2SampleAdminUserNumber(vres *adminviews.Goa2SampleAdminUserNumberView
 	return res
 }
 
-// newGoa2SampleAdminUserNumberView projects result type
-// Goa2SampleAdminUserNumber to projected type Goa2SampleAdminUserNumberView
+// newGoa3SampleAdminUserNumberView projects result type
+// Goa3SampleAdminUserNumber to projected type Goa3SampleAdminUserNumberView
 // using the "default" view.
-func newGoa2SampleAdminUserNumberView(res *Goa2SampleAdminUserNumber) *adminviews.Goa2SampleAdminUserNumberView {
-	vres := &adminviews.Goa2SampleAdminUserNumberView{
+func newGoa3SampleAdminUserNumberView(res *Goa3SampleAdminUserNumber) *adminviews.Goa3SampleAdminUserNumberView {
+	vres := &adminviews.Goa3SampleAdminUserNumberView{
 		X:     &res.X,
 		Y:     &res.Y,
 		Size:  res.Size,
@@ -210,31 +210,31 @@ func newGoa2SampleAdminUserNumberView(res *Goa2SampleAdminUserNumber) *adminview
 	return vres
 }
 
-// newGoa2SampleAdminUserCollection converts projected type
-// Goa2SampleAdminUserCollection to service type Goa2SampleAdminUserCollection.
-func newGoa2SampleAdminUserCollection(vres adminviews.Goa2SampleAdminUserCollectionView) Goa2SampleAdminUserCollection {
-	res := make(Goa2SampleAdminUserCollection, len(vres))
+// newGoa3SampleAdminUserCollection converts projected type
+// Goa3SampleAdminUserCollection to service type Goa3SampleAdminUserCollection.
+func newGoa3SampleAdminUserCollection(vres adminviews.Goa3SampleAdminUserCollectionView) Goa3SampleAdminUserCollection {
+	res := make(Goa3SampleAdminUserCollection, len(vres))
 	for i, n := range vres {
-		res[i] = newGoa2SampleAdminUser(n)
+		res[i] = newGoa3SampleAdminUser(n)
 	}
 	return res
 }
 
-// newGoa2SampleAdminUserCollectionView projects result type
-// Goa2SampleAdminUserCollection to projected type
-// Goa2SampleAdminUserCollectionView using the "default" view.
-func newGoa2SampleAdminUserCollectionView(res Goa2SampleAdminUserCollection) adminviews.Goa2SampleAdminUserCollectionView {
-	vres := make(adminviews.Goa2SampleAdminUserCollectionView, len(res))
+// newGoa3SampleAdminUserCollectionView projects result type
+// Goa3SampleAdminUserCollection to projected type
+// Goa3SampleAdminUserCollectionView using the "default" view.
+func newGoa3SampleAdminUserCollectionView(res Goa3SampleAdminUserCollection) adminviews.Goa3SampleAdminUserCollectionView {
+	vres := make(adminviews.Goa3SampleAdminUserCollectionView, len(res))
 	for i, n := range res {
-		vres[i] = newGoa2SampleAdminUserView(n)
+		vres[i] = newGoa3SampleAdminUserView(n)
 	}
 	return vres
 }
 
-// newGoa2SampleAdminUser converts projected type Goa2SampleAdminUser to
-// service type Goa2SampleAdminUser.
-func newGoa2SampleAdminUser(vres *adminviews.Goa2SampleAdminUserView) *Goa2SampleAdminUser {
-	res := &Goa2SampleAdminUser{
+// newGoa3SampleAdminUser converts projected type Goa3SampleAdminUser to
+// service type Goa3SampleAdminUser.
+func newGoa3SampleAdminUser(vres *adminviews.Goa3SampleAdminUserView) *Goa3SampleAdminUser {
+	res := &Goa3SampleAdminUser{
 		DeletedAt: vres.DeletedAt,
 	}
 	if vres.ID != nil {
@@ -255,10 +255,10 @@ func newGoa2SampleAdminUser(vres *adminviews.Goa2SampleAdminUserView) *Goa2Sampl
 	return res
 }
 
-// newGoa2SampleAdminUserView projects result type Goa2SampleAdminUser to
-// projected type Goa2SampleAdminUserView using the "default" view.
-func newGoa2SampleAdminUserView(res *Goa2SampleAdminUser) *adminviews.Goa2SampleAdminUserView {
-	vres := &adminviews.Goa2SampleAdminUserView{
+// newGoa3SampleAdminUserView projects result type Goa3SampleAdminUser to
+// projected type Goa3SampleAdminUserView using the "default" view.
+func newGoa3SampleAdminUserView(res *Goa3SampleAdminUser) *adminviews.Goa3SampleAdminUserView {
+	vres := &adminviews.Goa3SampleAdminUserView{
 		ID:        &res.ID,
 		Name:      &res.Name,
 		Email:     &res.Email,

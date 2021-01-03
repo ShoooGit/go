@@ -34,23 +34,23 @@ func NewClient(listUser, getUser, createUser, updateUser, deleteUser goa.Endpoin
 }
 
 // ListUser calls the "list user" endpoint of the "Users" service.
-func (c *Client) ListUser(ctx context.Context) (res Goa2SampleUserCollection, err error) {
+func (c *Client) ListUser(ctx context.Context) (res Goa3SampleUserCollection, err error) {
 	var ires interface{}
 	ires, err = c.ListUserEndpoint(ctx, nil)
 	if err != nil {
 		return
 	}
-	return ires.(Goa2SampleUserCollection), nil
+	return ires.(Goa3SampleUserCollection), nil
 }
 
 // GetUser calls the "get user" endpoint of the "Users" service.
-func (c *Client) GetUser(ctx context.Context, p *GetUserPayload) (res *Goa2SampleUser, err error) {
+func (c *Client) GetUser(ctx context.Context, p *GetUserPayload) (res *Goa3SampleUser, err error) {
 	var ires interface{}
 	ires, err = c.GetUserEndpoint(ctx, p)
 	if err != nil {
 		return
 	}
-	return ires.(*Goa2SampleUser), nil
+	return ires.(*Goa3SampleUser), nil
 }
 
 // CreateUser calls the "create user" endpoint of the "Users" service.
@@ -64,13 +64,13 @@ func (c *Client) CreateUser(ctx context.Context, p *CreateUserPayload) (res stri
 }
 
 // UpdateUser calls the "update user" endpoint of the "Users" service.
-func (c *Client) UpdateUser(ctx context.Context, p *UpdateUserPayload) (res *Goa2SampleUser, err error) {
+func (c *Client) UpdateUser(ctx context.Context, p *UpdateUserPayload) (res *Goa3SampleUser, err error) {
 	var ires interface{}
 	ires, err = c.UpdateUserEndpoint(ctx, p)
 	if err != nil {
 		return
 	}
-	return ires.(*Goa2SampleUser), nil
+	return ires.(*Goa3SampleUser), nil
 }
 
 // DeleteUser calls the "delete user" endpoint of the "Users" service.

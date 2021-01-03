@@ -19,7 +19,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Goa2SampleAdminUserNumber'
+                $ref: '#/components/schemas/Goa3SampleAdminUserNumber'
               example:
                 color: Est sed.
                 data:
@@ -48,7 +48,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Goa2SampleAdminUserCollection'
+                $ref: '#/components/schemas/Goa3SampleAdminUserCollection'
               example:
               - created_at: Velit reprehenderit sed earum rerum.
                 deleted_at: Ipsum laborum numquam.
@@ -137,7 +137,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Goa2SampleAdminUser'
+                $ref: '#/components/schemas/Goa3SampleAdminUser'
               example:
                 created_at: Eos dolorem aut illo aspernatur eligendi.
                 deleted_at: Impedit rem.
@@ -178,7 +178,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Goa2SampleAdminUser'
+                $ref: '#/components/schemas/Goa3SampleAdminUser'
               example:
                 created_at: Qui error dignissimos optio.
                 deleted_at: Quasi autem hic cumque.
@@ -199,7 +199,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Goa2SampleUserCollection'
+                $ref: '#/components/schemas/Goa3SampleUserCollection'
               example:
               - email: taro.yamada@xxx.jp
                 id: XRQ85mtXnINISH25zfM0m5RlC6L2
@@ -273,7 +273,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Goa2SampleUser'
+                $ref: '#/components/schemas/Goa3SampleUser'
               example:
                 email: taro.yamada@xxx.jp
                 id: XRQ85mtXnINISH25zfM0m5RlC6L2
@@ -311,7 +311,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Goa2SampleUser'
+                $ref: '#/components/schemas/Goa3SampleUser'
               example:
                 email: taro.yamada@xxx.jp
                 id: XRQ85mtXnINISH25zfM0m5RlC6L2
@@ -618,7 +618,7 @@ components:
       example:
         key: Eum beatae sed unde.
         value: Harum et asperiores autem sequi laudantium.
-    Goa2SampleAdminUser:
+    Goa3SampleAdminUser:
       type: object
       properties:
         created_at:
@@ -658,10 +658,10 @@ components:
       - email
       - created_at
       - updated_at
-    Goa2SampleAdminUserCollection:
+    Goa3SampleAdminUserCollection:
       type: array
       items:
-        $ref: '#/components/schemas/Goa2SampleAdminUser'
+        $ref: '#/components/schemas/Goa3SampleAdminUser'
       example:
       - created_at: Velit reprehenderit sed earum rerum.
         deleted_at: Ipsum laborum numquam.
@@ -687,7 +687,7 @@ components:
         id: XRQ85mtXnINISH25zfM0m5RlC6L2
         name: yamada taro
         updated_at: Consequatur qui blanditiis quos laborum quas omnis.
-    Goa2SampleAdminUserNumber:
+    Goa3SampleAdminUserNumber:
       type: object
       properties:
         color:
@@ -742,7 +742,7 @@ components:
       - x
       - "y"
       - guide
-    Goa2SampleUser:
+    Goa3SampleUser:
       type: object
       properties:
         email:
@@ -768,10 +768,10 @@ components:
       - id
       - name
       - email
-    Goa2SampleUserCollection:
+    Goa3SampleUserCollection:
       type: array
       items:
-        $ref: '#/components/schemas/Goa2SampleUser'
+        $ref: '#/components/schemas/Goa3SampleUser'
       example:
       - email: taro.yamada@xxx.jp
         id: XRQ85mtXnINISH25zfM0m5RlC6L2

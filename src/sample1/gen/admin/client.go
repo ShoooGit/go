@@ -36,33 +36,33 @@ func NewClient(userNumber, adminListUser, adminGetUser, adminCreateUser, adminUp
 }
 
 // UserNumber calls the "user_number" endpoint of the "Admin" service.
-func (c *Client) UserNumber(ctx context.Context) (res *Goa2SampleAdminUserNumber, err error) {
+func (c *Client) UserNumber(ctx context.Context) (res *Goa3SampleAdminUserNumber, err error) {
 	var ires interface{}
 	ires, err = c.UserNumberEndpoint(ctx, nil)
 	if err != nil {
 		return
 	}
-	return ires.(*Goa2SampleAdminUserNumber), nil
+	return ires.(*Goa3SampleAdminUserNumber), nil
 }
 
 // AdminListUser calls the "admin list user" endpoint of the "Admin" service.
-func (c *Client) AdminListUser(ctx context.Context) (res Goa2SampleAdminUserCollection, err error) {
+func (c *Client) AdminListUser(ctx context.Context) (res Goa3SampleAdminUserCollection, err error) {
 	var ires interface{}
 	ires, err = c.AdminListUserEndpoint(ctx, nil)
 	if err != nil {
 		return
 	}
-	return ires.(Goa2SampleAdminUserCollection), nil
+	return ires.(Goa3SampleAdminUserCollection), nil
 }
 
 // AdminGetUser calls the "admin get user" endpoint of the "Admin" service.
-func (c *Client) AdminGetUser(ctx context.Context, p *GetUserPayload) (res *Goa2SampleAdminUser, err error) {
+func (c *Client) AdminGetUser(ctx context.Context, p *GetUserPayload) (res *Goa3SampleAdminUser, err error) {
 	var ires interface{}
 	ires, err = c.AdminGetUserEndpoint(ctx, p)
 	if err != nil {
 		return
 	}
-	return ires.(*Goa2SampleAdminUser), nil
+	return ires.(*Goa3SampleAdminUser), nil
 }
 
 // AdminCreateUser calls the "admin create user" endpoint of the "Admin"
@@ -78,13 +78,13 @@ func (c *Client) AdminCreateUser(ctx context.Context, p *CreateUserPayload) (res
 
 // AdminUpdateUser calls the "admin update user" endpoint of the "Admin"
 // service.
-func (c *Client) AdminUpdateUser(ctx context.Context, p *UpdateUserPayload) (res *Goa2SampleAdminUser, err error) {
+func (c *Client) AdminUpdateUser(ctx context.Context, p *UpdateUserPayload) (res *Goa3SampleAdminUser, err error) {
 	var ires interface{}
 	ires, err = c.AdminUpdateUserEndpoint(ctx, p)
 	if err != nil {
 		return
 	}
-	return ires.(*Goa2SampleAdminUser), nil
+	return ires.(*Goa3SampleAdminUser), nil
 }
 
 // AdminDeleteUser calls the "admin delete user" endpoint of the "Admin"

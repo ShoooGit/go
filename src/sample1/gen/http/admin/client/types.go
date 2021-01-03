@@ -53,7 +53,7 @@ type UserNumberResponseBody struct {
 
 // AdminListUserResponseBody is the type of the "Admin" service "admin list
 // user" endpoint HTTP response body.
-type AdminListUserResponseBody []*Goa2SampleAdminUserResponse
+type AdminListUserResponseBody []*Goa3SampleAdminUserResponse
 
 // AdminGetUserResponseBody is the type of the "Admin" service "admin get user"
 // endpoint HTTP response body.
@@ -100,8 +100,8 @@ type StatsLabelTypeResponseBody struct {
 	Label *string `form:"label,omitempty" json:"label,omitempty" xml:"label,omitempty"`
 }
 
-// Goa2SampleAdminUserResponse is used to define fields on response body types.
-type Goa2SampleAdminUserResponse struct {
+// Goa3SampleAdminUserResponse is used to define fields on response body types.
+type Goa3SampleAdminUserResponse struct {
 	// User id
 	ID *string `form:"id,omitempty" json:"id,omitempty" xml:"id,omitempty"`
 	// Name of user
@@ -134,10 +134,10 @@ func NewAdminUpdateUserRequestBody(p *admin.UpdateUserPayload) *AdminUpdateUserR
 	return body
 }
 
-// NewUserNumberGoa2SampleAdminUserNumberOK builds a "Admin" service
+// NewUserNumberGoa3SampleAdminUserNumberOK builds a "Admin" service
 // "user_number" endpoint result from a HTTP "OK" response.
-func NewUserNumberGoa2SampleAdminUserNumberOK(body *UserNumberResponseBody) *adminviews.Goa2SampleAdminUserNumberView {
-	v := &adminviews.Goa2SampleAdminUserNumberView{
+func NewUserNumberGoa3SampleAdminUserNumberOK(body *UserNumberResponseBody) *adminviews.Goa3SampleAdminUserNumberView {
+	v := &adminviews.Goa3SampleAdminUserNumberView{
 		X:     body.X,
 		Y:     body.Y,
 		Size:  body.Size,
@@ -152,20 +152,20 @@ func NewUserNumberGoa2SampleAdminUserNumberOK(body *UserNumberResponseBody) *adm
 	return v
 }
 
-// NewAdminListUserGoa2SampleAdminUserCollectionOK builds a "Admin" service
+// NewAdminListUserGoa3SampleAdminUserCollectionOK builds a "Admin" service
 // "admin list user" endpoint result from a HTTP "OK" response.
-func NewAdminListUserGoa2SampleAdminUserCollectionOK(body AdminListUserResponseBody) adminviews.Goa2SampleAdminUserCollectionView {
-	v := make([]*adminviews.Goa2SampleAdminUserView, len(body))
+func NewAdminListUserGoa3SampleAdminUserCollectionOK(body AdminListUserResponseBody) adminviews.Goa3SampleAdminUserCollectionView {
+	v := make([]*adminviews.Goa3SampleAdminUserView, len(body))
 	for i, val := range body {
-		v[i] = unmarshalGoa2SampleAdminUserResponseToAdminviewsGoa2SampleAdminUserView(val)
+		v[i] = unmarshalGoa3SampleAdminUserResponseToAdminviewsGoa3SampleAdminUserView(val)
 	}
 	return v
 }
 
-// NewAdminGetUserGoa2SampleAdminUserOK builds a "Admin" service "admin get
+// NewAdminGetUserGoa3SampleAdminUserOK builds a "Admin" service "admin get
 // user" endpoint result from a HTTP "OK" response.
-func NewAdminGetUserGoa2SampleAdminUserOK(body *AdminGetUserResponseBody) *adminviews.Goa2SampleAdminUserView {
-	v := &adminviews.Goa2SampleAdminUserView{
+func NewAdminGetUserGoa3SampleAdminUserOK(body *AdminGetUserResponseBody) *adminviews.Goa3SampleAdminUserView {
+	v := &adminviews.Goa3SampleAdminUserView{
 		ID:        body.ID,
 		Name:      body.Name,
 		Email:     body.Email,
@@ -177,10 +177,10 @@ func NewAdminGetUserGoa2SampleAdminUserOK(body *AdminGetUserResponseBody) *admin
 	return v
 }
 
-// NewAdminUpdateUserGoa2SampleAdminUserOK builds a "Admin" service "admin
+// NewAdminUpdateUserGoa3SampleAdminUserOK builds a "Admin" service "admin
 // update user" endpoint result from a HTTP "OK" response.
-func NewAdminUpdateUserGoa2SampleAdminUserOK(body *AdminUpdateUserResponseBody) *adminviews.Goa2SampleAdminUserView {
-	v := &adminviews.Goa2SampleAdminUserView{
+func NewAdminUpdateUserGoa3SampleAdminUserOK(body *AdminUpdateUserResponseBody) *adminviews.Goa3SampleAdminUserView {
+	v := &adminviews.Goa3SampleAdminUserView{
 		ID:        body.ID,
 		Name:      body.Name,
 		Email:     body.Email,
@@ -217,9 +217,9 @@ func ValidateStatsLabelTypeResponseBody(body *StatsLabelTypeResponseBody) (err e
 	return
 }
 
-// ValidateGoa2SampleAdminUserResponse runs the validations defined on
-// Goa2-SampleAdminUserResponse
-func ValidateGoa2SampleAdminUserResponse(body *Goa2SampleAdminUserResponse) (err error) {
+// ValidateGoa3SampleAdminUserResponse runs the validations defined on
+// Goa3-SampleAdminUserResponse
+func ValidateGoa3SampleAdminUserResponse(body *Goa3SampleAdminUserResponse) (err error) {
 	if body.ID == nil {
 		err = goa.MergeErrors(err, goa.MissingFieldError("id", "body"))
 	}

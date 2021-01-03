@@ -61,13 +61,13 @@ func DecodeUserNumberResponse(decoder func(*http.Response) goahttp.Decoder, rest
 			if err != nil {
 				return nil, goahttp.ErrDecodingError("Admin", "user_number", err)
 			}
-			p := NewUserNumberGoa2SampleAdminUserNumberOK(&body)
+			p := NewUserNumberGoa3SampleAdminUserNumberOK(&body)
 			view := "default"
-			vres := &adminviews.Goa2SampleAdminUserNumber{Projected: p, View: view}
-			if err = adminviews.ValidateGoa2SampleAdminUserNumber(vres); err != nil {
+			vres := &adminviews.Goa3SampleAdminUserNumber{Projected: p, View: view}
+			if err = adminviews.ValidateGoa3SampleAdminUserNumber(vres); err != nil {
 				return nil, goahttp.ErrValidationError("Admin", "user_number", err)
 			}
-			res := admin.NewGoa2SampleAdminUserNumber(vres)
+			res := admin.NewGoa3SampleAdminUserNumber(vres)
 			return res, nil
 		default:
 			body, _ := ioutil.ReadAll(resp.Body)
@@ -118,13 +118,13 @@ func DecodeAdminListUserResponse(decoder func(*http.Response) goahttp.Decoder, r
 			if err != nil {
 				return nil, goahttp.ErrDecodingError("Admin", "admin list user", err)
 			}
-			p := NewAdminListUserGoa2SampleAdminUserCollectionOK(body)
+			p := NewAdminListUserGoa3SampleAdminUserCollectionOK(body)
 			view := "default"
-			vres := adminviews.Goa2SampleAdminUserCollection{Projected: p, View: view}
-			if err = adminviews.ValidateGoa2SampleAdminUserCollection(vres); err != nil {
+			vres := adminviews.Goa3SampleAdminUserCollection{Projected: p, View: view}
+			if err = adminviews.ValidateGoa3SampleAdminUserCollection(vres); err != nil {
 				return nil, goahttp.ErrValidationError("Admin", "admin list user", err)
 			}
-			res := admin.NewGoa2SampleAdminUserCollection(vres)
+			res := admin.NewGoa3SampleAdminUserCollection(vres)
 			return res, nil
 		default:
 			body, _ := ioutil.ReadAll(resp.Body)
@@ -185,13 +185,13 @@ func DecodeAdminGetUserResponse(decoder func(*http.Response) goahttp.Decoder, re
 			if err != nil {
 				return nil, goahttp.ErrDecodingError("Admin", "admin get user", err)
 			}
-			p := NewAdminGetUserGoa2SampleAdminUserOK(&body)
+			p := NewAdminGetUserGoa3SampleAdminUserOK(&body)
 			view := "default"
-			vres := &adminviews.Goa2SampleAdminUser{Projected: p, View: view}
-			if err = adminviews.ValidateGoa2SampleAdminUser(vres); err != nil {
+			vres := &adminviews.Goa3SampleAdminUser{Projected: p, View: view}
+			if err = adminviews.ValidateGoa3SampleAdminUser(vres); err != nil {
 				return nil, goahttp.ErrValidationError("Admin", "admin get user", err)
 			}
-			res := admin.NewGoa2SampleAdminUser(vres)
+			res := admin.NewGoa3SampleAdminUser(vres)
 			return res, nil
 		default:
 			body, _ := ioutil.ReadAll(resp.Body)
@@ -334,13 +334,13 @@ func DecodeAdminUpdateUserResponse(decoder func(*http.Response) goahttp.Decoder,
 			if err != nil {
 				return nil, goahttp.ErrDecodingError("Admin", "admin update user", err)
 			}
-			p := NewAdminUpdateUserGoa2SampleAdminUserOK(&body)
+			p := NewAdminUpdateUserGoa3SampleAdminUserOK(&body)
 			view := "default"
-			vres := &adminviews.Goa2SampleAdminUser{Projected: p, View: view}
-			if err = adminviews.ValidateGoa2SampleAdminUser(vres); err != nil {
+			vres := &adminviews.Goa3SampleAdminUser{Projected: p, View: view}
+			if err = adminviews.ValidateGoa3SampleAdminUser(vres); err != nil {
 				return nil, goahttp.ErrValidationError("Admin", "admin update user", err)
 			}
-			res := admin.NewGoa2SampleAdminUser(vres)
+			res := admin.NewGoa3SampleAdminUser(vres)
 			return res, nil
 		default:
 			body, _ := ioutil.ReadAll(resp.Body)
@@ -441,11 +441,11 @@ func unmarshalStatsLabelTypeResponseBodyToAdminviewsStatsLabelTypeView(v *StatsL
 	return res
 }
 
-// unmarshalGoa2SampleAdminUserResponseToAdminviewsGoa2SampleAdminUserView
-// builds a value of type *adminviews.Goa2SampleAdminUserView from a value of
-// type *Goa2SampleAdminUserResponse.
-func unmarshalGoa2SampleAdminUserResponseToAdminviewsGoa2SampleAdminUserView(v *Goa2SampleAdminUserResponse) *adminviews.Goa2SampleAdminUserView {
-	res := &adminviews.Goa2SampleAdminUserView{
+// unmarshalGoa3SampleAdminUserResponseToAdminviewsGoa3SampleAdminUserView
+// builds a value of type *adminviews.Goa3SampleAdminUserView from a value of
+// type *Goa3SampleAdminUserResponse.
+func unmarshalGoa3SampleAdminUserResponseToAdminviewsGoa3SampleAdminUserView(v *Goa3SampleAdminUserResponse) *adminviews.Goa3SampleAdminUserView {
+	res := &adminviews.Goa3SampleAdminUserView{
 		ID:        v.ID,
 		Name:      v.Name,
 		Email:     v.Email,

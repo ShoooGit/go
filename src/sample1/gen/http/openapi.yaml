@@ -40,7 +40,7 @@ paths:
         "200":
           description: OK response.
           schema:
-            $ref: '#/definitions/AdminGoa2SampleAdminUserResponseCollection'
+            $ref: '#/definitions/AdminGoa3SampleAdminUserResponseCollection'
       schemes:
       - http
     post:
@@ -142,7 +142,7 @@ paths:
         "200":
           description: OK response.
           schema:
-            $ref: '#/definitions/UsersGoa2SampleUserResponseCollection'
+            $ref: '#/definitions/UsersGoa3SampleUserResponseCollection'
       schemes:
       - http
     post:
@@ -303,7 +303,7 @@ definitions:
     - name
     - email
   AdminAdminGetUserResponseBody:
-    title: 'Mediatype identifier: application/vnd.goa2-sample.admin.user+json; view=default'
+    title: 'Mediatype identifier: application/vnd.goa3-sample.admin.user+json; view=default'
     type: object
     properties:
       created_at:
@@ -359,7 +359,7 @@ definitions:
       email: Dolor sint.
       name: Aut numquam omnis.
   AdminAdminUpdateUserResponseBody:
-    title: 'Mediatype identifier: application/vnd.goa2-sample.admin.user+json; view=default'
+    title: 'Mediatype identifier: application/vnd.goa3-sample.admin.user+json; view=default'
     type: object
     properties:
       created_at:
@@ -399,13 +399,13 @@ definitions:
     - email
     - created_at
     - updated_at
-  AdminGoa2SampleAdminUserResponseCollection:
-    title: 'Mediatype identifier: application/vnd.goa2-sample.admin.user+json; type=collection;
+  AdminGoa3SampleAdminUserResponseCollection:
+    title: 'Mediatype identifier: application/vnd.goa3-sample.admin.user+json; type=collection;
       view=default'
     type: array
     items:
-      $ref: '#/definitions/Goa2SampleAdminUserResponse'
-    description: Admin List UserResponseBody is the result type for an array of Goa2-SampleAdminUserResponse
+      $ref: '#/definitions/Goa3SampleAdminUserResponse'
+    description: Admin List UserResponseBody is the result type for an array of Goa3-SampleAdminUserResponse
       (default view)
     example:
     - created_at: Voluptatem tempora beatae animi.
@@ -433,7 +433,7 @@ definitions:
       name: yamada taro
       updated_at: Cumque sunt.
   AdminUserNumberResponseBody:
-    title: 'Mediatype identifier: application/vnd.goa2-sample.admin.user_number+json;
+    title: 'Mediatype identifier: application/vnd.goa3-sample.admin.user_number+json;
       view=default'
     type: object
     properties:
@@ -492,8 +492,8 @@ definitions:
     - x
     - "y"
     - guide
-  Goa2SampleAdminUserResponse:
-    title: 'Mediatype identifier: application/vnd.goa2-sample.admin.user+json; view=default'
+  Goa3SampleAdminUserResponse:
+    title: 'Mediatype identifier: application/vnd.goa3-sample.admin.user+json; view=default'
     type: object
     properties:
       created_at:
@@ -533,8 +533,8 @@ definitions:
     - email
     - created_at
     - updated_at
-  Goa2SampleUserResponse:
-    title: 'Mediatype identifier: application/vnd.goa2-sample.user+json; view=default'
+  Goa3SampleUserResponse:
+    title: 'Mediatype identifier: application/vnd.goa3-sample.user+json; view=default'
     type: object
     properties:
       email:
@@ -611,7 +611,7 @@ definitions:
     - name
     - email
   UsersGetUserResponseBody:
-    title: 'Mediatype identifier: application/vnd.goa2-sample.user+json; view=default'
+    title: 'Mediatype identifier: application/vnd.goa3-sample.user+json; view=default'
     type: object
     properties:
       email:
@@ -637,13 +637,13 @@ definitions:
     - id
     - name
     - email
-  UsersGoa2SampleUserResponseCollection:
-    title: 'Mediatype identifier: application/vnd.goa2-sample.user+json; type=collection;
+  UsersGoa3SampleUserResponseCollection:
+    title: 'Mediatype identifier: application/vnd.goa3-sample.user+json; type=collection;
       view=default'
     type: array
     items:
-      $ref: '#/definitions/Goa2SampleUserResponse'
-    description: List UserResponseBody is the result type for an array of Goa2-SampleUserResponse
+      $ref: '#/definitions/Goa3SampleUserResponse'
+    description: List UserResponseBody is the result type for an array of Goa3-SampleUserResponse
       (default view)
     example:
     - email: taro.yamada@xxx.jp
@@ -674,7 +674,7 @@ definitions:
       email: Ipsam fugiat et iste nihil maiores.
       name: Ducimus aut aut ut neque.
   UsersUpdateUserResponseBody:
-    title: 'Mediatype identifier: application/vnd.goa2-sample.user+json; view=default'
+    title: 'Mediatype identifier: application/vnd.goa3-sample.user+json; view=default'
     type: object
     properties:
       email:

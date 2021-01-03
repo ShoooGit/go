@@ -37,7 +37,7 @@ type UpdateUserRequestBody struct {
 
 // ListUserResponseBody is the type of the "Users" service "list user" endpoint
 // HTTP response body.
-type ListUserResponseBody []*Goa2SampleUserResponse
+type ListUserResponseBody []*Goa3SampleUserResponse
 
 // GetUserResponseBody is the type of the "Users" service "get user" endpoint
 // HTTP response body.
@@ -61,8 +61,8 @@ type UpdateUserResponseBody struct {
 	Email *string `form:"email,omitempty" json:"email,omitempty" xml:"email,omitempty"`
 }
 
-// Goa2SampleUserResponse is used to define fields on response body types.
-type Goa2SampleUserResponse struct {
+// Goa3SampleUserResponse is used to define fields on response body types.
+type Goa3SampleUserResponse struct {
 	// User id
 	ID *string `form:"id,omitempty" json:"id,omitempty" xml:"id,omitempty"`
 	// Name of user
@@ -92,20 +92,20 @@ func NewUpdateUserRequestBody(p *users.UpdateUserPayload) *UpdateUserRequestBody
 	return body
 }
 
-// NewListUserGoa2SampleUserCollectionOK builds a "Users" service "list user"
+// NewListUserGoa3SampleUserCollectionOK builds a "Users" service "list user"
 // endpoint result from a HTTP "OK" response.
-func NewListUserGoa2SampleUserCollectionOK(body ListUserResponseBody) usersviews.Goa2SampleUserCollectionView {
-	v := make([]*usersviews.Goa2SampleUserView, len(body))
+func NewListUserGoa3SampleUserCollectionOK(body ListUserResponseBody) usersviews.Goa3SampleUserCollectionView {
+	v := make([]*usersviews.Goa3SampleUserView, len(body))
 	for i, val := range body {
-		v[i] = unmarshalGoa2SampleUserResponseToUsersviewsGoa2SampleUserView(val)
+		v[i] = unmarshalGoa3SampleUserResponseToUsersviewsGoa3SampleUserView(val)
 	}
 	return v
 }
 
-// NewGetUserGoa2SampleUserOK builds a "Users" service "get user" endpoint
+// NewGetUserGoa3SampleUserOK builds a "Users" service "get user" endpoint
 // result from a HTTP "OK" response.
-func NewGetUserGoa2SampleUserOK(body *GetUserResponseBody) *usersviews.Goa2SampleUserView {
-	v := &usersviews.Goa2SampleUserView{
+func NewGetUserGoa3SampleUserOK(body *GetUserResponseBody) *usersviews.Goa3SampleUserView {
+	v := &usersviews.Goa3SampleUserView{
 		ID:    body.ID,
 		Name:  body.Name,
 		Email: body.Email,
@@ -114,10 +114,10 @@ func NewGetUserGoa2SampleUserOK(body *GetUserResponseBody) *usersviews.Goa2Sampl
 	return v
 }
 
-// NewUpdateUserGoa2SampleUserOK builds a "Users" service "update user"
+// NewUpdateUserGoa3SampleUserOK builds a "Users" service "update user"
 // endpoint result from a HTTP "OK" response.
-func NewUpdateUserGoa2SampleUserOK(body *UpdateUserResponseBody) *usersviews.Goa2SampleUserView {
-	v := &usersviews.Goa2SampleUserView{
+func NewUpdateUserGoa3SampleUserOK(body *UpdateUserResponseBody) *usersviews.Goa3SampleUserView {
+	v := &usersviews.Goa3SampleUserView{
 		ID:    body.ID,
 		Name:  body.Name,
 		Email: body.Email,
@@ -126,9 +126,9 @@ func NewUpdateUserGoa2SampleUserOK(body *UpdateUserResponseBody) *usersviews.Goa
 	return v
 }
 
-// ValidateGoa2SampleUserResponse runs the validations defined on
-// Goa2-SampleUserResponse
-func ValidateGoa2SampleUserResponse(body *Goa2SampleUserResponse) (err error) {
+// ValidateGoa3SampleUserResponse runs the validations defined on
+// Goa3-SampleUserResponse
+func ValidateGoa3SampleUserResponse(body *Goa3SampleUserResponse) (err error) {
 	if body.ID == nil {
 		err = goa.MergeErrors(err, goa.MissingFieldError("id", "body"))
 	}

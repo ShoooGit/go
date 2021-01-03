@@ -22,9 +22,9 @@ import (
 // Users list user endpoint.
 func EncodeListUserResponse(encoder func(context.Context, http.ResponseWriter) goahttp.Encoder) func(context.Context, http.ResponseWriter, interface{}) error {
 	return func(ctx context.Context, w http.ResponseWriter, v interface{}) error {
-		res := v.(usersviews.Goa2SampleUserCollection)
+		res := v.(usersviews.Goa3SampleUserCollection)
 		enc := encoder(ctx, w)
-		body := NewGoa2SampleUserResponseCollection(res.Projected)
+		body := NewGoa3SampleUserResponseCollection(res.Projected)
 		w.WriteHeader(http.StatusOK)
 		return enc.Encode(body)
 	}
@@ -34,7 +34,7 @@ func EncodeListUserResponse(encoder func(context.Context, http.ResponseWriter) g
 // get user endpoint.
 func EncodeGetUserResponse(encoder func(context.Context, http.ResponseWriter) goahttp.Encoder) func(context.Context, http.ResponseWriter, interface{}) error {
 	return func(ctx context.Context, w http.ResponseWriter, v interface{}) error {
-		res := v.(*usersviews.Goa2SampleUser)
+		res := v.(*usersviews.Goa3SampleUser)
 		ctx = context.WithValue(ctx, goahttp.ContentTypeKey, "application/json")
 		enc := encoder(ctx, w)
 		body := NewGetUserResponseBody(res.Projected)
@@ -100,7 +100,7 @@ func DecodeCreateUserRequest(mux goahttp.Muxer, decoder func(*http.Request) goah
 // Users update user endpoint.
 func EncodeUpdateUserResponse(encoder func(context.Context, http.ResponseWriter) goahttp.Encoder) func(context.Context, http.ResponseWriter, interface{}) error {
 	return func(ctx context.Context, w http.ResponseWriter, v interface{}) error {
-		res := v.(*usersviews.Goa2SampleUser)
+		res := v.(*usersviews.Goa3SampleUser)
 		ctx = context.WithValue(ctx, goahttp.ContentTypeKey, "application/json")
 		enc := encoder(ctx, w)
 		body := NewUpdateUserResponseBody(res.Projected)
@@ -171,11 +171,11 @@ func DecodeDeleteUserRequest(mux goahttp.Muxer, decoder func(*http.Request) goah
 	}
 }
 
-// marshalUsersviewsGoa2SampleUserViewToGoa2SampleUserResponse builds a value
-// of type *Goa2SampleUserResponse from a value of type
-// *usersviews.Goa2SampleUserView.
-func marshalUsersviewsGoa2SampleUserViewToGoa2SampleUserResponse(v *usersviews.Goa2SampleUserView) *Goa2SampleUserResponse {
-	res := &Goa2SampleUserResponse{
+// marshalUsersviewsGoa3SampleUserViewToGoa3SampleUserResponse builds a value
+// of type *Goa3SampleUserResponse from a value of type
+// *usersviews.Goa3SampleUserView.
+func marshalUsersviewsGoa3SampleUserViewToGoa3SampleUserResponse(v *usersviews.Goa3SampleUserView) *Goa3SampleUserResponse {
+	res := &Goa3SampleUserResponse{
 		ID:    *v.ID,
 		Name:  *v.Name,
 		Email: *v.Email,

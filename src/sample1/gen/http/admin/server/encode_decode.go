@@ -22,7 +22,7 @@ import (
 // Admin user_number endpoint.
 func EncodeUserNumberResponse(encoder func(context.Context, http.ResponseWriter) goahttp.Encoder) func(context.Context, http.ResponseWriter, interface{}) error {
 	return func(ctx context.Context, w http.ResponseWriter, v interface{}) error {
-		res := v.(*adminviews.Goa2SampleAdminUserNumber)
+		res := v.(*adminviews.Goa3SampleAdminUserNumber)
 		ctx = context.WithValue(ctx, goahttp.ContentTypeKey, "application/json")
 		enc := encoder(ctx, w)
 		body := NewUserNumberResponseBody(res.Projected)
@@ -35,9 +35,9 @@ func EncodeUserNumberResponse(encoder func(context.Context, http.ResponseWriter)
 // Admin admin list user endpoint.
 func EncodeAdminListUserResponse(encoder func(context.Context, http.ResponseWriter) goahttp.Encoder) func(context.Context, http.ResponseWriter, interface{}) error {
 	return func(ctx context.Context, w http.ResponseWriter, v interface{}) error {
-		res := v.(adminviews.Goa2SampleAdminUserCollection)
+		res := v.(adminviews.Goa3SampleAdminUserCollection)
 		enc := encoder(ctx, w)
-		body := NewGoa2SampleAdminUserResponseCollection(res.Projected)
+		body := NewGoa3SampleAdminUserResponseCollection(res.Projected)
 		w.WriteHeader(http.StatusOK)
 		return enc.Encode(body)
 	}
@@ -47,7 +47,7 @@ func EncodeAdminListUserResponse(encoder func(context.Context, http.ResponseWrit
 // Admin admin get user endpoint.
 func EncodeAdminGetUserResponse(encoder func(context.Context, http.ResponseWriter) goahttp.Encoder) func(context.Context, http.ResponseWriter, interface{}) error {
 	return func(ctx context.Context, w http.ResponseWriter, v interface{}) error {
-		res := v.(*adminviews.Goa2SampleAdminUser)
+		res := v.(*adminviews.Goa3SampleAdminUser)
 		ctx = context.WithValue(ctx, goahttp.ContentTypeKey, "application/json")
 		enc := encoder(ctx, w)
 		body := NewAdminGetUserResponseBody(res.Projected)
@@ -113,7 +113,7 @@ func DecodeAdminCreateUserRequest(mux goahttp.Muxer, decoder func(*http.Request)
 // the Admin admin update user endpoint.
 func EncodeAdminUpdateUserResponse(encoder func(context.Context, http.ResponseWriter) goahttp.Encoder) func(context.Context, http.ResponseWriter, interface{}) error {
 	return func(ctx context.Context, w http.ResponseWriter, v interface{}) error {
-		res := v.(*adminviews.Goa2SampleAdminUser)
+		res := v.(*adminviews.Goa3SampleAdminUser)
 		ctx = context.WithValue(ctx, goahttp.ContentTypeKey, "application/json")
 		enc := encoder(ctx, w)
 		body := NewAdminUpdateUserResponseBody(res.Projected)
@@ -224,11 +224,11 @@ func marshalAdminviewsStatsLabelTypeViewToStatsLabelTypeResponseBody(v *adminvie
 	return res
 }
 
-// marshalAdminviewsGoa2SampleAdminUserViewToGoa2SampleAdminUserResponse builds
-// a value of type *Goa2SampleAdminUserResponse from a value of type
-// *adminviews.Goa2SampleAdminUserView.
-func marshalAdminviewsGoa2SampleAdminUserViewToGoa2SampleAdminUserResponse(v *adminviews.Goa2SampleAdminUserView) *Goa2SampleAdminUserResponse {
-	res := &Goa2SampleAdminUserResponse{
+// marshalAdminviewsGoa3SampleAdminUserViewToGoa3SampleAdminUserResponse builds
+// a value of type *Goa3SampleAdminUserResponse from a value of type
+// *adminviews.Goa3SampleAdminUserView.
+func marshalAdminviewsGoa3SampleAdminUserViewToGoa3SampleAdminUserResponse(v *adminviews.Goa3SampleAdminUserView) *Goa3SampleAdminUserResponse {
+	res := &Goa3SampleAdminUserResponse{
 		ID:        *v.ID,
 		Name:      *v.Name,
 		Email:     *v.Email,

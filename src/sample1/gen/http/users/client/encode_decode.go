@@ -61,13 +61,13 @@ func DecodeListUserResponse(decoder func(*http.Response) goahttp.Decoder, restor
 			if err != nil {
 				return nil, goahttp.ErrDecodingError("Users", "list user", err)
 			}
-			p := NewListUserGoa2SampleUserCollectionOK(body)
+			p := NewListUserGoa3SampleUserCollectionOK(body)
 			view := "default"
-			vres := usersviews.Goa2SampleUserCollection{Projected: p, View: view}
-			if err = usersviews.ValidateGoa2SampleUserCollection(vres); err != nil {
+			vres := usersviews.Goa3SampleUserCollection{Projected: p, View: view}
+			if err = usersviews.ValidateGoa3SampleUserCollection(vres); err != nil {
 				return nil, goahttp.ErrValidationError("Users", "list user", err)
 			}
-			res := users.NewGoa2SampleUserCollection(vres)
+			res := users.NewGoa3SampleUserCollection(vres)
 			return res, nil
 		default:
 			body, _ := ioutil.ReadAll(resp.Body)
@@ -128,13 +128,13 @@ func DecodeGetUserResponse(decoder func(*http.Response) goahttp.Decoder, restore
 			if err != nil {
 				return nil, goahttp.ErrDecodingError("Users", "get user", err)
 			}
-			p := NewGetUserGoa2SampleUserOK(&body)
+			p := NewGetUserGoa3SampleUserOK(&body)
 			view := "default"
-			vres := &usersviews.Goa2SampleUser{Projected: p, View: view}
-			if err = usersviews.ValidateGoa2SampleUser(vres); err != nil {
+			vres := &usersviews.Goa3SampleUser{Projected: p, View: view}
+			if err = usersviews.ValidateGoa3SampleUser(vres); err != nil {
 				return nil, goahttp.ErrValidationError("Users", "get user", err)
 			}
-			res := users.NewGoa2SampleUser(vres)
+			res := users.NewGoa3SampleUser(vres)
 			return res, nil
 		default:
 			body, _ := ioutil.ReadAll(resp.Body)
@@ -277,13 +277,13 @@ func DecodeUpdateUserResponse(decoder func(*http.Response) goahttp.Decoder, rest
 			if err != nil {
 				return nil, goahttp.ErrDecodingError("Users", "update user", err)
 			}
-			p := NewUpdateUserGoa2SampleUserOK(&body)
+			p := NewUpdateUserGoa3SampleUserOK(&body)
 			view := "default"
-			vres := &usersviews.Goa2SampleUser{Projected: p, View: view}
-			if err = usersviews.ValidateGoa2SampleUser(vres); err != nil {
+			vres := &usersviews.Goa3SampleUser{Projected: p, View: view}
+			if err = usersviews.ValidateGoa3SampleUser(vres); err != nil {
 				return nil, goahttp.ErrValidationError("Users", "update user", err)
 			}
-			res := users.NewGoa2SampleUser(vres)
+			res := users.NewGoa3SampleUser(vres)
 			return res, nil
 		default:
 			body, _ := ioutil.ReadAll(resp.Body)
@@ -344,11 +344,11 @@ func DecodeDeleteUserResponse(decoder func(*http.Response) goahttp.Decoder, rest
 	}
 }
 
-// unmarshalGoa2SampleUserResponseToUsersviewsGoa2SampleUserView builds a value
-// of type *usersviews.Goa2SampleUserView from a value of type
-// *Goa2SampleUserResponse.
-func unmarshalGoa2SampleUserResponseToUsersviewsGoa2SampleUserView(v *Goa2SampleUserResponse) *usersviews.Goa2SampleUserView {
-	res := &usersviews.Goa2SampleUserView{
+// unmarshalGoa3SampleUserResponseToUsersviewsGoa3SampleUserView builds a value
+// of type *usersviews.Goa3SampleUserView from a value of type
+// *Goa3SampleUserResponse.
+func unmarshalGoa3SampleUserResponseToUsersviewsGoa3SampleUserView(v *Goa3SampleUserResponse) *usersviews.Goa3SampleUserView {
+	res := &usersviews.Goa3SampleUserView{
 		ID:    v.ID,
 		Name:  v.Name,
 		Email: v.Email,

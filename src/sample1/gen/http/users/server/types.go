@@ -35,9 +35,9 @@ type UpdateUserRequestBody struct {
 	Email *string `form:"email,omitempty" json:"email,omitempty" xml:"email,omitempty"`
 }
 
-// Goa2SampleUserResponseCollection is the type of the "Users" service "list
+// Goa3SampleUserResponseCollection is the type of the "Users" service "list
 // user" endpoint HTTP response body.
-type Goa2SampleUserResponseCollection []*Goa2SampleUserResponse
+type Goa3SampleUserResponseCollection []*Goa3SampleUserResponse
 
 // GetUserResponseBody is the type of the "Users" service "get user" endpoint
 // HTTP response body.
@@ -61,8 +61,8 @@ type UpdateUserResponseBody struct {
 	Email string `form:"email" json:"email" xml:"email"`
 }
 
-// Goa2SampleUserResponse is used to define fields on response body types.
-type Goa2SampleUserResponse struct {
+// Goa3SampleUserResponse is used to define fields on response body types.
+type Goa3SampleUserResponse struct {
 	// User id
 	ID string `form:"id" json:"id" xml:"id"`
 	// Name of user
@@ -71,19 +71,19 @@ type Goa2SampleUserResponse struct {
 	Email string `form:"email" json:"email" xml:"email"`
 }
 
-// NewGoa2SampleUserResponseCollection builds the HTTP response body from the
+// NewGoa3SampleUserResponseCollection builds the HTTP response body from the
 // result of the "list user" endpoint of the "Users" service.
-func NewGoa2SampleUserResponseCollection(res usersviews.Goa2SampleUserCollectionView) Goa2SampleUserResponseCollection {
-	body := make([]*Goa2SampleUserResponse, len(res))
+func NewGoa3SampleUserResponseCollection(res usersviews.Goa3SampleUserCollectionView) Goa3SampleUserResponseCollection {
+	body := make([]*Goa3SampleUserResponse, len(res))
 	for i, val := range res {
-		body[i] = marshalUsersviewsGoa2SampleUserViewToGoa2SampleUserResponse(val)
+		body[i] = marshalUsersviewsGoa3SampleUserViewToGoa3SampleUserResponse(val)
 	}
 	return body
 }
 
 // NewGetUserResponseBody builds the HTTP response body from the result of the
 // "get user" endpoint of the "Users" service.
-func NewGetUserResponseBody(res *usersviews.Goa2SampleUserView) *GetUserResponseBody {
+func NewGetUserResponseBody(res *usersviews.Goa3SampleUserView) *GetUserResponseBody {
 	body := &GetUserResponseBody{
 		ID:    *res.ID,
 		Name:  *res.Name,
@@ -94,7 +94,7 @@ func NewGetUserResponseBody(res *usersviews.Goa2SampleUserView) *GetUserResponse
 
 // NewUpdateUserResponseBody builds the HTTP response body from the result of
 // the "update user" endpoint of the "Users" service.
-func NewUpdateUserResponseBody(res *usersviews.Goa2SampleUserView) *UpdateUserResponseBody {
+func NewUpdateUserResponseBody(res *usersviews.Goa3SampleUserView) *UpdateUserResponseBody {
 	body := &UpdateUserResponseBody{
 		ID:    *res.ID,
 		Name:  *res.Name,

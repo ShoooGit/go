@@ -50,7 +50,7 @@ func NewListUserEndpoint(s Service) goa.Endpoint {
 		if err != nil {
 			return nil, err
 		}
-		vres := NewViewedGoa2SampleUserCollection(res, "default")
+		vres := NewViewedGoa3SampleUserCollection(res, "default")
 		return vres, nil
 	}
 }
@@ -64,7 +64,7 @@ func NewGetUserEndpoint(s Service) goa.Endpoint {
 		if err != nil {
 			return nil, err
 		}
-		vres := NewViewedGoa2SampleUser(res, "default")
+		vres := NewViewedGoa3SampleUser(res, "default")
 		return vres, nil
 	}
 }
@@ -87,7 +87,7 @@ func NewUpdateUserEndpoint(s Service) goa.Endpoint {
 		if err != nil {
 			return nil, err
 		}
-		vres := NewViewedGoa2SampleUser(res, "default")
+		vres := NewViewedGoa3SampleUser(res, "default")
 		return vres, nil
 	}
 }

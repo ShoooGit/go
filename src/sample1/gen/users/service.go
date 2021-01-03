@@ -15,13 +15,13 @@ import (
 // users serves user account relative information.
 type Service interface {
 	// List all stored users
-	ListUser(context.Context) (res Goa2SampleUserCollection, err error)
+	ListUser(context.Context) (res Goa3SampleUserCollection, err error)
 	// Show user by ID
-	GetUser(context.Context, *GetUserPayload) (res *Goa2SampleUser, err error)
+	GetUser(context.Context, *GetUserPayload) (res *Goa3SampleUser, err error)
 	// Add new user and return its ID.
 	CreateUser(context.Context, *CreateUserPayload) (res string, err error)
 	// Update user item.
-	UpdateUser(context.Context, *UpdateUserPayload) (res *Goa2SampleUser, err error)
+	UpdateUser(context.Context, *UpdateUserPayload) (res *Goa3SampleUser, err error)
 	// Delete user by id.
 	DeleteUser(context.Context, *DeleteUserPayload) (err error)
 }
@@ -36,17 +36,17 @@ const ServiceName = "Users"
 // MethodKey key.
 var MethodNames = [5]string{"list user", "get user", "create user", "update user", "delete user"}
 
-// Goa2SampleUserCollection is the result type of the Users service list user
+// Goa3SampleUserCollection is the result type of the Users service list user
 // method.
-type Goa2SampleUserCollection []*Goa2SampleUser
+type Goa3SampleUserCollection []*Goa3SampleUser
 
 // GetUserPayload is the payload type of the Users service get user method.
 type GetUserPayload struct {
 	ID string
 }
 
-// Goa2SampleUser is the result type of the Users service get user method.
-type Goa2SampleUser struct {
+// Goa3SampleUser is the result type of the Users service get user method.
+type Goa3SampleUser struct {
 	// User id
 	ID string
 	// Name of user
@@ -83,58 +83,58 @@ type DeleteUserPayload struct {
 	ID string
 }
 
-// NewGoa2SampleUserCollection initializes result type Goa2SampleUserCollection
-// from viewed result type Goa2SampleUserCollection.
-func NewGoa2SampleUserCollection(vres usersviews.Goa2SampleUserCollection) Goa2SampleUserCollection {
-	return newGoa2SampleUserCollection(vres.Projected)
+// NewGoa3SampleUserCollection initializes result type Goa3SampleUserCollection
+// from viewed result type Goa3SampleUserCollection.
+func NewGoa3SampleUserCollection(vres usersviews.Goa3SampleUserCollection) Goa3SampleUserCollection {
+	return newGoa3SampleUserCollection(vres.Projected)
 }
 
-// NewViewedGoa2SampleUserCollection initializes viewed result type
-// Goa2SampleUserCollection from result type Goa2SampleUserCollection using the
+// NewViewedGoa3SampleUserCollection initializes viewed result type
+// Goa3SampleUserCollection from result type Goa3SampleUserCollection using the
 // given view.
-func NewViewedGoa2SampleUserCollection(res Goa2SampleUserCollection, view string) usersviews.Goa2SampleUserCollection {
-	p := newGoa2SampleUserCollectionView(res)
-	return usersviews.Goa2SampleUserCollection{Projected: p, View: "default"}
+func NewViewedGoa3SampleUserCollection(res Goa3SampleUserCollection, view string) usersviews.Goa3SampleUserCollection {
+	p := newGoa3SampleUserCollectionView(res)
+	return usersviews.Goa3SampleUserCollection{Projected: p, View: "default"}
 }
 
-// NewGoa2SampleUser initializes result type Goa2SampleUser from viewed result
-// type Goa2SampleUser.
-func NewGoa2SampleUser(vres *usersviews.Goa2SampleUser) *Goa2SampleUser {
-	return newGoa2SampleUser(vres.Projected)
+// NewGoa3SampleUser initializes result type Goa3SampleUser from viewed result
+// type Goa3SampleUser.
+func NewGoa3SampleUser(vres *usersviews.Goa3SampleUser) *Goa3SampleUser {
+	return newGoa3SampleUser(vres.Projected)
 }
 
-// NewViewedGoa2SampleUser initializes viewed result type Goa2SampleUser from
-// result type Goa2SampleUser using the given view.
-func NewViewedGoa2SampleUser(res *Goa2SampleUser, view string) *usersviews.Goa2SampleUser {
-	p := newGoa2SampleUserView(res)
-	return &usersviews.Goa2SampleUser{Projected: p, View: "default"}
+// NewViewedGoa3SampleUser initializes viewed result type Goa3SampleUser from
+// result type Goa3SampleUser using the given view.
+func NewViewedGoa3SampleUser(res *Goa3SampleUser, view string) *usersviews.Goa3SampleUser {
+	p := newGoa3SampleUserView(res)
+	return &usersviews.Goa3SampleUser{Projected: p, View: "default"}
 }
 
-// newGoa2SampleUserCollection converts projected type Goa2SampleUserCollection
-// to service type Goa2SampleUserCollection.
-func newGoa2SampleUserCollection(vres usersviews.Goa2SampleUserCollectionView) Goa2SampleUserCollection {
-	res := make(Goa2SampleUserCollection, len(vres))
+// newGoa3SampleUserCollection converts projected type Goa3SampleUserCollection
+// to service type Goa3SampleUserCollection.
+func newGoa3SampleUserCollection(vres usersviews.Goa3SampleUserCollectionView) Goa3SampleUserCollection {
+	res := make(Goa3SampleUserCollection, len(vres))
 	for i, n := range vres {
-		res[i] = newGoa2SampleUser(n)
+		res[i] = newGoa3SampleUser(n)
 	}
 	return res
 }
 
-// newGoa2SampleUserCollectionView projects result type
-// Goa2SampleUserCollection to projected type Goa2SampleUserCollectionView
+// newGoa3SampleUserCollectionView projects result type
+// Goa3SampleUserCollection to projected type Goa3SampleUserCollectionView
 // using the "default" view.
-func newGoa2SampleUserCollectionView(res Goa2SampleUserCollection) usersviews.Goa2SampleUserCollectionView {
-	vres := make(usersviews.Goa2SampleUserCollectionView, len(res))
+func newGoa3SampleUserCollectionView(res Goa3SampleUserCollection) usersviews.Goa3SampleUserCollectionView {
+	vres := make(usersviews.Goa3SampleUserCollectionView, len(res))
 	for i, n := range res {
-		vres[i] = newGoa2SampleUserView(n)
+		vres[i] = newGoa3SampleUserView(n)
 	}
 	return vres
 }
 
-// newGoa2SampleUser converts projected type Goa2SampleUser to service type
-// Goa2SampleUser.
-func newGoa2SampleUser(vres *usersviews.Goa2SampleUserView) *Goa2SampleUser {
-	res := &Goa2SampleUser{}
+// newGoa3SampleUser converts projected type Goa3SampleUser to service type
+// Goa3SampleUser.
+func newGoa3SampleUser(vres *usersviews.Goa3SampleUserView) *Goa3SampleUser {
+	res := &Goa3SampleUser{}
 	if vres.ID != nil {
 		res.ID = *vres.ID
 	}
@@ -147,10 +147,10 @@ func newGoa2SampleUser(vres *usersviews.Goa2SampleUserView) *Goa2SampleUser {
 	return res
 }
 
-// newGoa2SampleUserView projects result type Goa2SampleUser to projected type
-// Goa2SampleUserView using the "default" view.
-func newGoa2SampleUserView(res *Goa2SampleUser) *usersviews.Goa2SampleUserView {
-	vres := &usersviews.Goa2SampleUserView{
+// newGoa3SampleUserView projects result type Goa3SampleUser to projected type
+// Goa3SampleUserView using the "default" view.
+func newGoa3SampleUserView(res *Goa3SampleUser) *usersviews.Goa3SampleUserView {
+	vres := &usersviews.Goa3SampleUserView{
 		ID:    &res.ID,
 		Name:  &res.Name,
 		Email: &res.Email,

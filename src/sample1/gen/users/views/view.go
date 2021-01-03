@@ -13,29 +13,29 @@ import (
 	goa "goa.design/goa/v3/pkg"
 )
 
-// Goa2SampleUserCollection is the viewed result type that is projected based
+// Goa3SampleUserCollection is the viewed result type that is projected based
 // on a view.
-type Goa2SampleUserCollection struct {
+type Goa3SampleUserCollection struct {
 	// Type to project
-	Projected Goa2SampleUserCollectionView
+	Projected Goa3SampleUserCollectionView
 	// View to render
 	View string
 }
 
-// Goa2SampleUser is the viewed result type that is projected based on a view.
-type Goa2SampleUser struct {
+// Goa3SampleUser is the viewed result type that is projected based on a view.
+type Goa3SampleUser struct {
 	// Type to project
-	Projected *Goa2SampleUserView
+	Projected *Goa3SampleUserView
 	// View to render
 	View string
 }
 
-// Goa2SampleUserCollectionView is a type that runs validations on a projected
+// Goa3SampleUserCollectionView is a type that runs validations on a projected
 // type.
-type Goa2SampleUserCollectionView []*Goa2SampleUserView
+type Goa3SampleUserCollectionView []*Goa3SampleUserView
 
-// Goa2SampleUserView is a type that runs validations on a projected type.
-type Goa2SampleUserView struct {
+// Goa3SampleUserView is a type that runs validations on a projected type.
+type Goa3SampleUserView struct {
 	// User id
 	ID *string
 	// Name of user
@@ -45,18 +45,18 @@ type Goa2SampleUserView struct {
 }
 
 var (
-	// Goa2SampleUserCollectionMap is a map of attribute names in result type
-	// Goa2SampleUserCollection indexed by view name.
-	Goa2SampleUserCollectionMap = map[string][]string{
+	// Goa3SampleUserCollectionMap is a map of attribute names in result type
+	// Goa3SampleUserCollection indexed by view name.
+	Goa3SampleUserCollectionMap = map[string][]string{
 		"default": []string{
 			"id",
 			"name",
 			"email",
 		},
 	}
-	// Goa2SampleUserMap is a map of attribute names in result type Goa2SampleUser
+	// Goa3SampleUserMap is a map of attribute names in result type Goa3SampleUser
 	// indexed by view name.
-	Goa2SampleUserMap = map[string][]string{
+	Goa3SampleUserMap = map[string][]string{
 		"default": []string{
 			"id",
 			"name",
@@ -65,44 +65,44 @@ var (
 	}
 )
 
-// ValidateGoa2SampleUserCollection runs the validations defined on the viewed
-// result type Goa2SampleUserCollection.
-func ValidateGoa2SampleUserCollection(result Goa2SampleUserCollection) (err error) {
+// ValidateGoa3SampleUserCollection runs the validations defined on the viewed
+// result type Goa3SampleUserCollection.
+func ValidateGoa3SampleUserCollection(result Goa3SampleUserCollection) (err error) {
 	switch result.View {
 	case "default", "":
-		err = ValidateGoa2SampleUserCollectionView(result.Projected)
+		err = ValidateGoa3SampleUserCollectionView(result.Projected)
 	default:
 		err = goa.InvalidEnumValueError("view", result.View, []interface{}{"default"})
 	}
 	return
 }
 
-// ValidateGoa2SampleUser runs the validations defined on the viewed result
-// type Goa2SampleUser.
-func ValidateGoa2SampleUser(result *Goa2SampleUser) (err error) {
+// ValidateGoa3SampleUser runs the validations defined on the viewed result
+// type Goa3SampleUser.
+func ValidateGoa3SampleUser(result *Goa3SampleUser) (err error) {
 	switch result.View {
 	case "default", "":
-		err = ValidateGoa2SampleUserView(result.Projected)
+		err = ValidateGoa3SampleUserView(result.Projected)
 	default:
 		err = goa.InvalidEnumValueError("view", result.View, []interface{}{"default"})
 	}
 	return
 }
 
-// ValidateGoa2SampleUserCollectionView runs the validations defined on
-// Goa2SampleUserCollectionView using the "default" view.
-func ValidateGoa2SampleUserCollectionView(result Goa2SampleUserCollectionView) (err error) {
+// ValidateGoa3SampleUserCollectionView runs the validations defined on
+// Goa3SampleUserCollectionView using the "default" view.
+func ValidateGoa3SampleUserCollectionView(result Goa3SampleUserCollectionView) (err error) {
 	for _, item := range result {
-		if err2 := ValidateGoa2SampleUserView(item); err2 != nil {
+		if err2 := ValidateGoa3SampleUserView(item); err2 != nil {
 			err = goa.MergeErrors(err, err2)
 		}
 	}
 	return
 }
 
-// ValidateGoa2SampleUserView runs the validations defined on
-// Goa2SampleUserView using the "default" view.
-func ValidateGoa2SampleUserView(result *Goa2SampleUserView) (err error) {
+// ValidateGoa3SampleUserView runs the validations defined on
+// Goa3SampleUserView using the "default" view.
+func ValidateGoa3SampleUserView(result *Goa3SampleUserView) (err error) {
 	if result.ID == nil {
 		err = goa.MergeErrors(err, goa.MissingFieldError("id", "result"))
 	}

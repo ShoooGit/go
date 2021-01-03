@@ -51,9 +51,9 @@ type UserNumberResponseBody struct {
 	Guide *StatsGuideTypeResponseBody `form:"guide" json:"guide" xml:"guide"`
 }
 
-// Goa2SampleAdminUserResponseCollection is the type of the "Admin" service
+// Goa3SampleAdminUserResponseCollection is the type of the "Admin" service
 // "admin list user" endpoint HTTP response body.
-type Goa2SampleAdminUserResponseCollection []*Goa2SampleAdminUserResponse
+type Goa3SampleAdminUserResponseCollection []*Goa3SampleAdminUserResponse
 
 // AdminGetUserResponseBody is the type of the "Admin" service "admin get user"
 // endpoint HTTP response body.
@@ -100,8 +100,8 @@ type StatsLabelTypeResponseBody struct {
 	Label string `form:"label" json:"label" xml:"label"`
 }
 
-// Goa2SampleAdminUserResponse is used to define fields on response body types.
-type Goa2SampleAdminUserResponse struct {
+// Goa3SampleAdminUserResponse is used to define fields on response body types.
+type Goa3SampleAdminUserResponse struct {
 	// User id
 	ID string `form:"id" json:"id" xml:"id"`
 	// Name of user
@@ -115,7 +115,7 @@ type Goa2SampleAdminUserResponse struct {
 
 // NewUserNumberResponseBody builds the HTTP response body from the result of
 // the "user_number" endpoint of the "Admin" service.
-func NewUserNumberResponseBody(res *adminviews.Goa2SampleAdminUserNumberView) *UserNumberResponseBody {
+func NewUserNumberResponseBody(res *adminviews.Goa3SampleAdminUserNumberView) *UserNumberResponseBody {
 	body := &UserNumberResponseBody{
 		X:     *res.X,
 		Y:     *res.Y,
@@ -134,19 +134,19 @@ func NewUserNumberResponseBody(res *adminviews.Goa2SampleAdminUserNumberView) *U
 	return body
 }
 
-// NewGoa2SampleAdminUserResponseCollection builds the HTTP response body from
+// NewGoa3SampleAdminUserResponseCollection builds the HTTP response body from
 // the result of the "admin list user" endpoint of the "Admin" service.
-func NewGoa2SampleAdminUserResponseCollection(res adminviews.Goa2SampleAdminUserCollectionView) Goa2SampleAdminUserResponseCollection {
-	body := make([]*Goa2SampleAdminUserResponse, len(res))
+func NewGoa3SampleAdminUserResponseCollection(res adminviews.Goa3SampleAdminUserCollectionView) Goa3SampleAdminUserResponseCollection {
+	body := make([]*Goa3SampleAdminUserResponse, len(res))
 	for i, val := range res {
-		body[i] = marshalAdminviewsGoa2SampleAdminUserViewToGoa2SampleAdminUserResponse(val)
+		body[i] = marshalAdminviewsGoa3SampleAdminUserViewToGoa3SampleAdminUserResponse(val)
 	}
 	return body
 }
 
 // NewAdminGetUserResponseBody builds the HTTP response body from the result of
 // the "admin get user" endpoint of the "Admin" service.
-func NewAdminGetUserResponseBody(res *adminviews.Goa2SampleAdminUserView) *AdminGetUserResponseBody {
+func NewAdminGetUserResponseBody(res *adminviews.Goa3SampleAdminUserView) *AdminGetUserResponseBody {
 	body := &AdminGetUserResponseBody{
 		ID:        *res.ID,
 		Name:      *res.Name,
@@ -160,7 +160,7 @@ func NewAdminGetUserResponseBody(res *adminviews.Goa2SampleAdminUserView) *Admin
 
 // NewAdminUpdateUserResponseBody builds the HTTP response body from the result
 // of the "admin update user" endpoint of the "Admin" service.
-func NewAdminUpdateUserResponseBody(res *adminviews.Goa2SampleAdminUserView) *AdminUpdateUserResponseBody {
+func NewAdminUpdateUserResponseBody(res *adminviews.Goa3SampleAdminUserView) *AdminUpdateUserResponseBody {
 	body := &AdminUpdateUserResponseBody{
 		ID:        *res.ID,
 		Name:      *res.Name,
