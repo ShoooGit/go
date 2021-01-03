@@ -3,6 +3,7 @@ module sample1
 go 1.15
 
 require (
+	goa.design/goa v2.2.5+incompatible
 	goa.design/goa/v3 v3.2.6
 	goa.design/plugins/v3 v3.2.6
 	golang.org/x/mod v0.4.0 // indirect
