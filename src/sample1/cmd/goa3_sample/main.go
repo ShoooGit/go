@@ -56,7 +56,7 @@ func main() {
 	{
 		usersSvc = goa3sample.NewUsers(logger, db)
 		vironSvc = goa3sample.NewViron(logger)
-		adminSvc = goa3sample.NewAdmin(logger, db)
+		adminSvc = goa3sample.NewAdmin(logger)
 	}
 
 	// Wrap the services in endpoints that can be invoked from other services
