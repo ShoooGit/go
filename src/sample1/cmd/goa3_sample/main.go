@@ -2,6 +2,7 @@ package main
 
 import (
 	"context"
+	"database/sql"
 	"flag"
 	"fmt"
 	"log"
@@ -15,6 +16,8 @@ import (
 	viron "sample1/gen/viron"
 	"sync"
 	"syscall"
+
+	_ "github.com/go-sql-driver/mysql"
 )
 
 func main() {
@@ -32,9 +35,16 @@ func main() {
 	// Setup logger. Replace logger with your own log package of choice.
 	var (
 		logger *log.Logger
+		db     *sql.DB
+		err    error
 	)
 	{
 		logger = log.New(os.Stderr, "[goa3sample] ", log.Ltime)
+		db, err = sql.Open("mysql", "test:test@/sampledb")
+		if err != nil {
+			log.Fatal(err.Error())
+		}
+		defer db.Close()
 	}
 
 	// Initialize the services.
@@ -44,9 +54,9 @@ func main() {
 		adminSvc admin.Service
 	)
 	{
-		usersSvc = goa3sample.NewUsers(logger)
+		usersSvc = goa3sample.NewUsers(logger, db)
 		vironSvc = goa3sample.NewViron(logger)
-		adminSvc = goa3sample.NewAdmin(logger)
+		adminSvc = goa3sample.NewAdmin(logger, db)
 	}
 
 	// Wrap the services in endpoints that can be invoked from other services
