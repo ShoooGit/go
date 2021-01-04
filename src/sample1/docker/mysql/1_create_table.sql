@@ -1,4 +1,5 @@
 use sampledb;
+
 CREATE TABLE users
 (
 	id char(28) NOT NULL COMMENT 'ID',
@@ -6,7 +7,7 @@ CREATE TABLE users
 	email text NOT NULL COMMENT 'メールアドレス',
 	created_at datetime DEFAULT CURRENT_TIMESTAMP NOT NULL COMMENT '作成日',
 	updated_at datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP NOT NULL COMMENT '更新日',
-    deleted_at datetime COMMENT '削除日',
+  deleted_at datetime COMMENT '削除日',
 	PRIMARY KEY (id)
 ) COMMENT = 'ユーザ';
 
@@ -16,6 +17,6 @@ CREATE TABLE users
 --
 
 INSERT INTO `users` (`id`, `name`, `email`, `created_at`, `updated_at`, `deleted_at`) VALUES
-('ABCDEFGHIJKLMNOPQRSTUVWXZ012', 'hoge', 'hoge@gmail.com', '2018-12-22 20:04:31', '2018-12-22 20:04:31', NULL),
-('AAAAAAAAAAAAAAAAAAAAAAAAAAAA', 'fuga', 'fuga@gmail.com', '2018-12-31 10:08:01', '2018-01-01 22:30:20', NULL),
-('BBBBBBBBBBBBBBBBBBBBBBBBBBBB', 'yamada tarou', 'taro@xxx.com', '2019-04-05 10:08:01', '2019-04-05 10:08:01', NULL);
+('1', 'hoge', 'hoge@gmail.com', '2018-12-22 20:04:31', '2018-12-22 20:04:31', NULL),
+('2', 'fuga', 'fuga@gmail.com', '2018-12-31 10:08:01', '2018-01-01 22:30:20', NULL),
+('3', 'yamada tarou', 'taro@xxx.com', '2019-04-05 10:08:01', '2019-04-05 10:08:01', NULL);
