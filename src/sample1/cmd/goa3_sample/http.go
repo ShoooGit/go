@@ -87,6 +87,9 @@ func handleHTTPServer(ctx context.Context, u *url.URL, usersEndpoints *users.End
 	// Start HTTP server using default configuration, change the code to
 	// configure the server as required by your service.
 	srv := &http.Server{Addr: u.Host, Handler: handler}
+	http.Handle("/", handler)
+	http.HandleFunc("/_dev/console/", newDevConsoleHandler("/_dev/console/", "./server/swagger-ui/"))
+
 	for _, m := range usersServer.Mounts {
 		logger.Printf("HTTP %q mounted on %s %s", m.Method, m.Verb, m.Pattern)
 	}
@@ -126,5 +129,12 @@ func errorHandler(logger *log.Logger) func(context.Context, http.ResponseWriter,
 		id := ctx.Value(middleware.RequestIDKey).(string)
 		_, _ = w.Write([]byte("[" + id + "] encoding: " + err.Error()))
 		logger.Printf("[%s] ERROR: %s", id, err.Error())
+	}
+}
+
+func newDevConsoleHandler(pathPrefix string, directory string) http.HandlerFunc {
+	return func(w http.ResponseWriter, r *http.Request) {
+		fs := http.FileServer(http.Dir(directory))
+		http.StripPrefix(pathPrefix, fs).ServeHTTP(w, r)
 	}
 }
