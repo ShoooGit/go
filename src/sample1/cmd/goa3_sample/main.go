@@ -39,7 +39,8 @@ func main() {
 	)
 	{
 		logger = log.New(os.Stderr, "[goa3sample] ", log.Ltime)
-		db, err = sql.Open("mysql", "test:test@/sampledb")
+		db, err = sql.Open("mysql", "root:root@tcp(localhost:3306)/sampledb")
+		log.Println("Connected to mysql.")
 		if err != nil {
 			log.Fatal(err.Error())
 		}
