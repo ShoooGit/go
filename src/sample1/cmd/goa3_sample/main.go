@@ -13,7 +13,6 @@ import (
 	goa3sample "sample1"
 	admin "sample1/gen/admin"
 	users "sample1/gen/users"
-	viron "sample1/gen/viron"
 	"sync"
 	"syscall"
 
@@ -50,12 +49,10 @@ func main() {
 	// Initialize the services.
 	var (
 		usersSvc users.Service
-		vironSvc viron.Service
 		adminSvc admin.Service
 	)
 	{
 		usersSvc = goa3sample.NewUsers(logger, db)
-		vironSvc = goa3sample.NewViron(logger)
 		adminSvc = goa3sample.NewAdmin(logger)
 	}
 
@@ -63,12 +60,10 @@ func main() {
 	// potentially running in different processes.
 	var (
 		usersEndpoints *users.Endpoints
-		vironEndpoints *viron.Endpoints
 		adminEndpoints *admin.Endpoints
 	)
 	{
 		usersEndpoints = users.NewEndpoints(usersSvc)
-		vironEndpoints = viron.NewEndpoints(vironSvc)
 		adminEndpoints = admin.NewEndpoints(adminSvc)
 	}
 
@@ -113,7 +108,7 @@ func main() {
 			} else if u.Port() == "" {
 				u.Host = net.JoinHostPort(u.Host, ":80")
 			}
-			handleHTTPServer(ctx, u, usersEndpoints, vironEndpoints, adminEndpoints, &wg, errc, logger, *dbgF)
+			handleHTTPServer(ctx, u, usersEndpoints, adminEndpoints, &wg, errc, logger, *dbgF)
 		}
 
 	default:

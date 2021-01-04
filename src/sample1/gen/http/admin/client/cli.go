@@ -37,7 +37,7 @@ func BuildAdminCreateUserPayload(adminAdminCreateUserBody string) (*admin.Create
 	{
 		err = json.Unmarshal([]byte(adminAdminCreateUserBody), &body)
 		if err != nil {
-			return nil, fmt.Errorf("invalid JSON for body, \nerror: %s, \nexample of valid JSON:\n%s", err, "'{\n      \"email\": \"Molestiae reiciendis.\",\n      \"id\": \"XRQ85mtXnINISH25zfM0m5RlC6L2\",\n      \"name\": \"Rerum doloremque eligendi et voluptatibus.\"\n   }'")
+			return nil, fmt.Errorf("invalid JSON for body, \nerror: %s, \nexample of valid JSON:\n%s", err, "'{\n      \"email\": \"At facilis quam rerum.\",\n      \"id\": \"XRQ85mtXnINISH25zfM0m5RlC6L2\",\n      \"name\": \"Adipisci esse.\"\n   }'")
 		}
 		if utf8.RuneCountInString(body.ID) < 28 {
 			err = goa.MergeErrors(err, goa.InvalidLengthError("body.id", body.ID, utf8.RuneCountInString(body.ID), 28, true))
@@ -66,7 +66,7 @@ func BuildAdminUpdateUserPayload(adminAdminUpdateUserBody string, adminAdminUpda
 	{
 		err = json.Unmarshal([]byte(adminAdminUpdateUserBody), &body)
 		if err != nil {
-			return nil, fmt.Errorf("invalid JSON for body, \nerror: %s, \nexample of valid JSON:\n%s", err, "'{\n      \"email\": \"Et neque aut nisi magni.\",\n      \"name\": \"Ipsam dignissimos consectetur amet.\"\n   }'")
+			return nil, fmt.Errorf("invalid JSON for body, \nerror: %s, \nexample of valid JSON:\n%s", err, "'{\n      \"email\": \"Quia qui sed culpa eius.\",\n      \"name\": \"Provident neque cum in optio.\"\n   }'")
 		}
 	}
 	var id string

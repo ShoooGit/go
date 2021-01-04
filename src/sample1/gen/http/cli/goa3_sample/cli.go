@@ -14,7 +14,6 @@ import (
 	"os"
 	adminc "sample1/gen/http/admin/client"
 	usersc "sample1/gen/http/users/client"
-	vironc "sample1/gen/http/viron/client"
 
 	goahttp "goa.design/goa/v3/http"
 	goa "goa.design/goa/v3/pkg"
@@ -27,7 +26,6 @@ import (
 func UsageCommands() string {
 	return `admin (user-number|admin- list- user|admin- get- user|admin- create- user|admin- update- user|admin- delete- user)
 users (list- user|get- user|create- user|update- user|delete- user)
-viron (authtype|viron-menu)
 `
 }
 
@@ -35,7 +33,6 @@ viron (authtype|viron-menu)
 func UsageExamples() string {
 	return os.Args[0] + ` admin user-number` + "\n" +
 		os.Args[0] + ` users list- user` + "\n" +
-		os.Args[0] + ` viron authtype` + "\n" +
 		""
 }
 
@@ -84,12 +81,6 @@ func ParseEndpoint(
 
 		usersDeleteUserFlags  = flag.NewFlagSet("delete- user", flag.ExitOnError)
 		usersDeleteUserIDFlag = usersDeleteUserFlags.String("id", "REQUIRED", "")
-
-		vironFlags = flag.NewFlagSet("viron", flag.ContinueOnError)
-
-		vironAuthtypeFlags = flag.NewFlagSet("authtype", flag.ExitOnError)
-
-		vironVironMenuFlags = flag.NewFlagSet("viron-menu", flag.ExitOnError)
 	)
 	adminFlags.Usage = adminUsage
 	adminUserNumberFlags.Usage = adminUserNumberUsage
@@ -105,10 +96,6 @@ func ParseEndpoint(
 	usersCreateUserFlags.Usage = usersCreateUserUsage
 	usersUpdateUserFlags.Usage = usersUpdateUserUsage
 	usersDeleteUserFlags.Usage = usersDeleteUserUsage
-
-	vironFlags.Usage = vironUsage
-	vironAuthtypeFlags.Usage = vironAuthtypeUsage
-	vironVironMenuFlags.Usage = vironVironMenuUsage
 
 	if err := flag.CommandLine.Parse(os.Args[1:]); err != nil {
 		return nil, nil, err
@@ -129,8 +116,6 @@ func ParseEndpoint(
 			svcf = adminFlags
 		case "users":
 			svcf = usersFlags
-		case "viron":
-			svcf = vironFlags
 		default:
 			return nil, nil, fmt.Errorf("unknown service %q", svcn)
 		}
@@ -184,16 +169,6 @@ func ParseEndpoint(
 
 			case "delete- user":
 				epf = usersDeleteUserFlags
-
-			}
-
-		case "viron":
-			switch epn {
-			case "authtype":
-				epf = vironAuthtypeFlags
-
-			case "viron-menu":
-				epf = vironVironMenuFlags
 
 			}
 
@@ -258,16 +233,6 @@ func ParseEndpoint(
 				endpoint = c.DeleteUser()
 				data, err = usersc.BuildDeleteUserPayload(*usersDeleteUserIDFlag)
 			}
-		case "viron":
-			c := vironc.NewClient(scheme, host, doer, enc, dec, restore)
-			switch epn {
-			case "authtype":
-				endpoint = c.Authtype()
-				data = nil
-			case "viron-menu":
-				endpoint = c.VironMenuEndpoint()
-				data = nil
-			}
 		}
 	}
 	if err != nil {
@@ -322,7 +287,7 @@ Show user by ID
     -id STRING: 
 
 Example:
-    `+os.Args[0]+` admin admin- get- user --id "At reiciendis enim quia."
+    `+os.Args[0]+` admin admin- get- user --id "Et occaecati assumenda."
 `, os.Args[0])
 }
 
@@ -334,9 +299,9 @@ Add new user and return its ID.
 
 Example:
     `+os.Args[0]+` admin admin- create- user --body '{
-      "email": "Molestiae reiciendis.",
+      "email": "At facilis quam rerum.",
       "id": "XRQ85mtXnINISH25zfM0m5RlC6L2",
-      "name": "Rerum doloremque eligendi et voluptatibus."
+      "name": "Adipisci esse."
    }'
 `, os.Args[0])
 }
@@ -350,8 +315,8 @@ Update user item.
 
 Example:
     `+os.Args[0]+` admin admin- update- user --body '{
-      "email": "Et neque aut nisi magni.",
-      "name": "Ipsam dignissimos consectetur amet."
+      "email": "Quia qui sed culpa eius.",
+      "name": "Provident neque cum in optio."
    }' --id "XRQ85mtXnINISH25zfM0m5RlC6L2"
 `, os.Args[0])
 }
@@ -363,7 +328,7 @@ Delete user by id.
     -id STRING: 
 
 Example:
-    `+os.Args[0]+` admin admin- delete- user --id "Sint adipisci magni rem."
+    `+os.Args[0]+` admin admin- delete- user --id "Sed quis quia voluptas placeat est minus."
 `, os.Args[0])
 }
 
@@ -401,7 +366,7 @@ Show user by ID
     -id STRING: 
 
 Example:
-    `+os.Args[0]+` users get- user --id "Quam fugiat."
+    `+os.Args[0]+` users get- user --id "Eveniet est."
 `, os.Args[0])
 }
 
@@ -413,9 +378,9 @@ Add new user and return its ID.
 
 Example:
     `+os.Args[0]+` users create- user --body '{
-      "email": "Commodi et.",
+      "email": "Modi rerum.",
       "id": "XRQ85mtXnINISH25zfM0m5RlC6L2",
-      "name": "Amet dolorem aut architecto architecto culpa."
+      "name": "Odio hic non et nostrum incidunt."
    }'
 `, os.Args[0])
 }
@@ -429,8 +394,8 @@ Update user item.
 
 Example:
     `+os.Args[0]+` users update- user --body '{
-      "email": "Aliquid et et.",
-      "name": "Dolorem quis qui."
+      "email": "Iure nihil corrupti.",
+      "name": "Consequatur ratione rerum dignissimos nostrum."
    }' --id "XRQ85mtXnINISH25zfM0m5RlC6L2"
 `, os.Args[0])
 }
@@ -442,40 +407,6 @@ Delete user by id.
     -id STRING: 
 
 Example:
-    `+os.Args[0]+` users delete- user --id "Enim similique aut ea qui voluptate quo."
-`, os.Args[0])
-}
-
-// vironUsage displays the usage of the viron command and its subcommands.
-func vironUsage() {
-	fmt.Fprintf(os.Stderr, `Service is the Viron service interface.
-Usage:
-    %s [globalflags] viron COMMAND [flags]
-
-COMMAND:
-    authtype: Add viron_authtype
-    viron-menu: Add viron_menu
-
-Additional help:
-    %s viron COMMAND --help
-`, os.Args[0], os.Args[0])
-}
-func vironAuthtypeUsage() {
-	fmt.Fprintf(os.Stderr, `%s [flags] viron authtype
-
-Add viron_authtype
-
-Example:
-    `+os.Args[0]+` viron authtype
-`, os.Args[0])
-}
-
-func vironVironMenuUsage() {
-	fmt.Fprintf(os.Stderr, `%s [flags] viron viron-menu
-
-Add viron_menu
-
-Example:
-    `+os.Args[0]+` viron viron-menu
+    `+os.Args[0]+` users delete- user --id "Sapiente id quaerat enim."
 `, os.Args[0])
 }

@@ -233,48 +233,6 @@ paths:
           description: No Content response.
       schemes:
       - http
-  /v1/swagger.json:
-    get:
-      tags:
-      - Viron
-      summary: Download gen/http/openapi.json
-      description: This endpoint serves the API swagger definition for viron.
-      operationId: Viron#/v1/swagger.json
-      responses:
-        "200":
-          description: File downloaded
-          schema:
-            type: file
-      schemes:
-      - http
-  /viron:
-    get:
-      tags:
-      - Viron
-      summary: viron_menu Viron
-      description: Add viron_menu
-      operationId: Viron#viron_menu
-      responses:
-        "200":
-          description: OK response.
-          schema:
-            $ref: '#/definitions/VironVironMenuResponseBody'
-      schemes:
-      - http
-  /viron_authtype:
-    get:
-      tags:
-      - Viron
-      summary: authtype Viron
-      description: Add viron_authtype
-      operationId: Viron#authtype
-      responses:
-        "200":
-          description: OK response.
-          schema:
-            $ref: '#/definitions/VironVironAuthtypeResponseCollection'
-      schemes:
-      - http
 definitions:
   AdminAdminCreateUserRequestBody:
     title: AdminAdminCreateUserRequestBody
@@ -283,7 +241,7 @@ definitions:
       email:
         type: string
         description: Email of user
-        example: Consequuntur ipsam ut in adipisci est.
+        example: Fugiat consequatur culpa adipisci.
       id:
         type: string
         description: User id
@@ -293,11 +251,11 @@ definitions:
       name:
         type: string
         description: Name of user
-        example: Ipsam reiciendis qui.
+        example: Enim similique aut ea qui voluptate quo.
     example:
-      email: Quibusdam illo repudiandae ad assumenda voluptatum neque.
+      email: Perspiciatis odit est.
       id: XRQ85mtXnINISH25zfM0m5RlC6L2
-      name: Itaque nobis dolores accusamus qui non.
+      name: Explicabo deserunt eius sit eos.
     required:
     - id
     - name
@@ -308,10 +266,10 @@ definitions:
     properties:
       created_at:
         type: string
-        example: Non modi esse voluptates.
+        example: Dolorem aut architecto architecto culpa ut.
       deleted_at:
         type: string
-        example: Et natus sit repudiandae sunt ea.
+        example: Consequatur sit omnis dolore quia accusamus.
       email:
         type: string
         description: Email of user
@@ -328,15 +286,15 @@ definitions:
         example: yamada taro
       updated_at:
         type: string
-        example: Est unde aliquid iure maxime nam et.
+        example: Et sunt omnis non consequatur.
     description: Admin Get UserResponseBody result type (default view)
     example:
-      created_at: Qui rerum sed quaerat sapiente in reiciendis.
-      deleted_at: Dolor ratione et veniam non.
+      created_at: Et qui reprehenderit dolorem quis qui est.
+      deleted_at: Possimus distinctio et in.
       email: taro.yamada@xxx.jp
       id: XRQ85mtXnINISH25zfM0m5RlC6L2
       name: yamada taro
-      updated_at: Aut neque.
+      updated_at: Et et.
     required:
     - id
     - name
@@ -350,24 +308,24 @@ definitions:
       email:
         type: string
         description: Email of user
-        example: Commodi non dolorem tenetur.
+        example: Eum et repudiandae.
       name:
         type: string
         description: Name of user
-        example: Numquam provident illum reiciendis.
+        example: Rerum qui aliquid.
     example:
-      email: Dolor sint.
-      name: Aut numquam omnis.
+      email: Ipsam reiciendis explicabo quaerat aliquid et.
+      name: Aut sint dolorem ut temporibus aut.
   AdminAdminUpdateUserResponseBody:
     title: 'Mediatype identifier: application/vnd.goa3-sample.admin.user+json; view=default'
     type: object
     properties:
       created_at:
         type: string
-        example: Suscipit doloremque accusantium maxime veniam impedit.
+        example: Dolores quia sed non officia.
       deleted_at:
         type: string
-        example: Magnam repellendus sapiente vero et omnis.
+        example: Possimus voluptatem quas doloremque.
       email:
         type: string
         description: Email of user
@@ -384,15 +342,15 @@ definitions:
         example: yamada taro
       updated_at:
         type: string
-        example: Eligendi dignissimos et ex repellendus sed.
+        example: Eum qui voluptatem quis fugiat.
     description: Admin Update UserResponseBody result type (default view)
     example:
-      created_at: Sed magni sed.
-      deleted_at: Nostrum tenetur nesciunt.
+      created_at: Laborum placeat sequi atque.
+      deleted_at: Quidem saepe quibusdam.
       email: taro.yamada@xxx.jp
       id: XRQ85mtXnINISH25zfM0m5RlC6L2
       name: yamada taro
-      updated_at: Et autem ducimus.
+      updated_at: Est eligendi neque dolore ullam illo.
     required:
     - id
     - name
@@ -408,30 +366,18 @@ definitions:
     description: Admin List UserResponseBody is the result type for an array of Goa3-SampleAdminUserResponse
       (default view)
     example:
-    - created_at: Voluptatem tempora beatae animi.
-      deleted_at: Itaque eos accusamus soluta.
+    - created_at: Et cupiditate.
+      deleted_at: Nemo ipsa doloribus voluptate qui molestias.
       email: taro.yamada@xxx.jp
       id: XRQ85mtXnINISH25zfM0m5RlC6L2
       name: yamada taro
-      updated_at: Cumque sunt.
-    - created_at: Voluptatem tempora beatae animi.
-      deleted_at: Itaque eos accusamus soluta.
+      updated_at: Sit aspernatur sit officiis earum.
+    - created_at: Et cupiditate.
+      deleted_at: Nemo ipsa doloribus voluptate qui molestias.
       email: taro.yamada@xxx.jp
       id: XRQ85mtXnINISH25zfM0m5RlC6L2
       name: yamada taro
-      updated_at: Cumque sunt.
-    - created_at: Voluptatem tempora beatae animi.
-      deleted_at: Itaque eos accusamus soluta.
-      email: taro.yamada@xxx.jp
-      id: XRQ85mtXnINISH25zfM0m5RlC6L2
-      name: yamada taro
-      updated_at: Cumque sunt.
-    - created_at: Voluptatem tempora beatae animi.
-      deleted_at: Itaque eos accusamus soluta.
-      email: taro.yamada@xxx.jp
-      id: XRQ85mtXnINISH25zfM0m5RlC6L2
-      name: yamada taro
-      updated_at: Cumque sunt.
+      updated_at: Sit aspernatur sit officiis earum.
   AdminUserNumberResponseBody:
     title: 'Mediatype identifier: application/vnd.goa3-sample.admin.user_number+json;
       view=default'
@@ -440,53 +386,53 @@ definitions:
       color:
         type: string
         description: ドットの色分けに使用するkey
-        example: Accusantium placeat eius et aut distinctio libero.
+        example: Doloremque eligendi et voluptatibus velit molestiae.
       data:
         type: array
         items:
           $ref: '#/definitions/dataResponseBody'
         description: グラフデータ
         example:
-        - key: Quod tempora.
-          value: Eveniet est.
-        - key: Quod tempora.
-          value: Eveniet est.
-        - key: Quod tempora.
-          value: Eveniet est.
+        - key: Sit dolores ullam delectus aut voluptas.
+          value: Minus in.
+        - key: Sit dolores ullam delectus aut voluptas.
+          value: Minus in.
+        - key: Sit dolores ullam delectus aut voluptas.
+          value: Minus in.
+        - key: Sit dolores ullam delectus aut voluptas.
+          value: Minus in.
       guide:
         $ref: '#/definitions/StatsGuideTypeResponseBody'
       size:
         type: string
         description: ドットの大きさに使用するkey
-        example: Nulla sequi ut possimus in deleniti.
+        example: Laboriosam impedit rem repellendus.
       x:
         type: string
         description: X軸に使用するkey
-        example: Aut esse libero enim qui officia in.
+        example: Reiciendis enim quia ea eos dolorem aut.
       "y":
         type: string
         description: Y軸に使用するkey
-        example: Fuga debitis aperiam harum.
+        example: Aspernatur eligendi ea saepe eum voluptatem.
     description: user_number_response_body result type (default view)
     example:
-      color: Et et aut quis.
+      color: Qui error dignissimos optio.
       data:
-      - key: Quod tempora.
-        value: Eveniet est.
-      - key: Quod tempora.
-        value: Eveniet est.
-      - key: Quod tempora.
-        value: Eveniet est.
-      - key: Quod tempora.
-        value: Eveniet est.
+      - key: Sit dolores ullam delectus aut voluptas.
+        value: Minus in.
+      - key: Sit dolores ullam delectus aut voluptas.
+        value: Minus in.
+      - key: Sit dolores ullam delectus aut voluptas.
+        value: Minus in.
       guide:
         x:
-          label: Odio hic non et nostrum incidunt.
+          label: Vitae quisquam exercitationem atque.
         "y":
-          label: Odio hic non et nostrum incidunt.
-      size: Possimus occaecati modi corporis.
-      x: Rerum itaque praesentium enim et.
-      "y": Amet mollitia dolorum quisquam suscipit voluptatem omnis.
+          label: Vitae quisquam exercitationem atque.
+      size: Amet nihil et neque aut nisi magni.
+      x: Ea sint.
+      "y": Enim quia impedit ipsam dignissimos.
     required:
     - data
     - x
@@ -498,10 +444,10 @@ definitions:
     properties:
       created_at:
         type: string
-        example: Provident dolor officia in hic nesciunt.
+        example: Cum nam laudantium iusto non culpa.
       deleted_at:
         type: string
-        example: Dolores earum sequi ut modi.
+        example: Neque voluptatibus neque maxime aliquam.
       email:
         type: string
         description: Email of user
@@ -518,15 +464,15 @@ definitions:
         example: yamada taro
       updated_at:
         type: string
-        example: Omnis voluptatibus ut neque aliquid.
+        example: Quasi autem hic cumque.
     description: User Response (default view)
     example:
-      created_at: Quia et dolores ducimus illum.
-      deleted_at: Eum quidem sed vero.
+      created_at: Sint adipisci magni rem.
+      deleted_at: Quam fugiat.
       email: taro.yamada@xxx.jp
       id: XRQ85mtXnINISH25zfM0m5RlC6L2
       name: yamada taro
-      updated_at: Aspernatur consequatur culpa cumque voluptas accusantium ipsa.
+      updated_at: Sit quia qui ut est sed dolorem.
     required:
     - id
     - name
@@ -570,18 +516,18 @@ definitions:
         $ref: '#/definitions/StatsLabelTypeResponseBody'
     example:
       x:
-        label: Odio hic non et nostrum incidunt.
+        label: Vitae quisquam exercitationem atque.
       "y":
-        label: Odio hic non et nostrum incidunt.
+        label: Vitae quisquam exercitationem atque.
   StatsLabelTypeResponseBody:
     title: StatsLabelTypeResponseBody
     type: object
     properties:
       label:
         type: string
-        example: Voluptate nobis esse ut voluptatem voluptas.
+        example: Aut et.
     example:
-      label: Reprehenderit modi saepe animi.
+      label: Alias harum sapiente asperiores autem nobis.
     required:
     - label
   UsersCreateUserRequestBody:
@@ -591,7 +537,7 @@ definitions:
       email:
         type: string
         description: Email of user
-        example: Delectus velit exercitationem facere.
+        example: Quae aut fugiat qui similique.
       id:
         type: string
         description: User id
@@ -601,11 +547,11 @@ definitions:
       name:
         type: string
         description: Name of user
-        example: Libero distinctio.
+        example: Maxime soluta et.
     example:
-      email: Quisquam ullam voluptatem.
+      email: Non error debitis ut quia.
       id: XRQ85mtXnINISH25zfM0m5RlC6L2
-      name: Et unde natus.
+      name: Sequi natus repellat illum eum.
     required:
     - id
     - name
@@ -655,9 +601,6 @@ definitions:
     - email: taro.yamada@xxx.jp
       id: XRQ85mtXnINISH25zfM0m5RlC6L2
       name: yamada taro
-    - email: taro.yamada@xxx.jp
-      id: XRQ85mtXnINISH25zfM0m5RlC6L2
-      name: yamada taro
   UsersUpdateUserRequestBody:
     title: UsersUpdateUserRequestBody
     type: object
@@ -665,14 +608,14 @@ definitions:
       email:
         type: string
         description: Email of user
-        example: Inventore vero sed.
+        example: Aliquid sunt id voluptas dolores suscipit.
       name:
         type: string
         description: Name of user
-        example: Temporibus quis totam doloremque aut.
+        example: Aut odit.
     example:
-      email: Ipsam fugiat et iste nihil maiores.
-      name: Ducimus aut aut ut neque.
+      email: Qui qui velit corrupti nesciunt est sint.
+      name: Quo sit.
   UsersUpdateUserResponseBody:
     title: 'Mediatype identifier: application/vnd.goa3-sample.user+json; view=default'
     type: object
@@ -700,824 +643,15 @@ definitions:
     - id
     - name
     - email
-  VironAPIResponseBody:
-    title: 'Mediatype identifier: application/vnd.viron.api+json; view=default'
-    type: object
-    properties:
-      method:
-        type: string
-        example: Ratione et qui enim.
-      path:
-        type: string
-        example: Aspernatur animi et.
-    example:
-      method: Ut veritatis voluptatibus voluptatem sit eligendi labore.
-      path: Sequi ab at molestias.
-    required:
-    - method
-    - path
-  VironAuthtypeResponse:
-    title: 'Mediatype identifier: application/vnd.viron.authtype+json; view=default'
-    type: object
-    properties:
-      method:
-        type: string
-        description: request method to submit this auth
-        example: Autem nisi.
-      provider:
-        type: string
-        description: provider name
-        example: Aspernatur facilis praesentium inventore consequatur.
-      type:
-        type: string
-        description: type name
-        example: Sint quis est est ipsa sequi provident.
-      url:
-        type: string
-        description: url
-        example: Cumque quis quam odio est optio.
-    description: VironAuthtypeResponse result type (default view)
-    example:
-      method: Aut maxime et ad ex aut consequuntur.
-      provider: Rerum dolore beatae autem.
-      type: Repellat praesentium perferendis ipsa est quas.
-      url: Optio et culpa.
-    required:
-    - type
-    - provider
-    - url
-    - method
-  VironComponentResponseBody:
-    title: 'Mediatype identifier: application/vnd.viron.component+json; view=default'
-    type: object
-    properties:
-      actions:
-        type: array
-        items:
-          type: string
-          example: Possimus distinctio.
-        example:
-        - Sit voluptas odit in et fugiat.
-        - Eligendi laborum vero ut.
-        - Nemo harum ut eius.
-        - Pariatur iure nihil eum quis mollitia.
-      api:
-        $ref: '#/definitions/VironAPIResponseBody'
-      auto_refresh_sec:
-        type: integer
-        example: 597239963
-        format: int32
-      name:
-        type: string
-        example: Sit quis.
-      pagination:
-        type: boolean
-        example: false
-      primary:
-        type: string
-        example: Necessitatibus architecto reprehenderit modi nulla voluptas.
-      query:
-        type: array
-        items:
-          $ref: '#/definitions/VironQueryResponseBody'
-        example:
-        - key: Fugit et id eius hic perferendis sed.
-          type: Quis perferendis.
-        - key: Fugit et id eius hic perferendis sed.
-          type: Quis perferendis.
-        - key: Fugit et id eius hic perferendis sed.
-          type: Quis perferendis.
-        - key: Fugit et id eius hic perferendis sed.
-          type: Quis perferendis.
-      style:
-        type: string
-        example: graph-stacked-area
-        enum:
-        - number
-        - table
-        - graph-bar
-        - graph-scatterplot
-        - graph-line
-        - graph-horizontal-bar
-        - graph-stacked-bar
-        - graph-horizontal-stacked-bar
-        - graph-stacked-area
-      table_labels:
-        type: array
-        items:
-          type: string
-          example: Ipsam dicta qui vel dolor molestias repudiandae.
-        example:
-        - Eveniet et exercitationem in odio rem autem.
-        - Soluta perferendis.
-        - Unde earum ducimus.
-      unit:
-        type: string
-        example: Vel ipsum.
-    example:
-      actions:
-      - Nostrum quo eos aut omnis.
-      - Qui fuga.
-      - Illum et sed dicta nisi minus.
-      api:
-        method: Sint sequi natus repellat illum.
-        path: Vero non error debitis.
-      auto_refresh_sec: 659361647
-      name: Assumenda eum enim rerum.
-      pagination: false
-      primary: Suscipit enim consequatur alias autem eos rem.
-      query:
-      - key: Fugit et id eius hic perferendis sed.
-        type: Quis perferendis.
-      - key: Fugit et id eius hic perferendis sed.
-        type: Quis perferendis.
-      - key: Fugit et id eius hic perferendis sed.
-        type: Quis perferendis.
-      style: graph-horizontal-stacked-bar
-      table_labels:
-      - Et est labore.
-      - Nobis aut molestias rerum.
-      unit: Unde dolorem quasi quidem rerum laborum.
-    required:
-    - name
-    - style
-    - api
-  VironPageResponseBody:
-    title: 'Mediatype identifier: application/vnd.viron.page+json; view=default'
-    type: object
-    properties:
-      components:
-        type: array
-        items:
-          $ref: '#/definitions/VironComponentResponseBody'
-        example:
-        - actions:
-          - Dolorem ut temporibus aut qui ipsam reiciendis.
-          - Quaerat aliquid et nisi sed maxime soluta.
-          - Culpa quae aut fugiat qui.
-          api:
-            method: Sint sequi natus repellat illum.
-            path: Vero non error debitis.
-          auto_refresh_sec: 1384079071
-          name: Saepe quibusdam veniam rerum.
-          pagination: false
-          primary: Nesciunt aut odit est aliquid sunt.
-          query:
-          - key: Fugit et id eius hic perferendis sed.
-            type: Quis perferendis.
-          - key: Fugit et id eius hic perferendis sed.
-            type: Quis perferendis.
-          style: graph-horizontal-bar
-          table_labels:
-          - Dolores suscipit ab quo.
-          - Enim qui qui velit corrupti.
-          - Est sint.
-          unit: Voluptas eum et repudiandae modi.
-        - actions:
-          - Dolorem ut temporibus aut qui ipsam reiciendis.
-          - Quaerat aliquid et nisi sed maxime soluta.
-          - Culpa quae aut fugiat qui.
-          api:
-            method: Sint sequi natus repellat illum.
-            path: Vero non error debitis.
-          auto_refresh_sec: 1384079071
-          name: Saepe quibusdam veniam rerum.
-          pagination: false
-          primary: Nesciunt aut odit est aliquid sunt.
-          query:
-          - key: Fugit et id eius hic perferendis sed.
-            type: Quis perferendis.
-          - key: Fugit et id eius hic perferendis sed.
-            type: Quis perferendis.
-          style: graph-horizontal-bar
-          table_labels:
-          - Dolores suscipit ab quo.
-          - Enim qui qui velit corrupti.
-          - Est sint.
-          unit: Voluptas eum et repudiandae modi.
-        - actions:
-          - Dolorem ut temporibus aut qui ipsam reiciendis.
-          - Quaerat aliquid et nisi sed maxime soluta.
-          - Culpa quae aut fugiat qui.
-          api:
-            method: Sint sequi natus repellat illum.
-            path: Vero non error debitis.
-          auto_refresh_sec: 1384079071
-          name: Saepe quibusdam veniam rerum.
-          pagination: false
-          primary: Nesciunt aut odit est aliquid sunt.
-          query:
-          - key: Fugit et id eius hic perferendis sed.
-            type: Quis perferendis.
-          - key: Fugit et id eius hic perferendis sed.
-            type: Quis perferendis.
-          style: graph-horizontal-bar
-          table_labels:
-          - Dolores suscipit ab quo.
-          - Enim qui qui velit corrupti.
-          - Est sint.
-          unit: Voluptas eum et repudiandae modi.
-      group:
-        type: string
-        example: Consequatur qui porro eos autem amet.
-      id:
-        type: string
-        example: Autem et praesentium doloremque modi.
-      name:
-        type: string
-        example: Beatae occaecati dicta.
-      section:
-        type: string
-        example: Incidunt blanditiis libero dicta qui similique.
-    example:
-      components:
-      - actions:
-        - Dolorem ut temporibus aut qui ipsam reiciendis.
-        - Quaerat aliquid et nisi sed maxime soluta.
-        - Culpa quae aut fugiat qui.
-        api:
-          method: Sint sequi natus repellat illum.
-          path: Vero non error debitis.
-        auto_refresh_sec: 1384079071
-        name: Saepe quibusdam veniam rerum.
-        pagination: false
-        primary: Nesciunt aut odit est aliquid sunt.
-        query:
-        - key: Fugit et id eius hic perferendis sed.
-          type: Quis perferendis.
-        - key: Fugit et id eius hic perferendis sed.
-          type: Quis perferendis.
-        style: graph-horizontal-bar
-        table_labels:
-        - Dolores suscipit ab quo.
-        - Enim qui qui velit corrupti.
-        - Est sint.
-        unit: Voluptas eum et repudiandae modi.
-      - actions:
-        - Dolorem ut temporibus aut qui ipsam reiciendis.
-        - Quaerat aliquid et nisi sed maxime soluta.
-        - Culpa quae aut fugiat qui.
-        api:
-          method: Sint sequi natus repellat illum.
-          path: Vero non error debitis.
-        auto_refresh_sec: 1384079071
-        name: Saepe quibusdam veniam rerum.
-        pagination: false
-        primary: Nesciunt aut odit est aliquid sunt.
-        query:
-        - key: Fugit et id eius hic perferendis sed.
-          type: Quis perferendis.
-        - key: Fugit et id eius hic perferendis sed.
-          type: Quis perferendis.
-        style: graph-horizontal-bar
-        table_labels:
-        - Dolores suscipit ab quo.
-        - Enim qui qui velit corrupti.
-        - Est sint.
-        unit: Voluptas eum et repudiandae modi.
-      group: Aspernatur quo quos ut animi.
-      id: Culpa nemo quos.
-      name: Nobis ea occaecati quidem odit asperiores qui.
-      section: Repellendus vel.
-    required:
-    - id
-    - name
-    - section
-    - components
-  VironQueryResponseBody:
-    title: 'Mediatype identifier: application/vnd.viron.query+json; view=default'
-    type: object
-    properties:
-      key:
-        type: string
-        example: Mollitia sit qui aspernatur.
-      type:
-        type: string
-        example: Dolorem optio sint eius quibusdam in.
-    example:
-      key: Consequatur consequatur est.
-      type: Reiciendis consectetur illo vel ad exercitationem voluptatem.
-    required:
-    - key
-    - type
-  VironVironAuthtypeResponseCollection:
-    title: 'Mediatype identifier: application/vnd.viron.authtype+json; type=collection;
-      view=default'
-    type: array
-    items:
-      $ref: '#/definitions/VironAuthtypeResponse'
-    description: AuthtypeResponseBody is the result type for an array of VironAuthtypeResponse
-      (default view)
-    example:
-    - method: Dolores quia sed non officia.
-      provider: Explicabo deserunt eius sit eos.
-      type: Fugiat consequatur culpa adipisci.
-      url: Perspiciatis odit est.
-    - method: Dolores quia sed non officia.
-      provider: Explicabo deserunt eius sit eos.
-      type: Fugiat consequatur culpa adipisci.
-      url: Perspiciatis odit est.
-    - method: Dolores quia sed non officia.
-      provider: Explicabo deserunt eius sit eos.
-      type: Fugiat consequatur culpa adipisci.
-      url: Perspiciatis odit est.
-    - method: Dolores quia sed non officia.
-      provider: Explicabo deserunt eius sit eos.
-      type: Fugiat consequatur culpa adipisci.
-      url: Perspiciatis odit est.
-  VironVironMenuResponseBody:
-    title: 'Mediatype identifier: application/vnd.viron.menu+json; view=default'
-    type: object
-    properties:
-      color:
-        type: string
-        example: white
-        enum:
-        - purple
-        - blue
-        - green
-        - yellow
-        - red
-        - gray
-        - black
-        - white
-      name:
-        type: string
-        example: Impedit ab vel dolorem id magnam et.
-      pages:
-        type: array
-        items:
-          $ref: '#/definitions/VironPageResponseBody'
-        example:
-        - components:
-          - actions:
-            - Dolorem ut temporibus aut qui ipsam reiciendis.
-            - Quaerat aliquid et nisi sed maxime soluta.
-            - Culpa quae aut fugiat qui.
-            api:
-              method: Sint sequi natus repellat illum.
-              path: Vero non error debitis.
-            auto_refresh_sec: 1384079071
-            name: Saepe quibusdam veniam rerum.
-            pagination: false
-            primary: Nesciunt aut odit est aliquid sunt.
-            query:
-            - key: Fugit et id eius hic perferendis sed.
-              type: Quis perferendis.
-            - key: Fugit et id eius hic perferendis sed.
-              type: Quis perferendis.
-            style: graph-horizontal-bar
-            table_labels:
-            - Dolores suscipit ab quo.
-            - Enim qui qui velit corrupti.
-            - Est sint.
-            unit: Voluptas eum et repudiandae modi.
-          - actions:
-            - Dolorem ut temporibus aut qui ipsam reiciendis.
-            - Quaerat aliquid et nisi sed maxime soluta.
-            - Culpa quae aut fugiat qui.
-            api:
-              method: Sint sequi natus repellat illum.
-              path: Vero non error debitis.
-            auto_refresh_sec: 1384079071
-            name: Saepe quibusdam veniam rerum.
-            pagination: false
-            primary: Nesciunt aut odit est aliquid sunt.
-            query:
-            - key: Fugit et id eius hic perferendis sed.
-              type: Quis perferendis.
-            - key: Fugit et id eius hic perferendis sed.
-              type: Quis perferendis.
-            style: graph-horizontal-bar
-            table_labels:
-            - Dolores suscipit ab quo.
-            - Enim qui qui velit corrupti.
-            - Est sint.
-            unit: Voluptas eum et repudiandae modi.
-          - actions:
-            - Dolorem ut temporibus aut qui ipsam reiciendis.
-            - Quaerat aliquid et nisi sed maxime soluta.
-            - Culpa quae aut fugiat qui.
-            api:
-              method: Sint sequi natus repellat illum.
-              path: Vero non error debitis.
-            auto_refresh_sec: 1384079071
-            name: Saepe quibusdam veniam rerum.
-            pagination: false
-            primary: Nesciunt aut odit est aliquid sunt.
-            query:
-            - key: Fugit et id eius hic perferendis sed.
-              type: Quis perferendis.
-            - key: Fugit et id eius hic perferendis sed.
-              type: Quis perferendis.
-            style: graph-horizontal-bar
-            table_labels:
-            - Dolores suscipit ab quo.
-            - Enim qui qui velit corrupti.
-            - Est sint.
-            unit: Voluptas eum et repudiandae modi.
-          group: Possimus voluptatem quas doloremque.
-          id: Laborum placeat sequi atque.
-          name: Est eligendi neque dolore ullam illo.
-          section: Qui voluptatem quis fugiat.
-        - components:
-          - actions:
-            - Dolorem ut temporibus aut qui ipsam reiciendis.
-            - Quaerat aliquid et nisi sed maxime soluta.
-            - Culpa quae aut fugiat qui.
-            api:
-              method: Sint sequi natus repellat illum.
-              path: Vero non error debitis.
-            auto_refresh_sec: 1384079071
-            name: Saepe quibusdam veniam rerum.
-            pagination: false
-            primary: Nesciunt aut odit est aliquid sunt.
-            query:
-            - key: Fugit et id eius hic perferendis sed.
-              type: Quis perferendis.
-            - key: Fugit et id eius hic perferendis sed.
-              type: Quis perferendis.
-            style: graph-horizontal-bar
-            table_labels:
-            - Dolores suscipit ab quo.
-            - Enim qui qui velit corrupti.
-            - Est sint.
-            unit: Voluptas eum et repudiandae modi.
-          - actions:
-            - Dolorem ut temporibus aut qui ipsam reiciendis.
-            - Quaerat aliquid et nisi sed maxime soluta.
-            - Culpa quae aut fugiat qui.
-            api:
-              method: Sint sequi natus repellat illum.
-              path: Vero non error debitis.
-            auto_refresh_sec: 1384079071
-            name: Saepe quibusdam veniam rerum.
-            pagination: false
-            primary: Nesciunt aut odit est aliquid sunt.
-            query:
-            - key: Fugit et id eius hic perferendis sed.
-              type: Quis perferendis.
-            - key: Fugit et id eius hic perferendis sed.
-              type: Quis perferendis.
-            style: graph-horizontal-bar
-            table_labels:
-            - Dolores suscipit ab quo.
-            - Enim qui qui velit corrupti.
-            - Est sint.
-            unit: Voluptas eum et repudiandae modi.
-          - actions:
-            - Dolorem ut temporibus aut qui ipsam reiciendis.
-            - Quaerat aliquid et nisi sed maxime soluta.
-            - Culpa quae aut fugiat qui.
-            api:
-              method: Sint sequi natus repellat illum.
-              path: Vero non error debitis.
-            auto_refresh_sec: 1384079071
-            name: Saepe quibusdam veniam rerum.
-            pagination: false
-            primary: Nesciunt aut odit est aliquid sunt.
-            query:
-            - key: Fugit et id eius hic perferendis sed.
-              type: Quis perferendis.
-            - key: Fugit et id eius hic perferendis sed.
-              type: Quis perferendis.
-            style: graph-horizontal-bar
-            table_labels:
-            - Dolores suscipit ab quo.
-            - Enim qui qui velit corrupti.
-            - Est sint.
-            unit: Voluptas eum et repudiandae modi.
-          group: Possimus voluptatem quas doloremque.
-          id: Laborum placeat sequi atque.
-          name: Est eligendi neque dolore ullam illo.
-          section: Qui voluptatem quis fugiat.
-      tags:
-        type: array
-        items:
-          type: string
-          example: Earum vitae nesciunt voluptatem animi.
-        example:
-        - Omnis voluptatem id ut quia nostrum.
-        - Iusto eius voluptates magni illo in.
-        - Maxime dolorem omnis sit non incidunt.
-      theme:
-        type: string
-        example: terminal
-        enum:
-        - standard
-        - midnight
-        - terminal
-      thumbnail:
-        type: string
-        example: Atque sit cumque quo doloribus laboriosam.
-    description: viron_menu_response_body result type (default view)
-    example:
-      color: green
-      name: Sunt reiciendis ea nihil est ut.
-      pages:
-      - components:
-        - actions:
-          - Dolorem ut temporibus aut qui ipsam reiciendis.
-          - Quaerat aliquid et nisi sed maxime soluta.
-          - Culpa quae aut fugiat qui.
-          api:
-            method: Sint sequi natus repellat illum.
-            path: Vero non error debitis.
-          auto_refresh_sec: 1384079071
-          name: Saepe quibusdam veniam rerum.
-          pagination: false
-          primary: Nesciunt aut odit est aliquid sunt.
-          query:
-          - key: Fugit et id eius hic perferendis sed.
-            type: Quis perferendis.
-          - key: Fugit et id eius hic perferendis sed.
-            type: Quis perferendis.
-          style: graph-horizontal-bar
-          table_labels:
-          - Dolores suscipit ab quo.
-          - Enim qui qui velit corrupti.
-          - Est sint.
-          unit: Voluptas eum et repudiandae modi.
-        - actions:
-          - Dolorem ut temporibus aut qui ipsam reiciendis.
-          - Quaerat aliquid et nisi sed maxime soluta.
-          - Culpa quae aut fugiat qui.
-          api:
-            method: Sint sequi natus repellat illum.
-            path: Vero non error debitis.
-          auto_refresh_sec: 1384079071
-          name: Saepe quibusdam veniam rerum.
-          pagination: false
-          primary: Nesciunt aut odit est aliquid sunt.
-          query:
-          - key: Fugit et id eius hic perferendis sed.
-            type: Quis perferendis.
-          - key: Fugit et id eius hic perferendis sed.
-            type: Quis perferendis.
-          style: graph-horizontal-bar
-          table_labels:
-          - Dolores suscipit ab quo.
-          - Enim qui qui velit corrupti.
-          - Est sint.
-          unit: Voluptas eum et repudiandae modi.
-        - actions:
-          - Dolorem ut temporibus aut qui ipsam reiciendis.
-          - Quaerat aliquid et nisi sed maxime soluta.
-          - Culpa quae aut fugiat qui.
-          api:
-            method: Sint sequi natus repellat illum.
-            path: Vero non error debitis.
-          auto_refresh_sec: 1384079071
-          name: Saepe quibusdam veniam rerum.
-          pagination: false
-          primary: Nesciunt aut odit est aliquid sunt.
-          query:
-          - key: Fugit et id eius hic perferendis sed.
-            type: Quis perferendis.
-          - key: Fugit et id eius hic perferendis sed.
-            type: Quis perferendis.
-          style: graph-horizontal-bar
-          table_labels:
-          - Dolores suscipit ab quo.
-          - Enim qui qui velit corrupti.
-          - Est sint.
-          unit: Voluptas eum et repudiandae modi.
-        group: Possimus voluptatem quas doloremque.
-        id: Laborum placeat sequi atque.
-        name: Est eligendi neque dolore ullam illo.
-        section: Qui voluptatem quis fugiat.
-      - components:
-        - actions:
-          - Dolorem ut temporibus aut qui ipsam reiciendis.
-          - Quaerat aliquid et nisi sed maxime soluta.
-          - Culpa quae aut fugiat qui.
-          api:
-            method: Sint sequi natus repellat illum.
-            path: Vero non error debitis.
-          auto_refresh_sec: 1384079071
-          name: Saepe quibusdam veniam rerum.
-          pagination: false
-          primary: Nesciunt aut odit est aliquid sunt.
-          query:
-          - key: Fugit et id eius hic perferendis sed.
-            type: Quis perferendis.
-          - key: Fugit et id eius hic perferendis sed.
-            type: Quis perferendis.
-          style: graph-horizontal-bar
-          table_labels:
-          - Dolores suscipit ab quo.
-          - Enim qui qui velit corrupti.
-          - Est sint.
-          unit: Voluptas eum et repudiandae modi.
-        - actions:
-          - Dolorem ut temporibus aut qui ipsam reiciendis.
-          - Quaerat aliquid et nisi sed maxime soluta.
-          - Culpa quae aut fugiat qui.
-          api:
-            method: Sint sequi natus repellat illum.
-            path: Vero non error debitis.
-          auto_refresh_sec: 1384079071
-          name: Saepe quibusdam veniam rerum.
-          pagination: false
-          primary: Nesciunt aut odit est aliquid sunt.
-          query:
-          - key: Fugit et id eius hic perferendis sed.
-            type: Quis perferendis.
-          - key: Fugit et id eius hic perferendis sed.
-            type: Quis perferendis.
-          style: graph-horizontal-bar
-          table_labels:
-          - Dolores suscipit ab quo.
-          - Enim qui qui velit corrupti.
-          - Est sint.
-          unit: Voluptas eum et repudiandae modi.
-        - actions:
-          - Dolorem ut temporibus aut qui ipsam reiciendis.
-          - Quaerat aliquid et nisi sed maxime soluta.
-          - Culpa quae aut fugiat qui.
-          api:
-            method: Sint sequi natus repellat illum.
-            path: Vero non error debitis.
-          auto_refresh_sec: 1384079071
-          name: Saepe quibusdam veniam rerum.
-          pagination: false
-          primary: Nesciunt aut odit est aliquid sunt.
-          query:
-          - key: Fugit et id eius hic perferendis sed.
-            type: Quis perferendis.
-          - key: Fugit et id eius hic perferendis sed.
-            type: Quis perferendis.
-          style: graph-horizontal-bar
-          table_labels:
-          - Dolores suscipit ab quo.
-          - Enim qui qui velit corrupti.
-          - Est sint.
-          unit: Voluptas eum et repudiandae modi.
-        group: Possimus voluptatem quas doloremque.
-        id: Laborum placeat sequi atque.
-        name: Est eligendi neque dolore ullam illo.
-        section: Qui voluptatem quis fugiat.
-      - components:
-        - actions:
-          - Dolorem ut temporibus aut qui ipsam reiciendis.
-          - Quaerat aliquid et nisi sed maxime soluta.
-          - Culpa quae aut fugiat qui.
-          api:
-            method: Sint sequi natus repellat illum.
-            path: Vero non error debitis.
-          auto_refresh_sec: 1384079071
-          name: Saepe quibusdam veniam rerum.
-          pagination: false
-          primary: Nesciunt aut odit est aliquid sunt.
-          query:
-          - key: Fugit et id eius hic perferendis sed.
-            type: Quis perferendis.
-          - key: Fugit et id eius hic perferendis sed.
-            type: Quis perferendis.
-          style: graph-horizontal-bar
-          table_labels:
-          - Dolores suscipit ab quo.
-          - Enim qui qui velit corrupti.
-          - Est sint.
-          unit: Voluptas eum et repudiandae modi.
-        - actions:
-          - Dolorem ut temporibus aut qui ipsam reiciendis.
-          - Quaerat aliquid et nisi sed maxime soluta.
-          - Culpa quae aut fugiat qui.
-          api:
-            method: Sint sequi natus repellat illum.
-            path: Vero non error debitis.
-          auto_refresh_sec: 1384079071
-          name: Saepe quibusdam veniam rerum.
-          pagination: false
-          primary: Nesciunt aut odit est aliquid sunt.
-          query:
-          - key: Fugit et id eius hic perferendis sed.
-            type: Quis perferendis.
-          - key: Fugit et id eius hic perferendis sed.
-            type: Quis perferendis.
-          style: graph-horizontal-bar
-          table_labels:
-          - Dolores suscipit ab quo.
-          - Enim qui qui velit corrupti.
-          - Est sint.
-          unit: Voluptas eum et repudiandae modi.
-        - actions:
-          - Dolorem ut temporibus aut qui ipsam reiciendis.
-          - Quaerat aliquid et nisi sed maxime soluta.
-          - Culpa quae aut fugiat qui.
-          api:
-            method: Sint sequi natus repellat illum.
-            path: Vero non error debitis.
-          auto_refresh_sec: 1384079071
-          name: Saepe quibusdam veniam rerum.
-          pagination: false
-          primary: Nesciunt aut odit est aliquid sunt.
-          query:
-          - key: Fugit et id eius hic perferendis sed.
-            type: Quis perferendis.
-          - key: Fugit et id eius hic perferendis sed.
-            type: Quis perferendis.
-          style: graph-horizontal-bar
-          table_labels:
-          - Dolores suscipit ab quo.
-          - Enim qui qui velit corrupti.
-          - Est sint.
-          unit: Voluptas eum et repudiandae modi.
-        group: Possimus voluptatem quas doloremque.
-        id: Laborum placeat sequi atque.
-        name: Est eligendi neque dolore ullam illo.
-        section: Qui voluptatem quis fugiat.
-      - components:
-        - actions:
-          - Dolorem ut temporibus aut qui ipsam reiciendis.
-          - Quaerat aliquid et nisi sed maxime soluta.
-          - Culpa quae aut fugiat qui.
-          api:
-            method: Sint sequi natus repellat illum.
-            path: Vero non error debitis.
-          auto_refresh_sec: 1384079071
-          name: Saepe quibusdam veniam rerum.
-          pagination: false
-          primary: Nesciunt aut odit est aliquid sunt.
-          query:
-          - key: Fugit et id eius hic perferendis sed.
-            type: Quis perferendis.
-          - key: Fugit et id eius hic perferendis sed.
-            type: Quis perferendis.
-          style: graph-horizontal-bar
-          table_labels:
-          - Dolores suscipit ab quo.
-          - Enim qui qui velit corrupti.
-          - Est sint.
-          unit: Voluptas eum et repudiandae modi.
-        - actions:
-          - Dolorem ut temporibus aut qui ipsam reiciendis.
-          - Quaerat aliquid et nisi sed maxime soluta.
-          - Culpa quae aut fugiat qui.
-          api:
-            method: Sint sequi natus repellat illum.
-            path: Vero non error debitis.
-          auto_refresh_sec: 1384079071
-          name: Saepe quibusdam veniam rerum.
-          pagination: false
-          primary: Nesciunt aut odit est aliquid sunt.
-          query:
-          - key: Fugit et id eius hic perferendis sed.
-            type: Quis perferendis.
-          - key: Fugit et id eius hic perferendis sed.
-            type: Quis perferendis.
-          style: graph-horizontal-bar
-          table_labels:
-          - Dolores suscipit ab quo.
-          - Enim qui qui velit corrupti.
-          - Est sint.
-          unit: Voluptas eum et repudiandae modi.
-        - actions:
-          - Dolorem ut temporibus aut qui ipsam reiciendis.
-          - Quaerat aliquid et nisi sed maxime soluta.
-          - Culpa quae aut fugiat qui.
-          api:
-            method: Sint sequi natus repellat illum.
-            path: Vero non error debitis.
-          auto_refresh_sec: 1384079071
-          name: Saepe quibusdam veniam rerum.
-          pagination: false
-          primary: Nesciunt aut odit est aliquid sunt.
-          query:
-          - key: Fugit et id eius hic perferendis sed.
-            type: Quis perferendis.
-          - key: Fugit et id eius hic perferendis sed.
-            type: Quis perferendis.
-          style: graph-horizontal-bar
-          table_labels:
-          - Dolores suscipit ab quo.
-          - Enim qui qui velit corrupti.
-          - Est sint.
-          unit: Voluptas eum et repudiandae modi.
-        group: Possimus voluptatem quas doloremque.
-        id: Laborum placeat sequi atque.
-        name: Est eligendi neque dolore ullam illo.
-        section: Qui voluptatem quis fugiat.
-      tags:
-      - Mollitia in sed in.
-      - Et unde consequatur autem eaque sed occaecati.
-      - Repellendus in vel illum reprehenderit velit quasi.
-      - Quidem aut quisquam id voluptatibus minima.
-      theme: midnight
-      thumbnail: Tenetur ea laboriosam et suscipit incidunt.
-    required:
-    - name
-    - pages
   dataResponseBody:
     title: dataResponseBody
     type: object
     properties:
       key:
         type: string
-        example: Commodi suscipit qui non ducimus et.
+        example: Ipsum reiciendis quas nam est sed suscipit.
       value:
-        example: Ab voluptatibus.
+        example: Tempora beatae animi cum cumque sunt sed.
     example:
-      key: Sint mollitia.
-      value: Ea sapiente iusto consequatur.
+      key: Eos accusamus soluta et.
+      value: Et voluptates laboriosam est aut maiores.
