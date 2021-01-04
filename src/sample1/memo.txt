@@ -1,0 +1,18 @@
+goa gen sample1/design
+goa example sample1/design
+go build ./cmd/goa3_sample && go build ./cmd/goa3_sample-cli
+
+コンテナの起動
+docker-compose up -d
+
+コンテナの削除
+docker-compose down
+
+コンテナの中でコマンド実行(mysqlの部分はコンテナ名)
+docker exec -it mysql bash
+
+mysqlへの接続(rootの部分はユーザー名)
+mysql -u root -p
+
+use sampledb
+show tables;
