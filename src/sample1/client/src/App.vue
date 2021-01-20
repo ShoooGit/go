@@ -3,7 +3,7 @@
     <el-menu :default-active="activeIndex" mode="horizontal" router>
       <el-menu-item index="home" :route="{ name:'Home' }">Home</el-menu-item>
       <el-menu-item index="about" :route="{ name:'About' }">About</el-menu-item>
-      <el-menu-item index="yamabiko" :route="{ name:'Yamabiko' }">Yamabiko</el-menu-item>
+      <el-menu-item index="user" :route="{ name:'User' }">User</el-menu-item>
       <el-menu-item>
         <a href="https://element.eleme.io" target="_blank">Link</a>
       </el-menu-item>
