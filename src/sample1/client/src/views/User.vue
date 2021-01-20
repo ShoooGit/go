@@ -1,9 +1,10 @@
 <template>
   <div>
     <h1>This is an User page</h1>
-    <!-- <input v-model="message" placeholder="Say Yahho"> -->
-    <!-- <button @click="GetUser">ユーザーデータの取得</button> -->
-    <button @click="AddUser">ユーザーデータの登録</button>
+    <el-input v-model="email" placeholder="メールアドレスを入力して下さい"></el-input>
+    <el-input v-model="name" placeholder="名前を入力して下さい"></el-input>
+    <el-button @click="GetUser">ユーザーデータの取得</el-button>
+    <el-button @click="AddUser">ユーザーデータの登録</el-button>
     <p>ユーザー : {{ user }}</p>
   </div>
 </template>
@@ -14,18 +15,20 @@ export default {
   name: 'User',
   data () {
     return {
-      user: []
+      user: [],
+      email: '',
+      name: ''
     }
   },
   methods: {
-    // async GetUser () {
-    //   const response = await axios.get('http://localhost:8080/api/v1/users/1')
-    //   this.user = response.data
-    // },
+    async GetUser () {
+      const response = await axios.get('http://localhost:8080/api/v1/users/1')
+      this.user = response.data
+    },
     AddUser () {
       axios.post('http://localhost:8080/api/v1/users', {
-        email: 'test@email',
         id: '99',
+        email: 'test@email',
         name: 'test'
       })
     }
