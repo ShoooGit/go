@@ -227,8 +227,8 @@ func ValidateAdminCreateUserRequestBody(body *AdminCreateUserRequestBody) (err e
 		err = goa.MergeErrors(err, goa.MissingFieldError("email", "body"))
 	}
 	if body.ID != nil {
-		if utf8.RuneCountInString(*body.ID) < 28 {
-			err = goa.MergeErrors(err, goa.InvalidLengthError("body.id", *body.ID, utf8.RuneCountInString(*body.ID), 28, true))
+		if utf8.RuneCountInString(*body.ID) < 1 {
+			err = goa.MergeErrors(err, goa.InvalidLengthError("body.id", *body.ID, utf8.RuneCountInString(*body.ID), 1, true))
 		}
 	}
 	if body.ID != nil {

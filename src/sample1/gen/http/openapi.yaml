@@ -102,7 +102,7 @@ paths:
         required: true
         type: string
         maxLength: 28
-        minLength: 28
+        minLength: 1
       - name: Admin Update UserRequestBody
         in: body
         required: true
@@ -204,7 +204,7 @@ paths:
         required: true
         type: string
         maxLength: 28
-        minLength: 28
+        minLength: 1
       - name: Update UserRequestBody
         in: body
         required: true
@@ -246,7 +246,7 @@ definitions:
         type: string
         description: User id
         example: XRQ85mtXnINISH25zfM0m5RlC6L2
-        minLength: 28
+        minLength: 1
         maxLength: 28
       name:
         type: string
@@ -278,7 +278,7 @@ definitions:
         type: string
         description: User id
         example: XRQ85mtXnINISH25zfM0m5RlC6L2
-        minLength: 28
+        minLength: 1
         maxLength: 28
       name:
         type: string
@@ -334,7 +334,7 @@ definitions:
         type: string
         description: User id
         example: XRQ85mtXnINISH25zfM0m5RlC6L2
-        minLength: 28
+        minLength: 1
         maxLength: 28
       name:
         type: string
@@ -456,7 +456,7 @@ definitions:
         type: string
         description: User id
         example: XRQ85mtXnINISH25zfM0m5RlC6L2
-        minLength: 28
+        minLength: 1
         maxLength: 28
       name:
         type: string
@@ -491,7 +491,7 @@ definitions:
         type: string
         description: User id
         example: XRQ85mtXnINISH25zfM0m5RlC6L2
-        minLength: 28
+        minLength: 1
         maxLength: 28
       name:
         type: string
@@ -542,7 +542,7 @@ definitions:
         type: string
         description: User id
         example: XRQ85mtXnINISH25zfM0m5RlC6L2
-        minLength: 28
+        minLength: 1
         maxLength: 28
       name:
         type: string
@@ -568,7 +568,7 @@ definitions:
         type: string
         description: User id
         example: XRQ85mtXnINISH25zfM0m5RlC6L2
-        minLength: 28
+        minLength: 1
         maxLength: 28
       name:
         type: string
@@ -628,7 +628,7 @@ definitions:
         type: string
         description: User id
         example: XRQ85mtXnINISH25zfM0m5RlC6L2
-        minLength: 28
+        minLength: 1
         maxLength: 28
       name:
         type: string

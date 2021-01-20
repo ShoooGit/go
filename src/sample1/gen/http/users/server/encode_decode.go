@@ -131,8 +131,8 @@ func DecodeUpdateUserRequest(mux goahttp.Muxer, decoder func(*http.Request) goah
 			params = mux.Vars(r)
 		)
 		id = params["id"]
-		if utf8.RuneCountInString(id) < 28 {
-			err = goa.MergeErrors(err, goa.InvalidLengthError("id", id, utf8.RuneCountInString(id), 28, true))
+		if utf8.RuneCountInString(id) < 1 {
+			err = goa.MergeErrors(err, goa.InvalidLengthError("id", id, utf8.RuneCountInString(id), 1, true))
 		}
 		if utf8.RuneCountInString(id) > 28 {
 			err = goa.MergeErrors(err, goa.InvalidLengthError("id", id, utf8.RuneCountInString(id), 28, false))

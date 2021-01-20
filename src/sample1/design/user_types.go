@@ -46,7 +46,7 @@ var User = Type("User", func() {
 var UserIDDefinition = func() {
 	Description("User id")
 	Example("XRQ85mtXnINISH25zfM0m5RlC6L2")
-	MinLength(28)
+	MinLength(1)
 	MaxLength(28)
 }
 

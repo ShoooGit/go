@@ -162,7 +162,7 @@ paths:
           type: string
           description: User id
           example: XRQ85mtXnINISH25zfM0m5RlC6L2
-          minLength: 28
+          minLength: 1
           maxLength: 28
         example: XRQ85mtXnINISH25zfM0m5RlC6L2
       requestBody:
@@ -295,7 +295,7 @@ paths:
           type: string
           description: User id
           example: XRQ85mtXnINISH25zfM0m5RlC6L2
-          minLength: 28
+          minLength: 1
           maxLength: 28
         example: XRQ85mtXnINISH25zfM0m5RlC6L2
       requestBody:
@@ -331,7 +331,7 @@ components:
           type: string
           description: User id
           example: XRQ85mtXnINISH25zfM0m5RlC6L2
-          minLength: 28
+          minLength: 1
           maxLength: 28
         name:
           type: string
@@ -389,7 +389,7 @@ components:
           type: string
           description: User id
           example: XRQ85mtXnINISH25zfM0m5RlC6L2
-          minLength: 28
+          minLength: 1
           maxLength: 28
         name:
           type: string
@@ -511,7 +511,7 @@ components:
           type: string
           description: User id
           example: XRQ85mtXnINISH25zfM0m5RlC6L2
-          minLength: 28
+          minLength: 1
           maxLength: 28
         name:
           type: string

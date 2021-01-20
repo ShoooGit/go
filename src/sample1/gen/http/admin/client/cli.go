@@ -39,8 +39,8 @@ func BuildAdminCreateUserPayload(adminAdminCreateUserBody string) (*admin.Create
 		if err != nil {
 			return nil, fmt.Errorf("invalid JSON for body, \nerror: %s, \nexample of valid JSON:\n%s", err, "'{\n      \"email\": \"At facilis quam rerum.\",\n      \"id\": \"XRQ85mtXnINISH25zfM0m5RlC6L2\",\n      \"name\": \"Adipisci esse.\"\n   }'")
 		}
-		if utf8.RuneCountInString(body.ID) < 28 {
-			err = goa.MergeErrors(err, goa.InvalidLengthError("body.id", body.ID, utf8.RuneCountInString(body.ID), 28, true))
+		if utf8.RuneCountInString(body.ID) < 1 {
+			err = goa.MergeErrors(err, goa.InvalidLengthError("body.id", body.ID, utf8.RuneCountInString(body.ID), 1, true))
 		}
 		if utf8.RuneCountInString(body.ID) > 28 {
 			err = goa.MergeErrors(err, goa.InvalidLengthError("body.id", body.ID, utf8.RuneCountInString(body.ID), 28, false))
@@ -72,8 +72,8 @@ func BuildAdminUpdateUserPayload(adminAdminUpdateUserBody string, adminAdminUpda
 	var id string
 	{
 		id = adminAdminUpdateUserID
-		if utf8.RuneCountInString(id) < 28 {
-			err = goa.MergeErrors(err, goa.InvalidLengthError("id", id, utf8.RuneCountInString(id), 28, true))
+		if utf8.RuneCountInString(id) < 1 {
+			err = goa.MergeErrors(err, goa.InvalidLengthError("id", id, utf8.RuneCountInString(id), 1, true))
 		}
 		if utf8.RuneCountInString(id) > 28 {
 			err = goa.MergeErrors(err, goa.InvalidLengthError("id", id, utf8.RuneCountInString(id), 28, false))

@@ -24,9 +24,9 @@ export default {
     // },
     AddUser () {
       axios.post('http://localhost:8080/api/v1/users', {
-        email: 'Non error debitis ut quia.',
-        id: 'XRQ85mtXnINISH25zfM0m5RlC6L2',
-        name: 'Sequi natus repellat illum eum.'
+        email: 'test@email',
+        id: '99',
+        name: 'test'
       })
     }
   }

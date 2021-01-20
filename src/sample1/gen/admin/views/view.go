@@ -249,8 +249,8 @@ func ValidateGoa3SampleAdminUserView(result *Goa3SampleAdminUserView) (err error
 		err = goa.MergeErrors(err, goa.MissingFieldError("updated_at", "result"))
 	}
 	if result.ID != nil {
-		if utf8.RuneCountInString(*result.ID) < 28 {
-			err = goa.MergeErrors(err, goa.InvalidLengthError("result.id", *result.ID, utf8.RuneCountInString(*result.ID), 28, true))
+		if utf8.RuneCountInString(*result.ID) < 1 {
+			err = goa.MergeErrors(err, goa.InvalidLengthError("result.id", *result.ID, utf8.RuneCountInString(*result.ID), 1, true))
 		}
 	}
 	if result.ID != nil {
