@@ -26,7 +26,7 @@ export default {
   },
   methods: {
     async GetUser () {
-      const response = await axios.get('http://localhost:8080/api/v1/users/1')
+      const response = await axios.get('http://localhost:8080/api/v1/users/' + this.id)
       this.user = response.data
     },
     AddUser () {
@@ -39,11 +39,12 @@ export default {
     DeleteUser () {
       axios.delete('http://localhost:8080/api/v1/users/' + this.id)
     },
-    UpdateUser () {
-      axios.put('http://localhost:8080/api/v1/users/' + this.id, {
+    async UpdateUser () {
+      const response = await axios.put('http://localhost:8080/api/v1/users/' + this.id, {
         email: this.email,
         name: this.name
       })
+      this.user = response.data
     }
   }
 }
