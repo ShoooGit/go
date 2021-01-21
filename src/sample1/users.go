@@ -41,6 +41,15 @@ func (s *userssrvc) GetUser(ctx context.Context, p *users.GetUserPayload) (res *
 // Add new user and return its ID.
 func (s *userssrvc) CreateUser(ctx context.Context, p *users.CreateUserPayload) (res string, err error) {
 	s.logger.Print("users.create user")
+	s.logger.Print(p.ID, p.Email, p.Name)
+	var stmt *sql.Stmt
+	stmt, err = s.DB.Prepare("INSERT INTO users(id,email,name) VALUES(?,?,?)")
+	defer stmt.Close()
+	_, err = stmt.Exec(p.ID, p.Email, p.Name)
+	if err != nil {
+		return
+	}
+	res = "OK"
 	return
 }
 

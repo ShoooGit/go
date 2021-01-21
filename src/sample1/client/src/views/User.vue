@@ -16,6 +16,7 @@ export default {
   data () {
     return {
       user: [],
+      id: '99',
       email: '',
       name: ''
     }
@@ -27,9 +28,9 @@ export default {
     },
     AddUser () {
       axios.post('http://localhost:8080/api/v1/users', {
-        id: '99',
-        email: 'test@email',
-        name: 'test'
+        id: this.id,
+        email: this.email,
+        name: this.name
       })
     }
   }
