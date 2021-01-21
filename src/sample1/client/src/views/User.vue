@@ -7,6 +7,7 @@
     <el-button @click="GetUser">ユーザーデータの取得</el-button>
     <el-button @click="AddUser">ユーザーデータの登録</el-button>
     <el-button @click="DeleteUser">ユーザーデータの削除</el-button>
+    <el-button @click="UpdateUser">ユーザーデータの更新</el-button>
     <p>ユーザー : {{ user }}</p>
   </div>
 </template>
@@ -37,6 +38,12 @@ export default {
     },
     DeleteUser () {
       axios.delete('http://localhost:8080/api/v1/users/' + this.id)
+    },
+    UpdateUser () {
+      axios.put('http://localhost:8080/api/v1/users/' + this.id, {
+        email: this.email,
+        name: this.name
+      })
     }
   }
 }

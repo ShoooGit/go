@@ -57,6 +57,20 @@ func (s *userssrvc) CreateUser(ctx context.Context, p *users.CreateUserPayload) 
 func (s *userssrvc) UpdateUser(ctx context.Context, p *users.UpdateUserPayload) (res *users.Goa3SampleUser, err error) {
 	res = &users.Goa3SampleUser{}
 	s.logger.Print("users.update user")
+	s.logger.Print(p.ID)
+	var stmt *sql.Stmt
+	stmt, err = s.DB.Prepare("UPDATE users SET name=? WHERE id=?")
+	defer stmt.Close()
+	_, err = stmt.Exec(p.Name, p.ID)
+	if err != nil {
+		return
+	}
+	var id, name, email string
+	err = s.DB.QueryRow("SELECT id, name, email FROM users WHERE id=?", p.ID).Scan(&id, &name, &email)
+	if err != nil {
+		return
+	}
+	res = &users.Goa3SampleUser{ID: id, Name: name, Email: email}
 	return
 }
 
