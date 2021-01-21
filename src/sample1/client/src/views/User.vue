@@ -29,12 +29,13 @@ export default {
       const response = await axios.get('http://localhost:8080/api/v1/users/' + this.id)
       this.user = response.data
     },
-    AddUser () {
-      axios.post('http://localhost:8080/api/v1/users', {
+    async AddUser () {
+      const response = await axios.post('http://localhost:8080/api/v1/users', {
         id: this.id,
         email: this.email,
         name: this.name
       })
+      alert(response.data)
     },
     DeleteUser () {
       axios.delete('http://localhost:8080/api/v1/users/' + this.id)
