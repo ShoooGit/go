@@ -41,7 +41,6 @@ func (s *userssrvc) GetUser(ctx context.Context, p *users.GetUserPayload) (res *
 // Add new user and return its ID.
 func (s *userssrvc) CreateUser(ctx context.Context, p *users.CreateUserPayload) (res string, err error) {
 	s.logger.Print("users.create user")
-	s.logger.Print(p.ID, p.Email, p.Name)
 	var stmt *sql.Stmt
 	stmt, err = s.DB.Prepare("INSERT INTO users(id,email,name) VALUES(?,?,?)")
 	defer stmt.Close()
@@ -55,9 +54,8 @@ func (s *userssrvc) CreateUser(ctx context.Context, p *users.CreateUserPayload) 
 
 // Update user item.
 func (s *userssrvc) UpdateUser(ctx context.Context, p *users.UpdateUserPayload) (res *users.Goa3SampleUser, err error) {
-	res = &users.Goa3SampleUser{}
+	res = &users.Goa3SampleUser{ID: p.ID, Name: *p.Name, Email: *p.Email}
 	s.logger.Print("users.update user")
-	s.logger.Print(p.ID)
 	var stmt *sql.Stmt
 	stmt, err = s.DB.Prepare("UPDATE users SET name=? WHERE id=?")
 	defer stmt.Close()
@@ -65,19 +63,12 @@ func (s *userssrvc) UpdateUser(ctx context.Context, p *users.UpdateUserPayload) 
 	if err != nil {
 		return
 	}
-	var id, name, email string
-	err = s.DB.QueryRow("SELECT id, name, email FROM users WHERE id=?", p.ID).Scan(&id, &name, &email)
-	if err != nil {
-		return
-	}
-	res = &users.Goa3SampleUser{ID: id, Name: name, Email: email}
 	return
 }
 
 // Delete user by id.
 func (s *userssrvc) DeleteUser(ctx context.Context, p *users.DeleteUserPayload) (err error) {
 	s.logger.Print("users.delete user")
-	s.logger.Print(p.ID)
 	var stmt *sql.Stmt
 	stmt, err = s.DB.Prepare("DELETE FROM users WHERE id=?")
 	defer stmt.Close()
