@@ -63,5 +63,13 @@ func (s *userssrvc) UpdateUser(ctx context.Context, p *users.UpdateUserPayload) 
 // Delete user by id.
 func (s *userssrvc) DeleteUser(ctx context.Context, p *users.DeleteUserPayload) (err error) {
 	s.logger.Print("users.delete user")
+	s.logger.Print(p.ID)
+	var stmt *sql.Stmt
+	stmt, err = s.DB.Prepare("DELETE FROM users WHERE id=?")
+	defer stmt.Close()
+	_, err = stmt.Exec(p.ID)
+	if err != nil {
+		return
+	}
 	return
 }
