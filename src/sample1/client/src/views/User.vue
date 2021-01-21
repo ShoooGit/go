@@ -1,9 +1,11 @@
 <template>
   <div>
     <h1>This is an User page</h1>
-    <el-input v-model="id" placeholder="IDを入力して下さい"></el-input>
-    <el-input v-model="email" placeholder="メールアドレスを入力して下さい"></el-input>
-    <el-input v-model="name" placeholder="名前を入力して下さい"></el-input>
+    <div class="form">
+      <el-input v-model="id" placeholder="IDを入力して下さい"></el-input>
+      <el-input v-model="email" placeholder="メールアドレスを入力して下さい"></el-input>
+      <el-input v-model="name" placeholder="名前を入力して下さい"></el-input>
+    </div>
     <el-button @click="GetUser">ユーザーデータの取得</el-button>
     <el-button @click="AddUser">ユーザーデータの登録</el-button>
     <el-button @click="DeleteUser">ユーザーデータの削除</el-button>
@@ -50,3 +52,9 @@ export default {
   }
 }
 </script>
+<style scoped>
+.form {
+    width: 30%;
+    margin: auto;
+}
+</style>
