@@ -6,188 +6,6 @@ info:
 servers:
 - url: http://localhost:8080
 paths:
-  /api/v1/admin/user_number:
-    get:
-      tags:
-      - Admin
-      summary: user_number Admin
-      description: Number of users
-      operationId: Admin#user_number
-      responses:
-        "200":
-          description: OK response.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Goa3SampleAdminUserNumber'
-              example:
-                color: Dicta fuga.
-                data:
-                - key: Sit dolores ullam delectus aut voluptas.
-                  value: Minus in.
-                - key: Sit dolores ullam delectus aut voluptas.
-                  value: Minus in.
-                - key: Sit dolores ullam delectus aut voluptas.
-                  value: Minus in.
-                guide:
-                  x:
-                    label: Vitae quisquam exercitationem atque.
-                  "y":
-                    label: Vitae quisquam exercitationem atque.
-                size: Quia aut sed ea eum enim natus.
-                x: Aspernatur voluptas quas eius tenetur minus.
-                "y": Enim aspernatur molestiae ducimus eius.
-  /api/v1/admin/users:
-    get:
-      tags:
-      - Admin
-      summary: admin list user Admin
-      description: List all stored users
-      operationId: Admin#admin list user
-      responses:
-        "200":
-          description: OK response.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Goa3SampleAdminUserCollection'
-              example:
-              - created_at: Velit reprehenderit sed earum rerum.
-                deleted_at: Ipsum laborum numquam.
-                email: taro.yamada@xxx.jp
-                id: XRQ85mtXnINISH25zfM0m5RlC6L2
-                name: yamada taro
-                updated_at: Consequatur qui blanditiis quos laborum quas omnis.
-              - created_at: Velit reprehenderit sed earum rerum.
-                deleted_at: Ipsum laborum numquam.
-                email: taro.yamada@xxx.jp
-                id: XRQ85mtXnINISH25zfM0m5RlC6L2
-                name: yamada taro
-                updated_at: Consequatur qui blanditiis quos laborum quas omnis.
-              - created_at: Velit reprehenderit sed earum rerum.
-                deleted_at: Ipsum laborum numquam.
-                email: taro.yamada@xxx.jp
-                id: XRQ85mtXnINISH25zfM0m5RlC6L2
-                name: yamada taro
-                updated_at: Consequatur qui blanditiis quos laborum quas omnis.
-              - created_at: Velit reprehenderit sed earum rerum.
-                deleted_at: Ipsum laborum numquam.
-                email: taro.yamada@xxx.jp
-                id: XRQ85mtXnINISH25zfM0m5RlC6L2
-                name: yamada taro
-                updated_at: Consequatur qui blanditiis quos laborum quas omnis.
-    post:
-      tags:
-      - Admin
-      summary: admin create user Admin
-      description: Add new user and return its ID.
-      operationId: Admin#admin create user
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/AdminCreateUserRequestBody'
-            example:
-              email: At facilis quam rerum.
-              id: XRQ85mtXnINISH25zfM0m5RlC6L2
-              name: Adipisci esse.
-      responses:
-        "201":
-          description: Created response.
-          content:
-            application/json:
-              schema:
-                type: string
-                example: Voluptate nobis esse ut voluptatem voluptas.
-              example: Voluptatibus ut neque.
-  /api/v1/admin/users/{id}:
-    delete:
-      tags:
-      - Admin
-      summary: admin delete user Admin
-      description: Delete user by id.
-      operationId: Admin#admin delete user
-      parameters:
-      - name: id
-        in: path
-        required: true
-        schema:
-          type: string
-          example: Aliquid dolores.
-        example: Sequi ut.
-      responses:
-        "204":
-          description: No Content response.
-    get:
-      tags:
-      - Admin
-      summary: admin get user Admin
-      description: Show user by ID
-      operationId: Admin#admin get user
-      parameters:
-      - name: id
-        in: path
-        required: true
-        schema:
-          type: string
-          example: Quis voluptatem provident dolor.
-        example: In hic nesciunt et.
-      responses:
-        "200":
-          description: OK response.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Goa3SampleAdminUser'
-              example:
-                created_at: Iusto at.
-                deleted_at: Vel libero optio esse eligendi error voluptas.
-                email: taro.yamada@xxx.jp
-                id: XRQ85mtXnINISH25zfM0m5RlC6L2
-                name: yamada taro
-                updated_at: Sunt et officiis odit odit in.
-    put:
-      tags:
-      - Admin
-      summary: admin update user Admin
-      description: Update user item.
-      operationId: Admin#admin update user
-      parameters:
-      - name: id
-        in: path
-        description: User id
-        required: true
-        schema:
-          type: string
-          description: User id
-          example: XRQ85mtXnINISH25zfM0m5RlC6L2
-          minLength: 1
-          maxLength: 28
-        example: XRQ85mtXnINISH25zfM0m5RlC6L2
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/AdminUpdateUserRequestBody'
-            example:
-              email: Quia qui sed culpa eius.
-              name: Provident neque cum in optio.
-      responses:
-        "200":
-          description: OK response.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Goa3SampleAdminUser'
-              example:
-                created_at: Assumenda blanditiis perferendis.
-                deleted_at: Quia veniam.
-                email: taro.yamada@xxx.jp
-                id: XRQ85mtXnINISH25zfM0m5RlC6L2
-                name: yamada taro
-                updated_at: Error voluptatem ex harum.
   /api/v1/users:
     get:
       tags:
@@ -209,9 +27,6 @@ paths:
               - email: taro.yamada@xxx.jp
                 id: XRQ85mtXnINISH25zfM0m5RlC6L2
                 name: yamada taro
-              - email: taro.yamada@xxx.jp
-                id: XRQ85mtXnINISH25zfM0m5RlC6L2
-                name: yamada taro
     post:
       tags:
       - Users
@@ -223,11 +38,11 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/AdminCreateUserRequestBody'
+              $ref: '#/components/schemas/CreateUserRequestBody'
             example:
-              email: Modi rerum.
+              email: Aperiam eos.
               id: XRQ85mtXnINISH25zfM0m5RlC6L2
-              name: Odio hic non et nostrum incidunt.
+              name: Ipsum laborum numquam.
       responses:
         "201":
           description: Created response.
@@ -235,8 +50,8 @@ paths:
             application/json:
               schema:
                 type: string
-                example: Modi corporis suscipit et et.
-              example: Eum quidem sed vero.
+                example: Et cupiditate.
+              example: Sunt et officiis odit odit in.
   /api/v1/users/{id}:
     delete:
       tags:
@@ -250,8 +65,8 @@ paths:
         required: true
         schema:
           type: string
-          example: Numquam non modi esse voluptates at est.
-        example: Aliquid iure maxime nam et dolorem.
+          example: Vel libero optio esse eligendi error voluptas.
+        example: Adipisci esse.
       responses:
         "204":
           description: No Content response.
@@ -267,8 +82,8 @@ paths:
         required: true
         schema:
           type: string
-          example: Dicta quia et dolores ducimus illum.
-        example: Aspernatur consequatur culpa cumque voluptas accusantium ipsa.
+          example: Et occaecati assumenda.
+        example: Iusto at.
       responses:
         "200":
           description: OK response.
@@ -303,10 +118,10 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/AdminUpdateUserRequestBody'
+              $ref: '#/components/schemas/UpdateUserRequestBody'
             example:
-              email: Iure nihil corrupti.
-              name: Consequatur ratione rerum dignissimos nostrum.
+              email: Officia perspiciatis occaecati laboriosam natus autem laborum.
+              name: Sit sequi et rerum.
       responses:
         "200":
           description: OK response.
@@ -320,13 +135,13 @@ paths:
                 name: yamada taro
 components:
   schemas:
-    AdminCreateUserRequestBody:
+    CreateUserRequestBody:
       type: object
       properties:
         email:
           type: string
           description: Email of user
-          example: Aperiam harum modi nulla.
+          example: Enim aspernatur molestiae ducimus eius.
         id:
           type: string
           description: User id
@@ -336,170 +151,15 @@ components:
         name:
           type: string
           description: Name of user
-          example: Officia in laborum fuga.
+          example: Aspernatur voluptas quas eius tenetur minus.
       example:
-        email: Accusantium placeat eius et aut distinctio libero.
+        email: Dicta fuga.
         id: XRQ85mtXnINISH25zfM0m5RlC6L2
-        name: Ut possimus in deleniti.
+        name: Quia aut sed ea eum enim natus.
       required:
       - id
       - name
       - email
-    AdminUpdateUserRequestBody:
-      type: object
-      properties:
-        email:
-          type: string
-          description: Email of user
-          example: Provident rerum itaque praesentium enim.
-        name:
-          type: string
-          description: Name of user
-          example: Reprehenderit modi saepe animi.
-      example:
-        email: Dolorum quisquam suscipit voluptatem omnis error.
-        name: Sapiente amet.
-    Data:
-      type: object
-      properties:
-        key:
-          type: string
-          example: Vitae fugit et id.
-        value:
-          type: string
-          example: Hic perferendis sed ipsum quis.
-          format: binary
-      example:
-        key: Corrupti laborum.
-        value: Dicta sed ipsam.
-    Goa3SampleAdminUser:
-      type: object
-      properties:
-        created_at:
-          type: string
-          example: Optio consectetur.
-        deleted_at:
-          type: string
-          example: Ab voluptatibus.
-        email:
-          type: string
-          description: Email of user
-          example: taro.yamada@xxx.jp
-        id:
-          type: string
-          description: User id
-          example: XRQ85mtXnINISH25zfM0m5RlC6L2
-          minLength: 1
-          maxLength: 28
-        name:
-          type: string
-          description: Name of user
-          example: yamada taro
-        updated_at:
-          type: string
-          example: Facilis commodi suscipit qui non ducimus et.
-      description: User Response
-      example:
-        created_at: Sint mollitia.
-        deleted_at: Maiores aut esse libero.
-        email: taro.yamada@xxx.jp
-        id: XRQ85mtXnINISH25zfM0m5RlC6L2
-        name: yamada taro
-        updated_at: Ea sapiente iusto consequatur.
-      required:
-      - id
-      - name
-      - email
-      - created_at
-      - updated_at
-    Goa3SampleAdminUserCollection:
-      type: array
-      items:
-        $ref: '#/components/schemas/Goa3SampleAdminUser'
-      example:
-      - created_at: Velit reprehenderit sed earum rerum.
-        deleted_at: Ipsum laborum numquam.
-        email: taro.yamada@xxx.jp
-        id: XRQ85mtXnINISH25zfM0m5RlC6L2
-        name: yamada taro
-        updated_at: Consequatur qui blanditiis quos laborum quas omnis.
-      - created_at: Velit reprehenderit sed earum rerum.
-        deleted_at: Ipsum laborum numquam.
-        email: taro.yamada@xxx.jp
-        id: XRQ85mtXnINISH25zfM0m5RlC6L2
-        name: yamada taro
-        updated_at: Consequatur qui blanditiis quos laborum quas omnis.
-      - created_at: Velit reprehenderit sed earum rerum.
-        deleted_at: Ipsum laborum numquam.
-        email: taro.yamada@xxx.jp
-        id: XRQ85mtXnINISH25zfM0m5RlC6L2
-        name: yamada taro
-        updated_at: Consequatur qui blanditiis quos laborum quas omnis.
-      - created_at: Velit reprehenderit sed earum rerum.
-        deleted_at: Ipsum laborum numquam.
-        email: taro.yamada@xxx.jp
-        id: XRQ85mtXnINISH25zfM0m5RlC6L2
-        name: yamada taro
-        updated_at: Consequatur qui blanditiis quos laborum quas omnis.
-    Goa3SampleAdminUserNumber:
-      type: object
-      properties:
-        color:
-          type: string
-          description: ドットの色分けに使用するkey
-          example: Modi autem quia quis.
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/Data'
-          description: グラフデータ
-          example:
-          - key: Sit dolores ullam delectus aut voluptas.
-            value: Minus in.
-          - key: Sit dolores ullam delectus aut voluptas.
-            value: Minus in.
-          - key: Sit dolores ullam delectus aut voluptas.
-            value: Minus in.
-          - key: Sit dolores ullam delectus aut voluptas.
-            value: Minus in.
-        guide:
-          $ref: '#/components/schemas/StatsGuideType'
-        size:
-          type: string
-          description: ドットの大きさに使用するkey
-          example: Est laborum illo.
-        x:
-          type: string
-          description: X軸に使用するkey
-          example: Repellendus quia facilis quia ullam nihil rerum.
-        "y":
-          type: string
-          description: Y軸に使用するkey
-          example: Sint repudiandae reiciendis ea.
-      example:
-        color: Vitae exercitationem.
-        data:
-        - key: Sit dolores ullam delectus aut voluptas.
-          value: Minus in.
-        - key: Sit dolores ullam delectus aut voluptas.
-          value: Minus in.
-        - key: Sit dolores ullam delectus aut voluptas.
-          value: Minus in.
-        - key: Sit dolores ullam delectus aut voluptas.
-          value: Minus in.
-        guide:
-          x:
-            label: Vitae quisquam exercitationem atque.
-          "y":
-            label: Vitae quisquam exercitationem atque.
-        size: Voluptatibus quaerat non ut ex eveniet.
-        x: Magni veniam iste dignissimos.
-        "y": Voluptatem optio velit.
-      required:
-      - data
-      - x
-      - "y"
-      - guide
     Goa3SampleUser:
       type: object
       properties:
@@ -540,25 +200,17 @@ components:
       - email: taro.yamada@xxx.jp
         id: XRQ85mtXnINISH25zfM0m5RlC6L2
         name: yamada taro
-    StatsGuideType:
+    UpdateUserRequestBody:
       type: object
       properties:
-        x:
-          $ref: '#/components/schemas/StatsLabelType'
-        "y":
-          $ref: '#/components/schemas/StatsLabelType'
-      example:
-        x:
-          label: Vitae quisquam exercitationem atque.
-        "y":
-          label: Vitae quisquam exercitationem atque.
-    StatsLabelType:
-      type: object
-      properties:
-        label:
+        email:
           type: string
-          example: Ut modi.
+          description: Email of user
+          example: Nemo ipsa doloribus voluptate qui molestias.
+        name:
+          type: string
+          description: Name of user
+          example: Sit aspernatur sit officiis earum.
       example:
-        label: Et nemo et eos vel fuga.
-      required:
-      - label
+        email: Praesentium autem vitae et autem.
+        name: Repellat voluptatem.

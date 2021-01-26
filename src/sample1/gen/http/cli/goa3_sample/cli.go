@@ -12,7 +12,6 @@ import (
 	"fmt"
 	"net/http"
 	"os"
-	adminc "sample1/gen/http/admin/client"
 	usersc "sample1/gen/http/users/client"
 
 	goahttp "goa.design/goa/v3/http"
@@ -24,15 +23,13 @@ import (
 //    command (subcommand1|subcommand2|...)
 //
 func UsageCommands() string {
-	return `admin (user-number|admin- list- user|admin- get- user|admin- create- user|admin- update- user|admin- delete- user)
-users (list- user|get- user|create- user|update- user|delete- user)
+	return `users (list- user|get- user|create- user|update- user|delete- user)
 `
 }
 
 // UsageExamples produces an example of a valid invocation of the CLI tool.
 func UsageExamples() string {
-	return os.Args[0] + ` admin user-number` + "\n" +
-		os.Args[0] + ` users list- user` + "\n" +
+	return os.Args[0] + ` users list- user` + "\n" +
 		""
 }
 
@@ -46,25 +43,6 @@ func ParseEndpoint(
 	restore bool,
 ) (goa.Endpoint, interface{}, error) {
 	var (
-		adminFlags = flag.NewFlagSet("admin", flag.ContinueOnError)
-
-		adminUserNumberFlags = flag.NewFlagSet("user-number", flag.ExitOnError)
-
-		adminAdminListUserFlags = flag.NewFlagSet("admin- list- user", flag.ExitOnError)
-
-		adminAdminGetUserFlags  = flag.NewFlagSet("admin- get- user", flag.ExitOnError)
-		adminAdminGetUserIDFlag = adminAdminGetUserFlags.String("id", "REQUIRED", "")
-
-		adminAdminCreateUserFlags    = flag.NewFlagSet("admin- create- user", flag.ExitOnError)
-		adminAdminCreateUserBodyFlag = adminAdminCreateUserFlags.String("body", "REQUIRED", "")
-
-		adminAdminUpdateUserFlags    = flag.NewFlagSet("admin- update- user", flag.ExitOnError)
-		adminAdminUpdateUserBodyFlag = adminAdminUpdateUserFlags.String("body", "REQUIRED", "")
-		adminAdminUpdateUserIDFlag   = adminAdminUpdateUserFlags.String("id", "REQUIRED", "User id")
-
-		adminAdminDeleteUserFlags  = flag.NewFlagSet("admin- delete- user", flag.ExitOnError)
-		adminAdminDeleteUserIDFlag = adminAdminDeleteUserFlags.String("id", "REQUIRED", "")
-
 		usersFlags = flag.NewFlagSet("users", flag.ContinueOnError)
 
 		usersListUserFlags = flag.NewFlagSet("list- user", flag.ExitOnError)
@@ -82,14 +60,6 @@ func ParseEndpoint(
 		usersDeleteUserFlags  = flag.NewFlagSet("delete- user", flag.ExitOnError)
 		usersDeleteUserIDFlag = usersDeleteUserFlags.String("id", "REQUIRED", "")
 	)
-	adminFlags.Usage = adminUsage
-	adminUserNumberFlags.Usage = adminUserNumberUsage
-	adminAdminListUserFlags.Usage = adminAdminListUserUsage
-	adminAdminGetUserFlags.Usage = adminAdminGetUserUsage
-	adminAdminCreateUserFlags.Usage = adminAdminCreateUserUsage
-	adminAdminUpdateUserFlags.Usage = adminAdminUpdateUserUsage
-	adminAdminDeleteUserFlags.Usage = adminAdminDeleteUserUsage
-
 	usersFlags.Usage = usersUsage
 	usersListUserFlags.Usage = usersListUserUsage
 	usersGetUserFlags.Usage = usersGetUserUsage
@@ -112,8 +82,6 @@ func ParseEndpoint(
 	{
 		svcn = flag.Arg(0)
 		switch svcn {
-		case "admin":
-			svcf = adminFlags
 		case "users":
 			svcf = usersFlags
 		default:
@@ -131,28 +99,6 @@ func ParseEndpoint(
 	{
 		epn = svcf.Arg(0)
 		switch svcn {
-		case "admin":
-			switch epn {
-			case "user-number":
-				epf = adminUserNumberFlags
-
-			case "admin- list- user":
-				epf = adminAdminListUserFlags
-
-			case "admin- get- user":
-				epf = adminAdminGetUserFlags
-
-			case "admin- create- user":
-				epf = adminAdminCreateUserFlags
-
-			case "admin- update- user":
-				epf = adminAdminUpdateUserFlags
-
-			case "admin- delete- user":
-				epf = adminAdminDeleteUserFlags
-
-			}
-
 		case "users":
 			switch epn {
 			case "list- user":
@@ -192,28 +138,6 @@ func ParseEndpoint(
 	)
 	{
 		switch svcn {
-		case "admin":
-			c := adminc.NewClient(scheme, host, doer, enc, dec, restore)
-			switch epn {
-			case "user-number":
-				endpoint = c.UserNumber()
-				data = nil
-			case "admin- list- user":
-				endpoint = c.AdminListUser()
-				data = nil
-			case "admin- get- user":
-				endpoint = c.AdminGetUser()
-				data, err = adminc.BuildAdminGetUserPayload(*adminAdminGetUserIDFlag)
-			case "admin- create- user":
-				endpoint = c.AdminCreateUser()
-				data, err = adminc.BuildAdminCreateUserPayload(*adminAdminCreateUserBodyFlag)
-			case "admin- update- user":
-				endpoint = c.AdminUpdateUser()
-				data, err = adminc.BuildAdminUpdateUserPayload(*adminAdminUpdateUserBodyFlag, *adminAdminUpdateUserIDFlag)
-			case "admin- delete- user":
-				endpoint = c.AdminDeleteUser()
-				data, err = adminc.BuildAdminDeleteUserPayload(*adminAdminDeleteUserIDFlag)
-			}
 		case "users":
 			c := usersc.NewClient(scheme, host, doer, enc, dec, restore)
 			switch epn {
@@ -240,96 +164,6 @@ func ParseEndpoint(
 	}
 
 	return endpoint, data, nil
-}
-
-// adminUsage displays the usage of the admin command and its subcommands.
-func adminUsage() {
-	fmt.Fprintf(os.Stderr, `Admin provide functions for the management screen.
-Usage:
-    %s [globalflags] admin COMMAND [flags]
-
-COMMAND:
-    user-number: Number of users
-    admin- list- user: List all stored users
-    admin- get- user: Show user by ID
-    admin- create- user: Add new user and return its ID.
-    admin- update- user: Update user item.
-    admin- delete- user: Delete user by id.
-
-Additional help:
-    %s admin COMMAND --help
-`, os.Args[0], os.Args[0])
-}
-func adminUserNumberUsage() {
-	fmt.Fprintf(os.Stderr, `%s [flags] admin user-number
-
-Number of users
-
-Example:
-    `+os.Args[0]+` admin user-number
-`, os.Args[0])
-}
-
-func adminAdminListUserUsage() {
-	fmt.Fprintf(os.Stderr, `%s [flags] admin admin- list- user
-
-List all stored users
-
-Example:
-    `+os.Args[0]+` admin admin- list- user
-`, os.Args[0])
-}
-
-func adminAdminGetUserUsage() {
-	fmt.Fprintf(os.Stderr, `%s [flags] admin admin- get- user -id STRING
-
-Show user by ID
-    -id STRING: 
-
-Example:
-    `+os.Args[0]+` admin admin- get- user --id "Et occaecati assumenda."
-`, os.Args[0])
-}
-
-func adminAdminCreateUserUsage() {
-	fmt.Fprintf(os.Stderr, `%s [flags] admin admin- create- user -body JSON
-
-Add new user and return its ID.
-    -body JSON: 
-
-Example:
-    `+os.Args[0]+` admin admin- create- user --body '{
-      "email": "At facilis quam rerum.",
-      "id": "XRQ85mtXnINISH25zfM0m5RlC6L2",
-      "name": "Adipisci esse."
-   }'
-`, os.Args[0])
-}
-
-func adminAdminUpdateUserUsage() {
-	fmt.Fprintf(os.Stderr, `%s [flags] admin admin- update- user -body JSON -id STRING
-
-Update user item.
-    -body JSON: 
-    -id STRING: User id
-
-Example:
-    `+os.Args[0]+` admin admin- update- user --body '{
-      "email": "Quia qui sed culpa eius.",
-      "name": "Provident neque cum in optio."
-   }' --id "XRQ85mtXnINISH25zfM0m5RlC6L2"
-`, os.Args[0])
-}
-
-func adminAdminDeleteUserUsage() {
-	fmt.Fprintf(os.Stderr, `%s [flags] admin admin- delete- user -id STRING
-
-Delete user by id.
-    -id STRING: 
-
-Example:
-    `+os.Args[0]+` admin admin- delete- user --id "Sed quis quia voluptas placeat est minus."
-`, os.Args[0])
 }
 
 // usersUsage displays the usage of the users command and its subcommands.
@@ -366,7 +200,7 @@ Show user by ID
     -id STRING: 
 
 Example:
-    `+os.Args[0]+` users get- user --id "Eveniet est."
+    `+os.Args[0]+` users get- user --id "Consequatur qui blanditiis quos laborum quas omnis."
 `, os.Args[0])
 }
 
@@ -378,9 +212,9 @@ Add new user and return its ID.
 
 Example:
     `+os.Args[0]+` users create- user --body '{
-      "email": "Modi rerum.",
+      "email": "Aperiam eos.",
       "id": "XRQ85mtXnINISH25zfM0m5RlC6L2",
-      "name": "Odio hic non et nostrum incidunt."
+      "name": "Ipsum laborum numquam."
    }'
 `, os.Args[0])
 }
@@ -394,8 +228,8 @@ Update user item.
 
 Example:
     `+os.Args[0]+` users update- user --body '{
-      "email": "Iure nihil corrupti.",
-      "name": "Consequatur ratione rerum dignissimos nostrum."
+      "email": "Officia perspiciatis occaecati laboriosam natus autem laborum.",
+      "name": "Sit sequi et rerum."
    }' --id "XRQ85mtXnINISH25zfM0m5RlC6L2"
 `, os.Args[0])
 }
@@ -407,6 +241,6 @@ Delete user by id.
     -id STRING: 
 
 Example:
-    `+os.Args[0]+` users delete- user --id "Sapiente id quaerat enim."
+    `+os.Args[0]+` users delete- user --id "Itaque doloribus id quisquam tempora qui enim."
 `, os.Args[0])
 }

@@ -17,7 +17,7 @@ var _ = API("goa3-sample", func() {
 	})
 
 	Server("goa3-sample", func() {
-		Services("Users", "Admin")
+		Services("Users")
 		Host("localhost", func() {
 			Description("development host")
 			URI("http://localhost:8080")

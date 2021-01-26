@@ -6,8 +6,6 @@ import (
 	"net/http"
 	"net/url"
 	"os"
-	admin "sample1/gen/admin"
-	adminsvr "sample1/gen/http/admin/server"
 	userssvr "sample1/gen/http/users/server"
 	users "sample1/gen/users"
 	"sync"
@@ -20,7 +18,7 @@ import (
 
 // handleHTTPServer starts configures and starts a HTTP server on the given
 // URL. It shuts down the server if any error is received in the error channel.
-func handleHTTPServer(ctx context.Context, u *url.URL, usersEndpoints *users.Endpoints, adminEndpoints *admin.Endpoints, wg *sync.WaitGroup, errc chan error, logger *log.Logger, debug bool) {
+func handleHTTPServer(ctx context.Context, u *url.URL, usersEndpoints *users.Endpoints, wg *sync.WaitGroup, errc chan error, logger *log.Logger, debug bool) {
 
 	// Setup goa log adapter.
 	var (
@@ -52,23 +50,19 @@ func handleHTTPServer(ctx context.Context, u *url.URL, usersEndpoints *users.End
 	// responses.
 	var (
 		usersServer *userssvr.Server
-		adminServer *adminsvr.Server
 	)
 	{
 		eh := errorHandler(logger)
 		usersServer = userssvr.New(usersEndpoints, mux, dec, enc, eh, nil)
-		adminServer = adminsvr.New(adminEndpoints, mux, dec, enc, eh, nil)
 		if debug {
 			servers := goahttp.Servers{
 				usersServer,
-				adminServer,
 			}
 			servers.Use(httpmdlwr.Debug(mux, os.Stdout))
 		}
 	}
 	// Configure the mux.
 	userssvr.Mount(mux, usersServer)
-	adminsvr.Mount(mux, adminServer)
 
 	// Wrap the multiplexer with additional middlewares. Middlewares mounted
 	// here apply to all the service endpoints.
@@ -85,9 +79,6 @@ func handleHTTPServer(ctx context.Context, u *url.URL, usersEndpoints *users.End
 	http.HandleFunc("/_dev/console/", newDevConsoleHandler("/_dev/console/", "./server/swagger-ui/"))
 
 	for _, m := range usersServer.Mounts {
-		logger.Printf("HTTP %q mounted on %s %s", m.Method, m.Verb, m.Pattern)
-	}
-	for _, m := range adminServer.Mounts {
 		logger.Printf("HTTP %q mounted on %s %s", m.Method, m.Verb, m.Pattern)
 	}
 
