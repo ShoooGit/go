@@ -7,10 +7,14 @@
       <el-input v-model="name" placeholder="名前を入力して下さい"></el-input>
     </div>
     <el-button @click="GetUser">ユーザーデータの取得</el-button>
+    <el-button @click="GetAllUser">全ユーザーデータの取得</el-button>
     <el-button @click="AddUser">ユーザーデータの登録</el-button>
     <el-button @click="DeleteUser">ユーザーデータの削除</el-button>
     <el-button @click="UpdateUser">ユーザーデータの更新</el-button>
     <p>ユーザー : {{ user }}</p>
+    <dl v-for="user in users" :key="user.id" >
+      <dd>{{ user }}</dd>
+    </dl>
   </div>
 </template>
 
@@ -20,6 +24,7 @@ export default {
   name: 'User',
   data () {
     return {
+      users: [{}],
       user: [],
       id: '99',
       email: 'test@email',
@@ -30,6 +35,10 @@ export default {
     async GetUser () {
       const response = await axios.get('http://localhost:8080/api/v1/users/' + this.id)
       this.user = response.data
+    },
+    async GetAllUser () {
+      const response = await axios.get('http://localhost:8080/api/v1/users')
+      this.users = response.data
     },
     async AddUser () {
       const response = await axios.post('http://localhost:8080/api/v1/users', {
