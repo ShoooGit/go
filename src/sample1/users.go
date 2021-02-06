@@ -22,6 +22,21 @@ func NewUsers(logger *log.Logger, db *sql.DB) users.Service {
 // List all stored users
 func (s *userssrvc) ListUser(ctx context.Context) (res users.Goa3SampleUserCollection, err error) {
 	s.logger.Print("users.list user")
+	var id, name, email string
+	user := &users.Goa3SampleUser{}
+	res = []*users.Goa3SampleUser{}
+	rows, err := s.DB.Query("SELECT id, name, email FROM users")
+	if err != nil {
+		return
+	}
+	for rows.Next() {
+		err2 := rows.Scan(&id, &name, &email)
+		if err2 != nil {
+			return
+		}
+		user = &users.Goa3SampleUser{ID: id, Name: name, Email: email}
+		res = append(res, user)
+	}
 	return
 }
 
