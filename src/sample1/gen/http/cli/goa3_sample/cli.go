@@ -12,6 +12,7 @@ import (
 	"fmt"
 	"net/http"
 	"os"
+	hac "sample1/gen/http/ha/client"
 	usersc "sample1/gen/http/users/client"
 
 	goahttp "goa.design/goa/v3/http"
@@ -23,13 +24,15 @@ import (
 //    command (subcommand1|subcommand2|...)
 //
 func UsageCommands() string {
-	return `users (list- user|get- user|create- user|update- user|delete- user)
+	return `ha draw- card
+users (list- user|get- user|create- user|update- user|delete- user)
 `
 }
 
 // UsageExamples produces an example of a valid invocation of the CLI tool.
 func UsageExamples() string {
-	return os.Args[0] + ` users list- user` + "\n" +
+	return os.Args[0] + ` ha draw- card` + "\n" +
+		os.Args[0] + ` users list- user` + "\n" +
 		""
 }
 
@@ -43,6 +46,10 @@ func ParseEndpoint(
 	restore bool,
 ) (goa.Endpoint, interface{}, error) {
 	var (
+		haFlags = flag.NewFlagSet("ha", flag.ContinueOnError)
+
+		haDrawCardFlags = flag.NewFlagSet("draw- card", flag.ExitOnError)
+
 		usersFlags = flag.NewFlagSet("users", flag.ContinueOnError)
 
 		usersListUserFlags = flag.NewFlagSet("list- user", flag.ExitOnError)
@@ -60,6 +67,9 @@ func ParseEndpoint(
 		usersDeleteUserFlags  = flag.NewFlagSet("delete- user", flag.ExitOnError)
 		usersDeleteUserIDFlag = usersDeleteUserFlags.String("id", "REQUIRED", "")
 	)
+	haFlags.Usage = haUsage
+	haDrawCardFlags.Usage = haDrawCardUsage
+
 	usersFlags.Usage = usersUsage
 	usersListUserFlags.Usage = usersListUserUsage
 	usersGetUserFlags.Usage = usersGetUserUsage
@@ -82,6 +92,8 @@ func ParseEndpoint(
 	{
 		svcn = flag.Arg(0)
 		switch svcn {
+		case "ha":
+			svcf = haFlags
 		case "users":
 			svcf = usersFlags
 		default:
@@ -99,6 +111,13 @@ func ParseEndpoint(
 	{
 		epn = svcf.Arg(0)
 		switch svcn {
+		case "ha":
+			switch epn {
+			case "draw- card":
+				epf = haDrawCardFlags
+
+			}
+
 		case "users":
 			switch epn {
 			case "list- user":
@@ -138,6 +157,13 @@ func ParseEndpoint(
 	)
 	{
 		switch svcn {
+		case "ha":
+			c := hac.NewClient(scheme, host, doer, enc, dec, restore)
+			switch epn {
+			case "draw- card":
+				endpoint = c.DrawCard()
+				data = nil
+			}
 		case "users":
 			c := usersc.NewClient(scheme, host, doer, enc, dec, restore)
 			switch epn {
@@ -164,6 +190,29 @@ func ParseEndpoint(
 	}
 
 	return endpoint, data, nil
+}
+
+// haUsage displays the usage of the ha command and its subcommands.
+func haUsage() {
+	fmt.Fprintf(os.Stderr, `ha serves.
+Usage:
+    %s [globalflags] ha COMMAND [flags]
+
+COMMAND:
+    draw- card: decied on a theme and card
+
+Additional help:
+    %s ha COMMAND --help
+`, os.Args[0], os.Args[0])
+}
+func haDrawCardUsage() {
+	fmt.Fprintf(os.Stderr, `%s [flags] ha draw- card
+
+decied on a theme and card
+
+Example:
+    `+os.Args[0]+` ha draw- card
+`, os.Args[0])
 }
 
 // usersUsage displays the usage of the users command and its subcommands.
