@@ -11,6 +11,7 @@ import (
 	"os"
 	"os/signal"
 	goa3sample "sample1"
+	ha "sample1/gen/ha"
 	users "sample1/gen/users"
 	"sync"
 	"syscall"
@@ -49,18 +50,22 @@ func main() {
 	// Initialize the services.
 	var (
 		usersSvc users.Service
+		haSvc    ha.Service
 	)
 	{
 		usersSvc = goa3sample.NewUsers(logger, db)
+		haSvc = goa3sample.NewHa(logger)
 	}
 
 	// Wrap the services in endpoints that can be invoked from other services
 	// potentially running in different processes.
 	var (
 		usersEndpoints *users.Endpoints
+		haEndpoints    *ha.Endpoints
 	)
 	{
 		usersEndpoints = users.NewEndpoints(usersSvc)
+		haEndpoints = ha.NewEndpoints(haSvc)
 	}
 
 	// Create channel used by both the signal handler and server goroutines
@@ -104,7 +109,7 @@ func main() {
 			} else if u.Port() == "" {
 				u.Host = net.JoinHostPort(u.Host, ":80")
 			}
-			handleHTTPServer(ctx, u, usersEndpoints, &wg, errc, logger, *dbgF)
+			handleHTTPServer(ctx, u, usersEndpoints, haEndpoints, &wg, errc, logger, *dbgF)
 		}
 
 	default:

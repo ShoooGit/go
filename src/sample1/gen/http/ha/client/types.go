@@ -15,29 +15,29 @@ import (
 
 // DrawCardResponseBody is the type of the "Ha" service "draw card" endpoint
 // HTTP response body.
-type DrawCardResponseBody []*Goa3SampleUserResponse
+type DrawCardResponseBody []*Goa3SampleHaResponse
 
-// Goa3SampleUserResponse is used to define fields on response body types.
-type Goa3SampleUserResponse struct {
+// Goa3SampleHaResponse is used to define fields on response body types.
+type Goa3SampleHaResponse struct {
 	// theme of game
 	Theme *string `form:"theme,omitempty" json:"theme,omitempty" xml:"theme,omitempty"`
 	// card of abc
 	Card *string `form:"card,omitempty" json:"card,omitempty" xml:"card,omitempty"`
 }
 
-// NewDrawCardGoa3SampleUserCollectionOK builds a "Ha" service "draw card"
+// NewDrawCardGoa3SampleHaCollectionOK builds a "Ha" service "draw card"
 // endpoint result from a HTTP "OK" response.
-func NewDrawCardGoa3SampleUserCollectionOK(body DrawCardResponseBody) haviews.Goa3SampleUserCollectionView {
-	v := make([]*haviews.Goa3SampleUserView, len(body))
+func NewDrawCardGoa3SampleHaCollectionOK(body DrawCardResponseBody) haviews.Goa3SampleHaCollectionView {
+	v := make([]*haviews.Goa3SampleHaView, len(body))
 	for i, val := range body {
-		v[i] = unmarshalGoa3SampleUserResponseToHaviewsGoa3SampleUserView(val)
+		v[i] = unmarshalGoa3SampleHaResponseToHaviewsGoa3SampleHaView(val)
 	}
 	return v
 }
 
-// ValidateGoa3SampleUserResponse runs the validations defined on
-// Goa3-SampleUserResponse
-func ValidateGoa3SampleUserResponse(body *Goa3SampleUserResponse) (err error) {
+// ValidateGoa3SampleHaResponse runs the validations defined on
+// Goa3-SampleHaResponse
+func ValidateGoa3SampleHaResponse(body *Goa3SampleHaResponse) (err error) {
 	if body.Theme == nil {
 		err = goa.MergeErrors(err, goa.MissingFieldError("theme", "body"))
 	}

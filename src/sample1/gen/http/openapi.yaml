@@ -24,7 +24,7 @@ paths:
         "200":
           description: OK response.
           schema:
-            $ref: '#/definitions/HaGoa3SampleUserResponseCollection'
+            $ref: '#/definitions/HaGoa3SampleHaResponseCollection'
       schemes:
       - http
   /api/v1/users:
@@ -130,8 +130,8 @@ paths:
       schemes:
       - http
 definitions:
-  Goa3SampleUserResponse:
-    title: 'Mediatype identifier: application/vnd.goa3-sample.user+json; view=default'
+  Goa3SampleHaResponse:
+    title: 'Mediatype identifier: application/vnd.goa3-sample.ha+json; view=default'
     type: object
     properties:
       card:
@@ -149,17 +149,42 @@ definitions:
     required:
     - theme
     - card
-  HaGoa3SampleUserResponseCollection:
-    title: 'Mediatype identifier: application/vnd.goa3-sample.user+json; type=collection;
+  Goa3SampleUserResponse:
+    title: 'Mediatype identifier: application/vnd.goa3-sample.user+json; view=default'
+    type: object
+    properties:
+      email:
+        type: string
+        description: Email of user
+        example: taro.yamada@xxx.jp
+      id:
+        type: string
+        description: User id
+        example: XRQ85mtXnINISH25zfM0m5RlC6L2
+        minLength: 1
+        maxLength: 28
+      name:
+        type: string
+        description: Name of user
+        example: yamada taro
+    description: User Response (default view)
+    example:
+      email: taro.yamada@xxx.jp
+      id: XRQ85mtXnINISH25zfM0m5RlC6L2
+      name: yamada taro
+    required:
+    - id
+    - name
+    - email
+  HaGoa3SampleHaResponseCollection:
+    title: 'Mediatype identifier: application/vnd.goa3-sample.ha+json; type=collection;
       view=default'
     type: array
     items:
-      $ref: '#/definitions/Goa3SampleUserResponse'
-    description: Draw CardResponseBody is the result type for an array of Goa3-SampleUserResponse
+      $ref: '#/definitions/Goa3SampleHaResponse'
+    description: Draw CardResponseBody is the result type for an array of Goa3-SampleHaResponse
       (default view)
     example:
-    - card: A
-      theme: Ha
     - card: A
       theme: Ha
     - card: A
@@ -171,7 +196,7 @@ definitions:
       email:
         type: string
         description: Email of user
-        example: Occaecati dolorum sit dolores ullam delectus aut.
+        example: In magni vitae quisquam exercitationem atque mollitia.
       id:
         type: string
         description: User id
@@ -181,11 +206,11 @@ definitions:
       name:
         type: string
         description: Name of user
-        example: Dolor tempora.
+        example: Ullam delectus aut voluptas et.
     example:
-      email: Quisquam exercitationem atque mollitia.
+      email: Quo libero dolores.
       id: XRQ85mtXnINISH25zfM0m5RlC6L2
-      name: Et minus in magni.
+      name: Illo saepe dolorem sit non dignissimos.
     required:
     - id
     - name
@@ -226,14 +251,12 @@ definitions:
     description: List UserResponseBody is the result type for an array of Goa3-SampleUserResponse
       (default view)
     example:
-    - card: A
-      theme: Ha
-    - card: A
-      theme: Ha
-    - card: A
-      theme: Ha
-    - card: A
-      theme: Ha
+    - email: taro.yamada@xxx.jp
+      id: XRQ85mtXnINISH25zfM0m5RlC6L2
+      name: yamada taro
+    - email: taro.yamada@xxx.jp
+      id: XRQ85mtXnINISH25zfM0m5RlC6L2
+      name: yamada taro
   UsersUpdateUserRequestBody:
     title: UsersUpdateUserRequestBody
     type: object
@@ -241,14 +264,14 @@ definitions:
       email:
         type: string
         description: Email of user
-        example: Quo libero dolores.
+        example: In dolore molestias nostrum.
       name:
         type: string
         description: Name of user
-        example: Illo saepe dolorem sit non dignissimos.
+        example: Eos reprehenderit ducimus et.
     example:
-      email: In dolore molestias nostrum.
-      name: Eos reprehenderit ducimus et.
+      email: Eius tenetur minus iste enim aspernatur molestiae.
+      name: Qui aspernatur voluptas.
   UsersUpdateUserResponseBody:
     title: 'Mediatype identifier: application/vnd.goa3-sample.user+json; view=default'
     type: object

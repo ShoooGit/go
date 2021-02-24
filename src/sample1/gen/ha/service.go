@@ -15,7 +15,7 @@ import (
 // ha serves.
 type Service interface {
 	// decied on a theme and card
-	DrawCard(context.Context) (res Goa3SampleUserCollection, err error)
+	DrawCard(context.Context) (res Goa3SampleHaCollection, err error)
 }
 
 // ServiceName is the name of the service as defined in the design. This is the
@@ -28,57 +28,55 @@ const ServiceName = "Ha"
 // MethodKey key.
 var MethodNames = [1]string{"draw card"}
 
-// Goa3SampleUserCollection is the result type of the Ha service draw card
-// method.
-type Goa3SampleUserCollection []*Goa3SampleUser
+// Goa3SampleHaCollection is the result type of the Ha service draw card method.
+type Goa3SampleHaCollection []*Goa3SampleHa
 
 // Ha Response
-type Goa3SampleUser struct {
+type Goa3SampleHa struct {
 	// theme of game
 	Theme string
 	// card of abc
 	Card string
 }
 
-// NewGoa3SampleUserCollection initializes result type Goa3SampleUserCollection
-// from viewed result type Goa3SampleUserCollection.
-func NewGoa3SampleUserCollection(vres haviews.Goa3SampleUserCollection) Goa3SampleUserCollection {
-	return newGoa3SampleUserCollection(vres.Projected)
+// NewGoa3SampleHaCollection initializes result type Goa3SampleHaCollection
+// from viewed result type Goa3SampleHaCollection.
+func NewGoa3SampleHaCollection(vres haviews.Goa3SampleHaCollection) Goa3SampleHaCollection {
+	return newGoa3SampleHaCollection(vres.Projected)
 }
 
-// NewViewedGoa3SampleUserCollection initializes viewed result type
-// Goa3SampleUserCollection from result type Goa3SampleUserCollection using the
+// NewViewedGoa3SampleHaCollection initializes viewed result type
+// Goa3SampleHaCollection from result type Goa3SampleHaCollection using the
 // given view.
-func NewViewedGoa3SampleUserCollection(res Goa3SampleUserCollection, view string) haviews.Goa3SampleUserCollection {
-	p := newGoa3SampleUserCollectionView(res)
-	return haviews.Goa3SampleUserCollection{Projected: p, View: "default"}
+func NewViewedGoa3SampleHaCollection(res Goa3SampleHaCollection, view string) haviews.Goa3SampleHaCollection {
+	p := newGoa3SampleHaCollectionView(res)
+	return haviews.Goa3SampleHaCollection{Projected: p, View: "default"}
 }
 
-// newGoa3SampleUserCollection converts projected type Goa3SampleUserCollection
-// to service type Goa3SampleUserCollection.
-func newGoa3SampleUserCollection(vres haviews.Goa3SampleUserCollectionView) Goa3SampleUserCollection {
-	res := make(Goa3SampleUserCollection, len(vres))
+// newGoa3SampleHaCollection converts projected type Goa3SampleHaCollection to
+// service type Goa3SampleHaCollection.
+func newGoa3SampleHaCollection(vres haviews.Goa3SampleHaCollectionView) Goa3SampleHaCollection {
+	res := make(Goa3SampleHaCollection, len(vres))
 	for i, n := range vres {
-		res[i] = newGoa3SampleUser(n)
+		res[i] = newGoa3SampleHa(n)
 	}
 	return res
 }
 
-// newGoa3SampleUserCollectionView projects result type
-// Goa3SampleUserCollection to projected type Goa3SampleUserCollectionView
-// using the "default" view.
-func newGoa3SampleUserCollectionView(res Goa3SampleUserCollection) haviews.Goa3SampleUserCollectionView {
-	vres := make(haviews.Goa3SampleUserCollectionView, len(res))
+// newGoa3SampleHaCollectionView projects result type Goa3SampleHaCollection to
+// projected type Goa3SampleHaCollectionView using the "default" view.
+func newGoa3SampleHaCollectionView(res Goa3SampleHaCollection) haviews.Goa3SampleHaCollectionView {
+	vres := make(haviews.Goa3SampleHaCollectionView, len(res))
 	for i, n := range res {
-		vres[i] = newGoa3SampleUserView(n)
+		vres[i] = newGoa3SampleHaView(n)
 	}
 	return vres
 }
 
-// newGoa3SampleUser converts projected type Goa3SampleUser to service type
-// Goa3SampleUser.
-func newGoa3SampleUser(vres *haviews.Goa3SampleUserView) *Goa3SampleUser {
-	res := &Goa3SampleUser{}
+// newGoa3SampleHa converts projected type Goa3SampleHa to service type
+// Goa3SampleHa.
+func newGoa3SampleHa(vres *haviews.Goa3SampleHaView) *Goa3SampleHa {
+	res := &Goa3SampleHa{}
 	if vres.Theme != nil {
 		res.Theme = *vres.Theme
 	}
@@ -88,10 +86,10 @@ func newGoa3SampleUser(vres *haviews.Goa3SampleUserView) *Goa3SampleUser {
 	return res
 }
 
-// newGoa3SampleUserView projects result type Goa3SampleUser to projected type
-// Goa3SampleUserView using the "default" view.
-func newGoa3SampleUserView(res *Goa3SampleUser) *haviews.Goa3SampleUserView {
-	vres := &haviews.Goa3SampleUserView{
+// newGoa3SampleHaView projects result type Goa3SampleHa to projected type
+// Goa3SampleHaView using the "default" view.
+func newGoa3SampleHaView(res *Goa3SampleHa) *haviews.Goa3SampleHaView {
+	vres := &haviews.Goa3SampleHaView{
 		Theme: &res.Theme,
 		Card:  &res.Card,
 	}

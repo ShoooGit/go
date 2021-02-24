@@ -19,19 +19,18 @@ import (
 // draw card endpoint.
 func EncodeDrawCardResponse(encoder func(context.Context, http.ResponseWriter) goahttp.Encoder) func(context.Context, http.ResponseWriter, interface{}) error {
 	return func(ctx context.Context, w http.ResponseWriter, v interface{}) error {
-		res := v.(haviews.Goa3SampleUserCollection)
+		res := v.(haviews.Goa3SampleHaCollection)
 		enc := encoder(ctx, w)
-		body := NewGoa3SampleUserResponseCollection(res.Projected)
+		body := NewGoa3SampleHaResponseCollection(res.Projected)
 		w.WriteHeader(http.StatusOK)
 		return enc.Encode(body)
 	}
 }
 
-// marshalHaviewsGoa3SampleUserViewToGoa3SampleUserResponse builds a value of
-// type *Goa3SampleUserResponse from a value of type
-// *haviews.Goa3SampleUserView.
-func marshalHaviewsGoa3SampleUserViewToGoa3SampleUserResponse(v *haviews.Goa3SampleUserView) *Goa3SampleUserResponse {
-	res := &Goa3SampleUserResponse{
+// marshalHaviewsGoa3SampleHaViewToGoa3SampleHaResponse builds a value of type
+// *Goa3SampleHaResponse from a value of type *haviews.Goa3SampleHaView.
+func marshalHaviewsGoa3SampleHaViewToGoa3SampleHaResponse(v *haviews.Goa3SampleHaView) *Goa3SampleHaResponse {
+	res := &Goa3SampleHaResponse{
 		Theme: *v.Theme,
 		Card:  *v.Card,
 	}

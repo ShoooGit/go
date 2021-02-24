@@ -38,7 +38,7 @@ func NewDrawCardEndpoint(s Service) goa.Endpoint {
 		if err != nil {
 			return nil, err
 		}
-		vres := NewViewedGoa3SampleUserCollection(res, "default")
+		vres := NewViewedGoa3SampleHaCollection(res, "default")
 		return vres, nil
 	}
 }

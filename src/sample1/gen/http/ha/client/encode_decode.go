@@ -61,13 +61,13 @@ func DecodeDrawCardResponse(decoder func(*http.Response) goahttp.Decoder, restor
 			if err != nil {
 				return nil, goahttp.ErrDecodingError("Ha", "draw card", err)
 			}
-			p := NewDrawCardGoa3SampleUserCollectionOK(body)
+			p := NewDrawCardGoa3SampleHaCollectionOK(body)
 			view := "default"
-			vres := haviews.Goa3SampleUserCollection{Projected: p, View: view}
-			if err = haviews.ValidateGoa3SampleUserCollection(vres); err != nil {
+			vres := haviews.Goa3SampleHaCollection{Projected: p, View: view}
+			if err = haviews.ValidateGoa3SampleHaCollection(vres); err != nil {
 				return nil, goahttp.ErrValidationError("Ha", "draw card", err)
 			}
-			res := ha.NewGoa3SampleUserCollection(vres)
+			res := ha.NewGoa3SampleHaCollection(vres)
 			return res, nil
 		default:
 			body, _ := ioutil.ReadAll(resp.Body)
@@ -76,11 +76,10 @@ func DecodeDrawCardResponse(decoder func(*http.Response) goahttp.Decoder, restor
 	}
 }
 
-// unmarshalGoa3SampleUserResponseToHaviewsGoa3SampleUserView builds a value of
-// type *haviews.Goa3SampleUserView from a value of type
-// *Goa3SampleUserResponse.
-func unmarshalGoa3SampleUserResponseToHaviewsGoa3SampleUserView(v *Goa3SampleUserResponse) *haviews.Goa3SampleUserView {
-	res := &haviews.Goa3SampleUserView{
+// unmarshalGoa3SampleHaResponseToHaviewsGoa3SampleHaView builds a value of
+// type *haviews.Goa3SampleHaView from a value of type *Goa3SampleHaResponse.
+func unmarshalGoa3SampleHaResponseToHaviewsGoa3SampleHaView(v *Goa3SampleHaResponse) *haviews.Goa3SampleHaView {
+	res := &haviews.Goa3SampleHaView{
 		Theme: v.Theme,
 		Card:  v.Card,
 	}

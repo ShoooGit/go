@@ -6,6 +6,8 @@ import (
 	"net/http"
 	"net/url"
 	"os"
+	ha "sample1/gen/ha"
+	hasvr "sample1/gen/http/ha/server"
 	userssvr "sample1/gen/http/users/server"
 	users "sample1/gen/users"
 	"sync"
@@ -18,7 +20,7 @@ import (
 
 // handleHTTPServer starts configures and starts a HTTP server on the given
 // URL. It shuts down the server if any error is received in the error channel.
-func handleHTTPServer(ctx context.Context, u *url.URL, usersEndpoints *users.Endpoints, wg *sync.WaitGroup, errc chan error, logger *log.Logger, debug bool) {
+func handleHTTPServer(ctx context.Context, u *url.URL, usersEndpoints *users.Endpoints, haEndpoints *ha.Endpoints, wg *sync.WaitGroup, errc chan error, logger *log.Logger, debug bool) {
 
 	// Setup goa log adapter.
 	var (
@@ -50,19 +52,23 @@ func handleHTTPServer(ctx context.Context, u *url.URL, usersEndpoints *users.End
 	// responses.
 	var (
 		usersServer *userssvr.Server
+		haServer    *hasvr.Server
 	)
 	{
 		eh := errorHandler(logger)
 		usersServer = userssvr.New(usersEndpoints, mux, dec, enc, eh, nil)
+		haServer = hasvr.New(haEndpoints, mux, dec, enc, eh, nil)
 		if debug {
 			servers := goahttp.Servers{
 				usersServer,
+				haServer,
 			}
 			servers.Use(httpmdlwr.Debug(mux, os.Stdout))
 		}
 	}
 	// Configure the mux.
 	userssvr.Mount(mux, usersServer)
+	hasvr.Mount(mux, haServer)
 
 	// Wrap the multiplexer with additional middlewares. Middlewares mounted
 	// here apply to all the service endpoints.
@@ -75,10 +81,10 @@ func handleHTTPServer(ctx context.Context, u *url.URL, usersEndpoints *users.End
 	// Start HTTP server using default configuration, change the code to
 	// configure the server as required by your service.
 	srv := &http.Server{Addr: u.Host, Handler: handler}
-	http.Handle("/", handler)
-	http.HandleFunc("/_dev/console/", newDevConsoleHandler("/_dev/console/", "./server/swagger-ui/"))
-
 	for _, m := range usersServer.Mounts {
+		logger.Printf("HTTP %q mounted on %s %s", m.Method, m.Verb, m.Pattern)
+	}
+	for _, m := range haServer.Mounts {
 		logger.Printf("HTTP %q mounted on %s %s", m.Method, m.Verb, m.Pattern)
 	}
 
@@ -111,12 +117,5 @@ func errorHandler(logger *log.Logger) func(context.Context, http.ResponseWriter,
 		id := ctx.Value(middleware.RequestIDKey).(string)
 		_, _ = w.Write([]byte("[" + id + "] encoding: " + err.Error()))
 		logger.Printf("[%s] ERROR: %s", id, err.Error())
-	}
-}
-
-func newDevConsoleHandler(pathPrefix string, directory string) http.HandlerFunc {
-	return func(w http.ResponseWriter, r *http.Request) {
-		fs := http.FileServer(http.Dir(directory))
-		http.StripPrefix(pathPrefix, fs).ServeHTTP(w, r)
 	}
 }

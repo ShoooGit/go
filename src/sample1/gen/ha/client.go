@@ -26,11 +26,11 @@ func NewClient(drawCard goa.Endpoint) *Client {
 }
 
 // DrawCard calls the "draw card" endpoint of the "Ha" service.
-func (c *Client) DrawCard(ctx context.Context) (res Goa3SampleUserCollection, err error) {
+func (c *Client) DrawCard(ctx context.Context) (res Goa3SampleHaCollection, err error) {
 	var ires interface{}
 	ires, err = c.DrawCardEndpoint(ctx, nil)
 	if err != nil {
 		return
 	}
-	return ires.(Goa3SampleUserCollection), nil
+	return ires.(Goa3SampleHaCollection), nil
 }

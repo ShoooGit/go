@@ -27,7 +27,7 @@ var UserResponse = ResultType("application/vnd.goa3-sample.user+json", func() {
 })
 
 // MediaType of Ha API.
-var HaResponse = ResultType("application/vnd.goa3-sample.user+json", func() {
+var HaResponse = ResultType("application/vnd.goa3-sample.ha+json", func() {
 	Description("Ha Response")
 	ContentType("application/json")
 

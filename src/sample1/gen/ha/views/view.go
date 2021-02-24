@@ -11,21 +11,21 @@ import (
 	goa "goa.design/goa/v3/pkg"
 )
 
-// Goa3SampleUserCollection is the viewed result type that is projected based
-// on a view.
-type Goa3SampleUserCollection struct {
+// Goa3SampleHaCollection is the viewed result type that is projected based on
+// a view.
+type Goa3SampleHaCollection struct {
 	// Type to project
-	Projected Goa3SampleUserCollectionView
+	Projected Goa3SampleHaCollectionView
 	// View to render
 	View string
 }
 
-// Goa3SampleUserCollectionView is a type that runs validations on a projected
+// Goa3SampleHaCollectionView is a type that runs validations on a projected
 // type.
-type Goa3SampleUserCollectionView []*Goa3SampleUserView
+type Goa3SampleHaCollectionView []*Goa3SampleHaView
 
-// Goa3SampleUserView is a type that runs validations on a projected type.
-type Goa3SampleUserView struct {
+// Goa3SampleHaView is a type that runs validations on a projected type.
+type Goa3SampleHaView struct {
 	// theme of game
 	Theme *string
 	// card of abc
@@ -33,17 +33,17 @@ type Goa3SampleUserView struct {
 }
 
 var (
-	// Goa3SampleUserCollectionMap is a map of attribute names in result type
-	// Goa3SampleUserCollection indexed by view name.
-	Goa3SampleUserCollectionMap = map[string][]string{
+	// Goa3SampleHaCollectionMap is a map of attribute names in result type
+	// Goa3SampleHaCollection indexed by view name.
+	Goa3SampleHaCollectionMap = map[string][]string{
 		"default": []string{
 			"theme",
 			"card",
 		},
 	}
-	// Goa3SampleUserMap is a map of attribute names in result type Goa3SampleUser
+	// Goa3SampleHaMap is a map of attribute names in result type Goa3SampleHa
 	// indexed by view name.
-	Goa3SampleUserMap = map[string][]string{
+	Goa3SampleHaMap = map[string][]string{
 		"default": []string{
 			"theme",
 			"card",
@@ -51,32 +51,32 @@ var (
 	}
 )
 
-// ValidateGoa3SampleUserCollection runs the validations defined on the viewed
-// result type Goa3SampleUserCollection.
-func ValidateGoa3SampleUserCollection(result Goa3SampleUserCollection) (err error) {
+// ValidateGoa3SampleHaCollection runs the validations defined on the viewed
+// result type Goa3SampleHaCollection.
+func ValidateGoa3SampleHaCollection(result Goa3SampleHaCollection) (err error) {
 	switch result.View {
 	case "default", "":
-		err = ValidateGoa3SampleUserCollectionView(result.Projected)
+		err = ValidateGoa3SampleHaCollectionView(result.Projected)
 	default:
 		err = goa.InvalidEnumValueError("view", result.View, []interface{}{"default"})
 	}
 	return
 }
 
-// ValidateGoa3SampleUserCollectionView runs the validations defined on
-// Goa3SampleUserCollectionView using the "default" view.
-func ValidateGoa3SampleUserCollectionView(result Goa3SampleUserCollectionView) (err error) {
+// ValidateGoa3SampleHaCollectionView runs the validations defined on
+// Goa3SampleHaCollectionView using the "default" view.
+func ValidateGoa3SampleHaCollectionView(result Goa3SampleHaCollectionView) (err error) {
 	for _, item := range result {
-		if err2 := ValidateGoa3SampleUserView(item); err2 != nil {
+		if err2 := ValidateGoa3SampleHaView(item); err2 != nil {
 			err = goa.MergeErrors(err, err2)
 		}
 	}
 	return
 }
 
-// ValidateGoa3SampleUserView runs the validations defined on
-// Goa3SampleUserView using the "default" view.
-func ValidateGoa3SampleUserView(result *Goa3SampleUserView) (err error) {
+// ValidateGoa3SampleHaView runs the validations defined on Goa3SampleHaView
+// using the "default" view.
+func ValidateGoa3SampleHaView(result *Goa3SampleHaView) (err error) {
 	if result.Theme == nil {
 		err = goa.MergeErrors(err, goa.MissingFieldError("theme", "result"))
 	}

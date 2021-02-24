@@ -18,7 +18,10 @@ func NewHa(logger *log.Logger) ha.Service {
 }
 
 // decied on a theme and card
-func (s *hasrvc) DrawCard(ctx context.Context) (res ha.Goa3SampleUserCollection, err error) {
+func (s *hasrvc) DrawCard(ctx context.Context) (res ha.Goa3SampleHaCollection, err error) {
 	s.logger.Print("ha.draw card")
+	res = []*ha.Goa3SampleHa{}
+	ha := &ha.Goa3SampleHa{Theme: "theme", Card: "A"}
+	res = append(res, ha)
 	return
 }

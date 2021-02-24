@@ -249,7 +249,7 @@ Show user by ID
     -id STRING: 
 
 Example:
-    `+os.Args[0]+` users get- user --id "Consequatur qui blanditiis quos laborum quas omnis."
+    `+os.Args[0]+` users get- user --id "Qui blanditiis quos laborum quas."
 `, os.Args[0])
 }
 
@@ -261,9 +261,9 @@ Add new user and return its ID.
 
 Example:
     `+os.Args[0]+` users create- user --body '{
-      "email": "Aperiam eos.",
+      "email": "Eos illum expedita ut doloremque alias distinctio.",
       "id": "XRQ85mtXnINISH25zfM0m5RlC6L2",
-      "name": "Ipsum laborum numquam."
+      "name": "Corrupti ipsum laborum numquam fugiat."
    }'
 `, os.Args[0])
 }
@@ -277,8 +277,8 @@ Update user item.
 
 Example:
     `+os.Args[0]+` users update- user --body '{
-      "email": "Officia perspiciatis occaecati laboriosam natus autem laborum.",
-      "name": "Sit sequi et rerum."
+      "email": "Inventore omnis delectus.",
+      "name": "Officia perspiciatis occaecati laboriosam natus autem laborum."
    }' --id "XRQ85mtXnINISH25zfM0m5RlC6L2"
 `, os.Args[0])
 }
@@ -290,6 +290,6 @@ Delete user by id.
     -id STRING: 
 
 Example:
-    `+os.Args[0]+` users delete- user --id "Itaque doloribus id quisquam tempora qui enim."
+    `+os.Args[0]+` users delete- user --id "Fugiat accusamus dolor tempora ad occaecati."
 `, os.Args[0])
 }
